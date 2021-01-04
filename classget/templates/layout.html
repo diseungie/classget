@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>
+      {% if title %}
+        クラゲ百科事典 - {{ title }}
+      {% else %}
+        クラゲ百科事典
+      {% endif %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css">
+    {% block stylesheet %}{% endblock %}
+  </head>
+
+  <body>
+    <div class="layout">
+      <div class="header"><!--ここからヘッダー-->
+        <a>一橋生のための履修情報サイト</a>
+        <img src="pop_reiwa_hatsu.png" class="mainlogo">
+        <div class="presented">
+          <p>presented by <img src="static/img/hasclogo.png"></p>
+        </div>
+      </div><!--ここまでヘッダー-->
+
+      <div class="menu"><!--ここから緑のメニュー-->　　
+        <div class="login">
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('mypage') }}">マイページ</a>
+            <a href="{{ url_for('logout') }}">ログアウト</a>
+          {% else %}
+            <a href="{{ url_for('login') }}">ログイン</a>
+            <a href="{{ url_for('createaccount') }}">アカウント作成</a>
+          {% endif %}
+        </div>
+      </div><!--ここまで緑のメニュー -->
+    </div>
+  {% block contents %}
+  {% endblock %}
+  </body>
+</html>
