@@ -75,22 +75,14 @@
                     {{ form.username(class="form_blank") }}
                 {% endif %}
             </div>
-            <div class="syozoku">
-              <label>学部：</label>
-              <select name="gakubu">
-                <option value="com">商学部</option>
-                <option value="eco">経済学部</option>
-                <option value="law">法学部</option>
-                <option value="soc">社会学部</option>
-              </select>
 
-              <label>学年：</label>
-              <select name="gakunen">
-                <option value="first">1年</option>
-                <option value="second">2年</option>
-                <option value="third">3年</option>
-                <option value="fourth">4年</option>
-              </select>
+            <!--     学部と学年のラベル／入力欄       -->
+            <div class="syozoku">
+                {{ form.faculty.label(class="form_label") }}
+                {{ form.faculty(class="form_blank") }}
+
+                {{ form.year.label(class="form_label") }}
+                {{ form.year(class="form_blank") }}
             </div>
         </fieldset>
         <div>

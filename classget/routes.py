@@ -14,13 +14,19 @@ def mainpage():
 def createaccount():
     if current_user.is_authenticated:
         return redirect(url_for('mainpage'))
+    # ----create user with data from RegistrationForm----
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, id=form.iduser.data, password=hashed_pw)
+        user = User(username=form.username.data, iduser=form.iduser.data, password=hashed_pw,
+                    faculty=form.faculty.data, year=form.year.data)
         db.session.add(user)
         db.session.commit()
-        return render_template('login.html')
+        # ----complete creating user-----
+        # ----login and send user to typetest----
+        user = User.query.filter_by(iduser=form.iduser.data).first()
+        login_user(user)
+        return redirect(url_for('typetest'))
     return render_template('createaccount.html', title='Register', form=form)
 
 
@@ -28,10 +34,11 @@ def createaccount():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('mainpage'))
+    # ----login with data from LoginForm----
     form = LoginForm()
     login_error = 0
     if form.validate_on_submit():
-        user = User.query.filter_by(id=form.iduser.data).first()
+        user = User.query.filter_by(iduser=form.iduser.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -51,3 +58,8 @@ def logout():
 @login_required
 def mypage():
     return render_template('mypage.html', title='mypage')
+
+
+@app.route("/typetest")
+def typetest():
+    return render_template('typetest.html')

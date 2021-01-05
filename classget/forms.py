@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, ValidationError
 from wtforms.validators import DataRequired, Length, EqualTo
 from classget.models import User
 
 
 class RegistrationForm(FlaskForm):
+    faculty_choices = [('com', '商学部'), ('eco', '経済学部'), ('law', '法学部'), ('soc', '社会学部')]
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=10)])
     iduser = StringField('UserID',
@@ -12,6 +13,8 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
+    faculty = SelectField('Faculty', choices=faculty_choices)
+    year = SelectField('Year', choices=[(1, 1), (2, 2), (3, 3), (4, 4)])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):

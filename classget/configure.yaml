@@ -1,0 +1,3 @@
+secret_key: '4364ca03dbc381061fba56bfed8e8546'
+
+mysql_config: 'mysql://b29e27618b7b81:bc57179f@us-cdbr-east-02.cleardb.com/heroku_7fac0b158ef36d7'

@@ -15,32 +15,32 @@
 
                 <!--       ID入力欄         -->
                 <div class="userid">
-                    {{ form.iduser.label(class="form-control-label") }}
+                    {{ form.iduser.label(class="label") }}
 
                     {% if form.iduser.errors %}
-                        {{ form.iduser(class="form-control form-control-lg") }}
+                        {{ form.iduser(class="form") }}
                         <div class="invalid-feedback">
                             {% for error in form.iduser.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.iduser(class="form-control form-control-lg") }}
+                        {{ form.iduser(class="form") }}
                     {% endif %}
                 </div>
 
                 <!--     　　　パスワード入力欄           -->
                 <div class="password">
-                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password.label(class="label") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.password(class="form") }}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.password(class="form") }}
                     {% endif %}
                 </div>
 
