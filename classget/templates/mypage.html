@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block contents %}
-<h1>{{ current_user.username }}</h1>
+    <div class="userinfo">
+        <img class="userimg" src="{{ image_file }}">
+        <div class="username">
+            {{ current_user.username }}
+        </div>
+        <div class="faculty/year">
+            <span class="faculty">
+                {{ current_user.faculty }}
+            </span>
+            <span class="year">
+                {{ current_user.year }}年生
+            </span>
+        </div>
+    </div>
+
+    <a href="{{ url_for('updateaccount') }}">Update Account</a>
 {% endblock %}
