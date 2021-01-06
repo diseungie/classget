@@ -54,6 +54,11 @@ def logout():
     return redirect(url_for('mainpage'))
 
 
+@app.route("/typetest")
+def typetest():
+    return render_template('typetest.html')
+
+
 @app.route("/mypage")
 @login_required
 def mypage():
@@ -65,25 +70,23 @@ def mypage():
 @login_required
 def updateaccount():
     form = UpdateAccountForm()
+    password_error = 0
     if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.faculty = form.faculty.data
-        current_user.year = form.year.data
-        print(form.year.data)
-        db.session.commit()
-        if form.new_password.data:
-            current_user.password = bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
+        if bcrypt.check_password_hash(current_user.password, form.current_password.data):
+            current_user.username = form.username.data
+            current_user.faculty = form.faculty.data
+            current_user.year = form.year.data
             db.session.commit()
-        return redirect(url_for('mypage'))
+            if form.new_password.data:
+                current_user.password = bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
+                db.session.commit()
+            return redirect(url_for('mypage'))
+        else:
+            password_error = 1
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.faculty.data = current_user.faculty
         form.year.data = current_user.year
-    #     if bcrypt.check_password_hash(current_user.password, form.current_password.data):
 
-    return render_template('updateaccount.html', title='update account', form=form)
+    return render_template('updateaccount.html', title='update account', form=form, password_error=password_error)
 
-
-@app.route("/typetest")
-def typetest():
-    return render_template('typetest.html')

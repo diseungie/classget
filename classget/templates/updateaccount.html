@@ -42,6 +42,11 @@
                     {% else %}
                         {{ form.current_password(class="form_blank") }}
                     {% endif %}
+                    {% if password_error == 1 %}
+                        <div class="error_message">
+                            wrong password, please check it again
+                        </div>
+                    {% endif %}
                 </div>
 
                 <!--       新しいパスワード入力欄         -->
