@@ -2,7 +2,7 @@
 
 {% block stylesheet %}
 <!-- ここにCSSファイルをリンクする -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/createaccount.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/updateaccount.css') }}" type="text/css">
 {% endblock %}
 
 {% block contents %}
@@ -90,7 +90,7 @@
                 </div>
             </fieldset>
             <div>
-                {{ form.submit(class="btn-outline-info") }}
+                {{ form.submit(class="submit_button") }}
             </div>
         </form>
     </div>

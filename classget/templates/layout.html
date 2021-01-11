@@ -27,6 +27,7 @@
       <div class="menu"><!--ここから緑のメニュー-->　　
         <div class="login">
           {% if current_user.is_authenticated %}
+            <a href="{{ url_for('typetest') }}">キャラ診断</a>
             <a href="{{ url_for('mypage') }}">マイページ</a>
             <a href="{{ url_for('logout') }}">ログアウト</a>
           {% else %}

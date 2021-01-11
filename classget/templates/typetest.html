@@ -2,8 +2,34 @@
 
 {% block stylesheet %}
 <!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/typetest.css') }}" type="text/css">
 {% endblock %}
 
 {% block contents %}
-<h1>find out which type {{ current_user.username }} is!</h1>
+    <h1>find out which type {{ current_user.username }} is!</h1>
+    <div>
+        <form method="POST" action="">
+        {{ form.hidden_tag() }}
+            <fieldset>
+                <!--      キャラ診断タイトル         -->
+                <legend>キャラ診断</legend>
+
+                {% for subfield in form if subfield.widget.input_type != 'hidden' %}
+                    {% if subfield.type=="RadioField" %}
+                        <div class="questions">
+                            {{ subfield.label }}
+                        </div>
+                        <div class="choices">
+                            {{ subfield }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <!--     提出ボタン       -->
+                <div class="submit_button">
+                    {{ form.submit(class="submit_button") }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
 {% endblock %}

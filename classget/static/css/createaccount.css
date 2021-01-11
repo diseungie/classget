@@ -1,0 +1,84 @@
+*{
+  background-color: #EBF7F7;
+}
+
+/* 入力欄の枠線 */
+fieldset{
+  margin: auto;
+  border: 4pt #4E6C6C solid;  /*枠線*/
+  border-radius: 0.67em;  /*角丸*/
+  padding: 50px; /*内側の余白*/
+  background-color: #BDCCCC;  /*背景色*/
+  width: 370px; /*横幅*/
+  height: 425px;  /*高さ*/
+  line-height: 40px;  /*行の高さ*/
+}
+
+/* アカウント作成 */
+legend{
+  text-align: center;
+  background-color: transparent;
+  width: 100%;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+/* ユーザー名入力欄の文字について */
+.userid{
+  position: relative;
+  width: 100;
+  background-color: transparent;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+/* パスワード入力欄の文字について */
+.password{
+  background-color: transparent;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+/* パスワード確認入力欄の文字について */
+.confirm_passowrd{
+  background-color: transparent;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+/* ユーザー名入力欄 */
+.username{
+  background-color: transparent;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+/* 学部と学年のラベル／入力欄 */
+.syozoku{
+  background-color: transparent;
+  font-family: Noto Sans CJK JPRegular;
+  font-size: 15pt;
+  color: #273636
+}
+
+.form_blank{
+
+}
+
+.form_label{
+
+
+}
+
+.error_message{
+
+}
+
+.submit_button{
+
+}

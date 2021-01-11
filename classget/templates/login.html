@@ -15,38 +15,38 @@
 
                 <!--       ID入力欄         -->
                 <div class="userid">
-                    {{ form.iduser.label(class="label") }}
+                    {{ form.iduser.label(class="form_label") }}
 
                     {% if form.iduser.errors %}
-                        {{ form.iduser(class="form") }}
-                        <div class="invalid-feedback">
+                        {{ form.iduser(class="form_blank") }}
+                        <div class="error_message">
                             {% for error in form.iduser.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.iduser(class="form") }}
+                        {{ form.iduser(class="form_blank") }}
                     {% endif %}
                 </div>
 
                 <!--     　　　パスワード入力欄           -->
                 <div class="password">
-                    {{ form.password.label(class="label") }}
+                    {{ form.password.label(class="form_label") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form") }}
-                        <div class="invalid-feedback">
+                        {{ form.password(class="form_blank") }}
+                        <div class="error_message">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form") }}
+                        {{ form.password(class="form_blank") }}
                     {% endif %}
                 </div>
 
                 {% if login_error == 1 %}
                     <!--      ログインに失敗した時にエラーメッセージ          -->
-                    <div class="login_error">
+                    <div class="error_message">
                         login failed, please check your id and password
                     </div>
                 {% endif %}
@@ -60,7 +60,7 @@
 
             <!--     Loginボタン       -->
             <div class="login_button">
-                {{ form.submit(class="btn-outline-info") }}
+                {{ form.submit(class="login_button") }}
             </div>
 
             <!--     Forgot　Password?       -->
