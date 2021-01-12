@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request
 from classget import app, db, bcrypt
-from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, TypeTestForm
+from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from classget.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import random
@@ -81,20 +81,26 @@ def logout():
 
 
 @app.route("/typetest", methods=['GET', 'POST'])
+@login_required
 def typetest():
     form = TypeTestForm()
+    question = ['Q01.初対面の人と友達になるのが得意だ。', 'Q02.人助けをしたり、されたりすることが多い。', 'Q03.課題の期限は守るほうだし、遅刻もしない。',
+                'Q04.普段ストレスや不安をなかなか感じないブッダみたいな性格を持っている。', 'Q05.芸術や美術は結構好きだ。', 'Q06.しばしば新しい冒険についてのアイデアが思い浮かぶ。',
+                'Q07.他の人にどう思われるかなんて気にしない超マイウェイ。', 'Q08.人との約束のためなら無理もする。', 'Q09.みんなで何かを成し遂げることが好きだ。',
+                'Q10.面白い話で場を盛り上げることができる。']
     # すでにキャラ診断した人は結果ページに送る
     if current_user.type != 'none':
         return redirect(url_for('typeresult'))
-    if form.validate_on_submit():
+    if request.method == 'POST':
         # formのdataから属性ごとにスコアを集計
-        kaisou_score = int(form.Q1.data) + int(form.Q10.data)
-        penguin_score = int(form.Q2.data) + int(form.Q9.data)
-        iruka_score = int(form.Q3.data) + int(form.Q8.data)
-        kame_score = int(form.Q4.data) + int(form.Q7.data)
-        taco_score = int(form.Q5.data) + int(form.Q6.data)
+        kaisou_score = int(request.form['Q1']) + int(request.form['Q10'])
+        penguin_score = int(request.form['Q2']) + int(request.form['Q9'])
+        iruka_score = int(request.form['Q3']) + int(request.form['Q8'])
+        kame_score = int(request.form['Q4']) + int(request.form['Q7'])
+        taco_score = int(request.form['Q5']) + int(request.form['Q6'])
         scores = {'kaisou': kaisou_score, 'penguin': penguin_score, 'iruka': iruka_score,
                   'kame': kame_score, 'taco': taco_score}
+        print(kaisou_score, penguin_score, iruka_score, kame_score, taco_score)
         # 一番高いスコアのキャラを入れる（複数の場合は共同１位のうちランダムで）
         max_score = max(scores.items(), key=lambda x: x[1])
         list_max = []
@@ -104,10 +110,11 @@ def typetest():
         current_user.type = random.choice(list_max)
         db.session.commit()
         return redirect(url_for('typeresult'))
-    return render_template('typetest.html', form=form)
+    return render_template('typetest.html', form=form, question=question)
 
 
 @app.route("/typeresult", methods=['GET'])
+@login_required
 def typeresult():
     return render_template('typeresult.html')
 
@@ -117,5 +124,3 @@ def typeresult():
 def mypage():
     image_file = url_for('static', filename='img/profile_pics/' + current_user.type + '.jpg')
     return render_template('mypage.html', title='mypage', image_file=image_file)
-
-
