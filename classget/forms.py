@@ -1,8 +1,14 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, RadioField, \
+    SelectMultipleField, ValidationError, widgets
 from wtforms.validators import DataRequired, Length, EqualTo
 from classget.models import User
+
+
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
 
 
 class RegistrationForm(FlaskForm):
@@ -54,3 +60,15 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('That username is taken, Please choose a different one')
+
+
+class ReviewForm(FlaskForm):
+    keyword_choice = [('抽選', '抽選'), ('期末試験', '期末試験'), ('期末レポート', '期末レポート'), ('中間試験', '中間試験'),
+               ('中間レポート', '中間レポート'), ('出席', '出席'), ('課題(毎回)', '課題(毎回)'), ('課題(たまに)', '課題(たまに)'),
+               ('ライブ', 'ライブ'), ('オンデマンド', 'オンデマンド'), ('ライブ・オンデマ併用', 'ライブ・オンデマ併用'), ('対面', '対面'),
+               ('顔出し', '顔出し')]
+    title = StringField('Title', validators=[DataRequired(), Length(max=30)])
+    rating = RadioField('Rating', choices=[(0, 'good'), (1, 'soso'), (2, 'bad')])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    keyword = MultiCheckboxField('keywords', choices=keyword_choice)
+    submit = SubmitField('submit')

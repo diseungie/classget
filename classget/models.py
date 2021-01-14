@@ -4,8 +4,8 @@ from flask_login import UserMixin
 
 
 @login_manager.user_loader
-def load_user(iduser):
-    return User.query.get(int(iduser))
+def load_user(id):
+    return User.query.get(int(id))
 
 
 class User(db.Model, UserMixin):
@@ -16,18 +16,35 @@ class User(db.Model, UserMixin):
     faculty = db.Column(db.String(10), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     type = db.Column(db.String(10), nullable=False, default='none')
-    posts = db.relationship('Post', backref='author', lazy=True)
+    reviews = db.relationship('Review', backref='author', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.iduser}', '{self.image_file}')"
+        return f"User('{self.username}', '{self.iduser}', '{self.faculty}', '{self.year}', '{self.type}')"
 
 
-class Post(db.Model):
+class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.iduser'), nullable=False)
+    sort = db.Column(db.String(20), nullable=False)
+    term = db.Column(db.String(20), nullable=False)
+    time = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(30), nullable=False)
+    teacher = db.Column(db.String(30), nullable=False)
+    language = db.Column(db.String(20), nullable=False)
+    draw = db.Column(db.Integer, nullable=False)
+    keyword = db.Column(db.String(200))
 
     def __repr__(self):
-        return f"User('{self.title}', '{self.date_posted}')"
+        return f"Subject('{self.id}', '{self.sort}', '{self.term}', '{self.time}', '{self.name}', '{self.teacher}', " \
+               f"'{self.language}', '{self.draw}', '{self.keyword}')"
+
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    keyword = db.Column(db.String(200))
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), nullable=False)
+
