@@ -1,0 +1,9 @@
+body {
+    background-color: #EBF7F7;
+    display: flex;
+    height: 100vh;
+}
+
+.rating input[type="radio"]{
+    display: none;
+}

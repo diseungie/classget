@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ヒトツカミ-授業検索結果</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <!-- ここから授業詳細 -->
+    <div class="rev-section">
+        <h1 class="class">授業名</h1>
+        <p class="detail">　曜　限　教授</p> 
+        <img src="img/unlike.png">
+        <div class="likes">お気に入り　件</div>
+        <div class="categories"></div>
+
+        <!-- ここからレビュー一覧 -->
+        <div class="reviews">
+            <div class="review">
+                <div class="user">
+                    <img src="img/icon.png"
+                    width= "55.3485px">
+                    <div class="username"ユーザー名></div>
+                </div>
+                
+                <div class="review-body">
+                    <div class="title">タイトル</div>
+                    <img src="img/rating-maybe.png">
+                    <hr>
+                    <div class="text">レビュー</div>
+                    <div class="upload-date"></div>
+
+                </div>
+            </div>
+
+               
+         </div>
+    </div>
+
+    <br>
+
+    <!-- ここからレビュー作成 -->
+    <div class="newreview">
+        <h2>マイレビュー</h2>
+        <form>
+            <div class="title-review">タイトル</div>
+                <input type="text" name="title" maxlength="20">
+        
+            <div class="rating-review">評価</div>
+                <input type="radio" name="rating"　value="good" >
+                <label for="good">
+                    <img src="img/rating-good.png">
+                </label>
+        
+                <input type="radio" name="rating"　value="maybe" >
+                <label for="maybe">
+                    <img src="img/rating-maybe.png">
+                </label>
+        
+                <input type="radio" name="rating"　value="no" >
+                <label for="no">
+                    <img src="img/rating-no.png">
+                </label>
+        
+            <div class="keyword">キーワード </div>
+                <input type="checkbox" name="keyword" value="final">期末試験
+                <input type="checkbox" name="keyword" value="final-essay">期末レポート
+                <input type="checkbox" name="keyword" value="midterm">中間試験
+                <input type="checkbox" name="keyword" value="midterm-essay">中間レポート
+                <input type="checkbox" name="keyword" value="attendance">出席
+                <input type="checkbox" name="keyword" value="hw-every">課題（毎回）
+                <input type="checkbox" name="keyword" value="hw-some">課題（たまに）
+                <input type="checkbox" name="keyword" value="outline">レジュメ
+                <input type="checkbox" name="keyword" value="live">ライブ
+                <input type="checkbox" name="keyword" value="recorded">オンデマンド
+                <input type="checkbox" name="keyword" value="live-recorded">ライブ・オンデマンド併用
+                <input type="checkbox" name="keyword" value="in-person">対面
+                <input type="checkbox" name="keyword" value="camera-on">顔出し
+            
+            <div class="rev-text">レビュー本文</div>
+                <input type="text">
+        </form>
+
+    </div>
+     
+
+</body>
+</html>

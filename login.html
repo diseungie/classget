@@ -1,0 +1,12 @@
+<center> <h1> Login </h1> </center>   
+<form action="{{ url_for('login_complete') }}" target="result" method="get">  
+    <div class="loginform">   
+        <label>ID : </label>   
+        <input type="text" placeholder="ID" name="userid" required>  
+        <label>Password : </label>   
+        <input type="password" placeholder="Enter Password" name="password" required>  
+        <button type="submit">ログイン</button>   
+        <input type="checkbox" checked="checked"> Remember me    
+        <a href="{{ url_for('createaccount') }}">新しいアカウントを作る</a> 
+    </div>   
+</form>      

@@ -1,0 +1,73 @@
+.toppage{
+    position: relative;
+    height:250px;
+    width:100%;
+    float: left;
+    background-color: #fff;
+  }
+  
+  .toppage p{
+    position: absolute;
+    left: 75px;
+    text-align: center;
+    font-size:40pt;
+    width:50%;
+  }
+  
+  .toppage img{
+    position: absolute;
+    top: 20px;
+    right: 75px;
+    height:200px;
+    margin:0;
+    padding:0;
+  }
+  
+  .search-area{
+    position: relative;
+    height: 800px;
+    width:100%;
+    background-color: #e5ffff;
+  }
+  
+  /*検索ボックス全体*/
+  .searchform{
+    width          : 290px;              /* BOXの幅               */
+    height         : 26px;               /* BOXの高さ             */
+    letter-spacing : 0.1em;              /* 文字間隔              */
+    font-weight    : bold;               /* 太字                  */
+    line-height    : 0;                  /* 標準の行高さ          */
+  }
+   
+   /*テキスト入力欄*/
+  .searchform .searchText {
+    display        : block;              /* ブロック化            */
+    float          : left;               /* 横並び                */
+    box-sizing     : border-box;         /* 枠線,余白を含んだ長さ */
+    height         : 26px;               /* 入力の高さ            */
+    width          : 170px;              /* 入力の幅              */
+    margin         : 0;                  /* 外余白                */
+    padding        : 0 13px;             /* 内余白                */
+    border         : 2px solid #fff;  /* 枠線　幅,実践,色      */
+    border-radius  : 13px 13px 13px 13px;      /* 左上下の角丸          */
+    color          : #333;               /* 文字色                */
+    outline        : 0;                  /* 入力の薄い枠を非表示  */
+    font-size      : 14px;               /* フォントサイズ        */
+  }
+  
+  .search-area .check{
+    position: absolute;
+    top:40px;
+    left: 40px;
+    font-size: 12pt;
+  }
+  
+  .check p{
+    font-size:15pt;
+  }
+  
+  .search-area .searchbotton{
+    position: absolute;
+    top: 400px;
+    left: 100px;
+  } 

@@ -1,0 +1,60 @@
+ 
+<div class="toppage"><!--ここからコピーとロゴ-->
+  <h1>キャッチコピー、入れよう。</h1>
+  <img src="static/img/jellyfish.jpg">
+</div> <!--ここまでコピーとロゴ-->
+
+<div class="search-area">
+  <p>条件で検索する</p>
+  <form action="{{ url_for('searchresult') }}" target="result" method="get">
+    <div class="check">
+      <div class="syozoku">
+        <p>時間割所属</p>
+        <label><input type="checkbox" name="syozoku" value="all">全学共通教育科目</label>
+        <label><input type="checkbox" name="syozoku" value="com">商学部</label>
+        <label><input type="checkbox" name="syozoku" value="eco">経済学部</label>
+        <label><input type="checkbox" name="syozoku" value="law">法学部</label>
+        <label><input type="checkbox" name="syozoku" value="soc">社会学部</label>
+      </div>
+
+      <div class="season">
+        <p>開講区分</p>
+        <label><input type="checkbox" name="season" value="spsm">春夏学期</label>
+        <label><input type="checkbox" name="season" value="sp">春学期</label>
+        <label><input type="checkbox" name="season" value="sm">夏学期</label>
+        <label><input type="checkbox" name="season" value="auwi">秋冬学期</label>
+        <label><input type="checkbox" name="season" value="au">秋学期</label>
+        <label><input type="checkbox" name="season" value="wi">冬学期</label>
+      </div>
+
+      <div class="day">
+        <p>曜日</p>
+        <label><input type="checkbox" name="day" value="mon">月曜日</label>
+        <label><input type="checkbox" name="day" value="tue">火曜日</label>
+        <label><input type="checkbox" name="day" value="wed">水曜日</label>
+        <label><input type="checkbox" name="day" value="thu">木曜日</label>
+        <label><input type="checkbox" name="day" value="fri">金曜日</label>
+      </div>
+            
+      <div class="when">
+        <p>時限</p>
+        <label><input type="checkbox" name="when" value="1">1限</label>
+        <label><input type="checkbox" name="when" value="2"">2限</label>
+        <label><input type="checkbox" name="when" value="3">3限</label>
+        <label><input type="checkbox" name="when" value="4"">4限</label>
+        <label><input type="checkbox" name="when" value="5">5限</label>
+      </div>
+
+      <div class="searchform" id="makeImg">
+        <p>科目名</p>
+        <input type="text" id="inText" class="searchText">
+      </div>
+    </div><!--ここまでチェック項目-->
+    <div class="searchbotton">
+      <input type="submit" value="検索">
+    </div>
+    <div class="searchdetail">
+      <!-- ここにキーワード？ -->
+    </div>
+  </form>
+</div><!-- ここまで授業検索画面 -->

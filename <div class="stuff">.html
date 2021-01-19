@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ひとつかみ</title>
+    <link rel="stylesheet" href="createaccount.css" type="text/css">
+
+  </head>
+
+  <body>
+    <div class="stuff">
+    <div class="textBox">
+    <input 
+            class="text" 
+            type="textbox"
+            placeholder="ユーザー名"
+            onkeyup="this.setAttribute('value', this.value);"
+            value=""/>
+    <label class="label">Email Address</label>
+    <label class="error"></label>
+    </div>
+    <div class="textBox">
+    <input 
+            class="text" 
+            type="password"
+            placeholder="パスワード"
+            onkeyup="this.setAttribute('value', this.value);"
+            value=""/>
+    <label class="label">パスワード
+    </label> 
+    <label class="error"></label>
+    </div>
+    </div>
+  </body>
+</html>
+
