@@ -1,4 +1,6 @@
 from flask import render_template, url_for, redirect, request
+from werkzeug.exceptions import abort
+
 from classget import app, db, bcrypt
 from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm
 from classget.models import User, Subject, Review
@@ -145,7 +147,7 @@ def searchresult():
     return render_template('searchresult.html', title='検索結果', subject=subject)
 
 
-@app.route("/classinfo/<int:subject_id>", methods=["GET", "POST"])
+@app.route("/classinfo/<int:subject_id>", methods=["GET", "POST", "DELETE"])
 def classinfo(subject_id):
     # PKのIDでその授業の情報を持ってくる
     subject = Subject.query.get_or_404(subject_id)
@@ -169,3 +171,13 @@ def classinfo(subject_id):
             return redirect(url_for('login'))
     return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
                            enumerate=enumerate)
+
+
+@app.route("/delete_review/<int:review_id>_<int:subject_id>", methods=["GET"])
+def delete_review(review_id, subject_id):
+    review = Review.query.get_or_404(review_id)
+    if review.author != current_user:
+        abort(403)
+    db.session.delete(review)
+    db.session.commit()
+    return redirect(url_for('classinfo', subject_id=subject_id))

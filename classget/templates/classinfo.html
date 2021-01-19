@@ -48,6 +48,11 @@
               <div class="uplaoded_date">
                 {{ review.date_posted.strftime('%Y-%m-%d') }}
               </div>
+              {% if review.author == current_user %}
+                <form action="{{ url_for('delete_review', review_id=review.id, subject_id=subject.id) }}">
+                  <button type="submit">このレビューを削除</button>
+                </form>
+              {% endif %}
             </div>
         </fieldset>
       {% endfor %}

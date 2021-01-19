@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, RadioField, \
-    SelectMultipleField, ValidationError, widgets
+    SelectMultipleField, HiddenField, ValidationError, widgets
 from wtforms.validators import DataRequired, Length, EqualTo
 from classget.models import User
 
