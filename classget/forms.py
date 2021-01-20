@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, RadioField, \
-    SelectMultipleField, HiddenField, ValidationError, widgets
+    SelectMultipleField, ValidationError, widgets
 from wtforms.validators import DataRequired, Length, EqualTo
 from classget.models import User
 
@@ -63,7 +63,7 @@ class UpdateAccountForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    keyword_choice = [('抽選', '抽選'), ('期末試験', '期末試験'), ('期末レポート', '期末レポート'), ('中間試験', '中間試験'),
+    keyword_choice = [('期末試験', '期末試験'), ('期末レポート', '期末レポート'), ('中間試験', '中間試験'),
                ('中間レポート', '中間レポート'), ('出席', '出席'), ('課題(毎回)', '課題(毎回)'), ('課題(たまに)', '課題(たまに)'),
                ('ライブ', 'ライブ'), ('オンデマンド', 'オンデマンド'), ('ライブ・オンデマ併用', 'ライブ・オンデマ併用'), ('対面', '対面'),
                ('顔出し', '顔出し')]

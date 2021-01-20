@@ -12,14 +12,25 @@
     <div class="classinfo">
       <h1 class="name">{{ subject.name }}</h1>
       <!--  ↓お気に入りボタン（右上）    -->
-      <img src="static/img/unlike.png">
+      {% if current_user.has_liked_subject(subject) %}
+        <a href="{{ url_for('like_action', subject_id=subject.id, action='unlike') }}">
+          <img src="{{ url_for('static', filename='img/liked.png') }}">
+        </a>
+      {% else %}
+        <a href="{{ url_for('like_action', subject_id=subject.id, action='like') }}">
+          <img src="{{ url_for('static', filename='img/unliked.png') }}">
+        </a>
+      {% endif %}
+
       <p class="sort">{{ subject.sort }}</p>
       <p class="term_and_time">{{ subject.term}} {{ subject.time }}</p>
       <p class="professor_and_language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
 
-      <div class="likes">お気に入り　件</div>
+      <div class="likes">お気に入り　{{ subject.likes.count() }}件</div>
       <div class="categories">
-        期末試験
+        {% for keyword in subject_keyword %}
+          <span class="subject_keyword">{{ keyword }}</span>
+        {% endfor %}
       </div>
     </div>
   </fieldset>

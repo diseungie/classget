@@ -3,7 +3,7 @@ from werkzeug.exceptions import abort
 
 from classget import app, db, bcrypt
 from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm
-from classget.models import User, Subject, Review
+from classget.models import User, Subject, Review, Like
 from flask_login import login_user, current_user, logout_user, login_required
 import random
 
@@ -99,10 +99,10 @@ def logout():
 @app.route("/typetest", methods=['GET', 'POST'])
 @login_required
 def typetest():
-    question = ['Q01.初対面の人と友達になるのが得意だ。', 'Q02.人助けをしたり、されたりすることが多い。', 'Q03.課題の期限は守るほうだし、遅刻もしない。',
-                'Q04.普段ストレスや不安をなかなか感じないブッダみたいな性格を持っている。', 'Q05.芸術や美術は結構好きだ。',
-                'Q06.しばしば新しい冒険についてのアイデアが思い浮かぶ。', 'Q07.他の人にどう思われるかなんて気にしない超マイウェイ。',
-                'Q08.人との約束のためなら無理もする。', 'Q09.みんなで何かを成し遂げることが好きだ。', 'Q10.面白い話で場を盛り上げることができる。']
+    question = ['初対面の人と友達になるのが得意だ。', '人助けをしたり、されたりすることが多い。', '課題の期限は守るほうだし、遅刻もしない。',
+                '普段ストレスや不安をなかなか感じないブッダみたいな性格を持っている。', '芸術や美術は結構好きだ。',
+                'しばしば新しい冒険についてのアイデアが思い浮かぶ。', '他の人にどう思われるかなんて気にしない超マイウェイ。',
+                '人との約束のためなら無理もする。', 'みんなで何かを成し遂げることが好きだ。', '面白い話で場を盛り上げることができる。']
     # すでにキャラ診断した人は結果ページに送る
     if current_user.type != 'none':
         return redirect(url_for('typeresult'))
@@ -134,24 +134,36 @@ def typeresult():
     return render_template('typeresult.html')
 
 
-@app.route("/mypage")
+@app.route("/mypage/<my_term>")
 @login_required
-def mypage():
+def mypage(my_term):
     image_file = url_for('static', filename='img/profile_pics/' + current_user.type + '.png')
-    return render_template('mypage.html', title='mypage', image_file=image_file)
+    liked_subject = Like.query.filter_by(user_id=current_user.id)\
+        .filter(Like.subject_term.like('%{}%'.format(my_term))).all()
+
+    def timetable(i):
+        result = []
+        for l in liked_subject:
+            for t in l.subject.time.split(','):
+                if t == i:
+                    result.append(l.subject.name)
+        return result
+
+    return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject, timetable=timetable)
 
 
 @app.route("/searchresult")
 def searchresult():
-    subject = Subject.query.all()
-    return render_template('searchresult.html', title='検索結果', subject=subject)
+    result = Subject.query.all()
+    return render_template('searchresult.html', title='検索結果', result=result)
 
 
 @app.route("/classinfo/<int:subject_id>", methods=["GET", "POST", "DELETE"])
 def classinfo(subject_id):
-    # PKのIDでその授業の情報を持ってくる
+    # PKのIDでその授業の情報を持ってくるv
     subject = Subject.query.get_or_404(subject_id)
     form = ReviewForm()
+    subject_keyword = subject.keyword.split('　')
     # 授業IDでその授業のレビューを全部持ってくる
     reviews = Review.query.filter_by(subject_id=subject_id).all()
     # レビューフォームを提出したら
@@ -165,12 +177,12 @@ def classinfo(subject_id):
                             keyword=keywords, author=current_user, subject_id=subject_id)
             db.session.add(review)
             db.session.commit()
-            return redirect(url_for('classinfo', subject_id=subject_id))
+            return redirect(request.referrer)
         # ログインしていない場合→ログイン画面へ
         else:
             return redirect(url_for('login'))
     return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
-                           enumerate=enumerate)
+                           enumerate=enumerate, subject_keyword=subject_keyword)
 
 
 @app.route("/delete_review/<int:review_id>_<int:subject_id>", methods=["GET"])
@@ -181,3 +193,16 @@ def delete_review(review_id, subject_id):
     db.session.delete(review)
     db.session.commit()
     return redirect(url_for('classinfo', subject_id=subject_id))
+
+
+@app.route('/like/<int:subject_id>/<action>')
+@login_required
+def like_action(subject_id, action):
+    subject = Subject.query.filter_by(id=subject_id).first_or_404()
+    if action == 'like':
+        current_user.like_subject(subject)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unlike_subject(subject)
+        db.session.commit()
+    return redirect(request.referrer)

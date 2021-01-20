@@ -1,0 +1,24 @@
+.userinfo img{
+  width:30px;
+  }
+
+table th{
+  height: 30px;
+  background-color: #a5c9c1;
+}
+
+table td{
+  background-color: #e5fff2;
+  font-size: 10.5pt;
+  text-align: center;
+}
+
+table .jigen{
+  background-color: #a5c9c1;
+  padding: 30px 10px;
+}
+
+table .space{
+  background-color: #54917f;
+  width: 30px;
+}

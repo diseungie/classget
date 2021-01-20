@@ -9,15 +9,26 @@
 {% block contents %}
     <div class="searchresult">
         <h3>検索結果</h3>
-        {% for s in subject %}
-            <div class="class">
-                <p class="class_title">{{ s.name }}</p>
-                <p class="class_sort">{{ s.sort }}</p>
-                <p class="class_time">{{ s.term }} {{ s.time }}</p>
-                <p class="class_likes">お気に入り　件</p>
-                <p class="keyword">キーワード</p>
-                <a href="{{ url_for('classinfo', subject_id=s.id) }}">授業の詳細を見る</a>
-            </div>
+        {% for subject in result %}
+            <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
+                <div class="class">
+                    <p class="class_title">{{ subject.name }}</p>
+                    <p class="class_sort">{{ subject.sort }}</p>
+                    <p class="class_time">{{ subject.term }} {{ subject.time }}</p>
+                    <p class="class_likes">お気に入り {{ subject.likes.count() }}件</p>
+                    <p class="keyword">キーワード</p>
+                    <p>授業の詳細を見る</p>
+                    {% if current_user.has_liked_subject(subject) %}
+                        <a href="{{ url_for('like_action', subject_id=subject.id, action='unlike') }}">
+                            <img src="{{ url_for('static', filename='img/liked.png') }}">
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('like_action', subject_id=subject.id, action='like') }}">
+                            <img src="{{ url_for('static', filename='img/unliked.png') }}">
+                        </a>
+                    {% endif %}
+                </div>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}

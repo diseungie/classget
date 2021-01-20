@@ -15,7 +15,8 @@
                 {% for i in range(10) %}
                     <div class="testform">
                         <div class="question">
-                            {{ question[i] }}
+                            <span class="q_number">Q{{ i+1 }}</span>
+                            <span class="q_text">{{ question[i] }}</span>
                         </div>
                         <label>全くそう思わない</label>
                         <input type="radio" id="a1" name="Q{{ i+1 }}" value=-30>
