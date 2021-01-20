@@ -24,17 +24,14 @@
         </div>
     </div>
 
-    <a href="{{ url_for('updateaccount') }}">Update Account</a>
+    <a href="{{ url_for('updateaccount') }}"><button>アカウント情報修正</button></a>
 
     <!-- ここに時間割作ってください -->
     <div class="select-season">
-        <select name="gakki">
-            <option value="sp">春</option>
-            <option value="su">夏</option>
-            <option value="au">秋</option>
-            <option value="wi">冬</option>
-        </select>
-        学期
+        <a href="{{ url_for('mypage', my_term='春') }}"><button>春学期</button></a>
+        <a href="{{ url_for('mypage', my_term='夏') }}"><button>夏学期</button></a>
+        <a href="{{ url_for('mypage', my_term='秋') }}"><button>秋学期</button></a>
+        <a href="{{ url_for('mypage', my_term='冬') }}"><button>冬学期</button></a>
     </div>
 
     <div class="timetable">

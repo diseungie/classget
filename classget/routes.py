@@ -148,7 +148,6 @@ def mypage(my_term):
                 if t == i:
                     result.append(l.subject.name)
         return result
-
     return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject, timetable=timetable)
 
 
