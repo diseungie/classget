@@ -9,7 +9,7 @@
 {% block contents %}
     <div class="searchresult">
         <h3>検索結果</h3>
-        {% for subject in result %}
+        {% for subject in result.items %}
             <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
                 <div class="class">
                     <p class="class_title">{{ subject.name }}</p>
@@ -18,7 +18,7 @@
                     <p class="class_likes">お気に入り {{ subject.likes.count() }}件</p>
                     <p class="keyword">キーワード</p>
                     <p>授業の詳細を見る</p>
-                    {% if current_user.has_liked_subject(subject) %}
+                    {% if current_user.id and current_user.has_liked_subject(subject) %}
                         <a href="{{ url_for('like_action', subject_id=subject.id, action='unlike') }}">
                             <img src="{{ url_for('static', filename='img/liked.png') }}">
                         </a>
@@ -31,4 +31,15 @@
             </a>
         {% endfor %}
     </div>
-{% endblock %}
+    {% for page_num in result.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if result.page == page_num %}
+                <a class="current_page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+{% endblock contents %}

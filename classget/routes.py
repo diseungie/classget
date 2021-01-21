@@ -1,6 +1,5 @@
 from flask import render_template, url_for, redirect, request
 from werkzeug.exceptions import abort
-
 from classget import app, db, bcrypt
 from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm
 from classget.models import User, Subject, Review, Like
@@ -146,14 +145,15 @@ def mypage(my_term):
         for l in liked_subject:
             for t in l.subject.time.split(','):
                 if t == i:
-                    result.append(l.subject.name)
+                    result.append([l.subject.id, l.subject.name])
         return result
     return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject, timetable=timetable)
 
 
 @app.route("/searchresult")
 def searchresult():
-    result = Subject.query.all()
+    page = request.args.get('page', 1, type=int)
+    result = Subject.query.paginate(page=page, per_page=10)
     return render_template('searchresult.html', title='検索結果', result=result)
 
 
@@ -161,10 +161,12 @@ def searchresult():
 def classinfo(subject_id):
     # PKのIDでその授業の情報を持ってくるv
     subject = Subject.query.get_or_404(subject_id)
+    page = request.args.get('page', 1, type=int)
     form = ReviewForm()
     subject_keyword = subject.keyword.split('　')
     # 授業IDでその授業のレビューを全部持ってくる
-    reviews = Review.query.filter_by(subject_id=subject_id).all()
+    reviews = Review.query.filter_by(subject_id=subject_id).order_by(Review.date_posted.desc())\
+        .paginate(page=page, per_page=5)
     # レビューフォームを提出したら
     if form.validate_on_submit():
         # ログインしている場合
