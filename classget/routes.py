@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request
 from werkzeug.exceptions import abort
 from classget import app, db, bcrypt
 from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm
-from classget.models import User, Subject, Review, Like
+from classget.models import User, Subject, Review, Like, get_count
 from flask_login import login_user, current_user, logout_user, login_required
 import random
 
@@ -76,7 +76,7 @@ def updateaccount():
                 current_user.password = bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
                 db.session.commit()
             # 修正が終わったらマイページに戻る
-            return redirect(url_for('mypage'))
+            return redirect(url_for('mypage', my_term='春'))
         # 入力したPWが現在PWと一致しない場合：パスワードエラー
         else:
             password_error = 1
@@ -112,9 +112,8 @@ def typetest():
         iruka_score = int(request.form['Q3']) + int(request.form['Q8'])
         kame_score = int(request.form['Q4']) + int(request.form['Q7'])
         taco_score = int(request.form['Q5']) + int(request.form['Q6'])
-        scores = {'kaisou': kaisou_score, 'penguin': penguin_score, 'iruka': iruka_score,
-                  'kame': kame_score, 'taco': taco_score}
-        print(kaisou_score, penguin_score, iruka_score, kame_score, taco_score)
+        scores = {'海藻': kaisou_score, 'ペンギン': penguin_score, 'イルカ': iruka_score,
+                  'カメ': kame_score, 'タコ': taco_score}
         # 一番高いスコアのキャラを入れる（複数の場合は共同１位のうちランダムで）
         max_score = max(scores.items(), key=lambda x: x[1])
         list_max = []
@@ -130,7 +129,20 @@ def typetest():
 @app.route("/typeresult", methods=['GET'])
 @login_required
 def typeresult():
-    return render_template('typeresult.html')
+    recommended_subjects = current_user.recommend_by_likes()
+    type_number = get_count(User.query.filter_by(type=current_user.type))
+    user_number = get_count(User.query)
+    type_com = get_count(User.query.filter_by(type=current_user.type, faculty='商学部'))
+    type_eco = get_count(User.query.filter_by(type=current_user.type, faculty='経済学部'))
+    type_law = get_count(User.query.filter_by(type=current_user.type, faculty='法学部'))
+    type_soc = get_count(User.query.filter_by(type=current_user.type, faculty='社会学部'))
+    type_proportion = (type_number/user_number)*100
+    com_proportion = (type_com/type_number)*100
+    eco_proportion = (type_eco / type_number) * 100
+    law_proportion = (type_law / type_number) * 100
+    soc_proportion = (type_soc / type_number) * 100
+    return render_template('typeresult.html', recommended_subjects=recommended_subjects, type_pp=type_proportion,
+                           com_pp=com_proportion, eco_pp=eco_proportion, law_pp=law_proportion, soc_pp=soc_proportion)
 
 
 @app.route("/mypage/<my_term>")

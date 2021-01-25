@@ -5,5 +5,25 @@
 {% endblock %}
 
 {% block contents %}
-<h1>{{ current_user.username }}さんは、{{ current_user.type }}タイプ大学生です！</h1>
+    <h1>{{ current_user.username }}さんは、{{ current_user.type }}タイプ大学生です！</h1>
+    <div>
+        {{ current_user.type }}タイプは全体の{{ type_pp }}%です！
+    </div>
+    <div>
+        {{ current_user.type }}タイプには、<br>
+        商学部が{{ com_pp }}%、経済学部が{{ eco_pp }}%、法学部が{{ law_pp }}%、社会学部が{{ soc_pp }}%です！
+    </div>
+    <div>
+        {{ current_user.type }}タイプの学生たちは、こちらの授業をお気に入りしています
+    </div>
+    {% for subject in recommended_subjects %}
+        <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
+            <div class="recommended_class">
+                <p>{{ subject.name }}</p>
+                <p>{{ subject.sort }}</p>
+                <p>{{ subject.term }} {{ subject.time }}</p>
+            </div>
+        </a>
+    {% endfor %}
+
 {% endblock %}
