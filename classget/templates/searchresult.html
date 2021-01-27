@@ -12,7 +12,7 @@
         {% for subject in result.items %}
             <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
                 <div class="class">
-                    <div class="header">
+                    <div class="class-header">
                         <div class="class_name">{{ subject.name }}</div>
                         <div class="class_time">{{ subject.term }} {{ subject.time }}</div>
                         <div class="like_button">
@@ -32,7 +32,7 @@
                         <div class="rating-good"><img src="static/img/rating-good.png" width="32.5px">?</div>
                         <div class="rating-maybe"><img src="static/img/rating-maybe.png" width="32.5px">?</div>
                         <div class="rating-no"><img src="static/img/rating-no.png" width="32.5px">?</div>
-                        <div class="liked-number">(お気に入り{{ subject.likes.count() }}件)</div>
+                        <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
                     </div>
                     <div class="class_keyword">
                         {% for keyword in subject_keyword %}

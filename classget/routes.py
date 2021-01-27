@@ -1,15 +1,97 @@
 from flask import render_template, url_for, redirect, request
 from werkzeug.exceptions import abort
 from classget import app, db, bcrypt
-from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm
+from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm, SearchClassForm
 from classget.models import User, Subject, Review, Like, get_count
 from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy import or_
 import random
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def mainpage():
-    return render_template('mainpage.html')
+    form = SearchClassForm()
+    # if form.validate_on_submit():
+    #     result = Subject.query
+    #     # 所属
+    #     if form.sort.data:
+    #         result = result.filter(Subject.sort.in_(form.sort.data))
+    #     # 開講区分
+    #     if form.term.data:
+    #         result = result.filter(Subject.term.in_(form.term.data))
+    #     # 曜日
+    #     if form.day.data:
+    #         day = [0, 0, 0, 0, 0]
+    #         for i in range(len(form.day.data)):
+    #             day[i] = form.day.data[i]
+    #         result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
+    #                                    Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
+    #                                    Subject.time.like(f'%{day[4]}%')))
+    #     # 時限
+    #     if form.time.data:
+    #         time = [0, 0, 0, 0, 0]
+    #         for i in range(len(form.time.data)):
+    #             time[i] = form.time.data[i]
+    #         result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
+    #                                    Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
+    #                                    Subject.time.like(f'%{time[4]}%')))
+    #     # 抽選
+    #     if form.draw.data:
+    #         result = result.filter(Subject.draw.in_(form.draw.data))
+    #     # 授業名
+    #     if form.title.data:
+    #         result = result.filter(Subject.name.like(f'%{form.title.data}%'))
+    #     # キーワード
+    #     if form.keyword.data:
+    #         for keyword in form.keyword.data:
+    #             result = result.filter(Subject.keyword.notlike(f'%{keyword}%'))
+    #     # 検索結果を１０個ずつ分けてページを作る
+    #     page = request.args.get('page', 1, type=int)
+    #     result = result.paginate(page=page, per_page=10)
+    return render_template('mainpage.html', form=form)
+
+
+@app.route("/searchresult", methods=['GET', 'POST'])
+def searchresult():
+    form = SearchClassForm()
+    if form.validate_on_submit():
+        result = Subject.query
+        # 所属
+        if form.sort.data:
+            result = result.filter(Subject.sort.in_(form.sort.data))
+        # 開講区分
+        if form.term.data:
+            result = result.filter(Subject.term.in_(form.term.data))
+        # 曜日
+        if form.day.data:
+            day = [0, 0, 0, 0, 0]
+            for i in range(len(form.day.data)):
+                day[i] = form.day.data[i]
+            result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
+                                       Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
+                                       Subject.time.like(f'%{day[4]}%')))
+        # 時限
+        if form.time.data:
+            time = [0, 0, 0, 0, 0]
+            for i in range(len(form.time.data)):
+                time[i] = form.time.data[i]
+            result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
+                                       Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
+                                       Subject.time.like(f'%{time[4]}%')))
+        # 抽選
+        if form.draw.data:
+            result = result.filter(Subject.draw.in_(form.draw.data))
+        # 授業名
+        if form.title.data:
+            result = result.filter(Subject.name.like(f'%{form.title.data}%'))
+        # キーワード
+        if form.keyword.data:
+            for keyword in form.keyword.data:
+                result = result.filter(Subject.keyword.notlike(f'%{keyword}%'))
+        # 検索結果を１０個ずつ分けてページを作る
+        page = request.args.get('page', 1, type=int)
+        result = result.paginate(page=page, per_page=10)
+    return render_template('searchresult.html', title='検索結果', result=result, get_count=get_count)
 
 
 @app.route("/createaccount", methods=['GET', 'POST'])
@@ -162,16 +244,9 @@ def mypage(my_term):
     return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject, timetable=timetable)
 
 
-@app.route("/searchresult")
-def searchresult():
-    page = request.args.get('page', 1, type=int)
-    result = Subject.query.paginate(page=page, per_page=10)
-    return render_template('searchresult.html', title='検索結果', result=result)
-
-
-@app.route("/classinfo/<int:subject_id>", methods=["GET", "POST", "DELETE"])
+@app.route("/classinfo/<int:subject_id>", methods=["GET", "POST"])
 def classinfo(subject_id):
-    # PKのIDでその授業の情報を持ってくるv
+    # PKのIDでその授業の情報を持ってくる
     subject = Subject.query.get_or_404(subject_id)
     page = request.args.get('page', 1, type=int)
     form = ReviewForm()
@@ -195,7 +270,7 @@ def classinfo(subject_id):
         else:
             return redirect(url_for('login'))
     return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
-                           enumerate=enumerate, subject_keyword=subject_keyword)
+                           enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count)
 
 
 @app.route("/delete_review/<int:review_id>_<int:subject_id>", methods=["GET"])
@@ -218,4 +293,4 @@ def like_action(subject_id, action):
     if action == 'unlike':
         current_user.unlike_subject(subject)
         db.session.commit()
-    return redirect(request.referrer)
+    return redirect(request.referrer, code=307)
