@@ -1,13 +1,20 @@
-/*共通*/
-*{
-  font-family: Noto Sans CJK JP; /*全体のフォント*/
+body{
+  /*コンテンツがwebページ全体に広がるようにする*/
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  /*webサイト全体の色を変える*/
+  background-color: rgb(235,247,247);
+  /*フォントを指定する*/
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 /*水色部分全体*/
 .header{
   position: relative;
   height:180px;
-  background-color: #e5ffff;
+  background-color: rgb(235,247,247);
   }
 
 
@@ -33,6 +40,7 @@
   left:0;
   right:0;
   margin:auto;
+  cursor: pointer;
 }
 
 /*presented by HASC*/
@@ -53,9 +61,17 @@
 /*緑部分全体*/
 .menu{
   position: relative;
-  background-color: #54917f;
+  background-color: rgb(78,108,108) !important;
   width: 100%;
   height: 40px;
+}
+
+/*ホーム・マイページボタン*/
+.menu .home{
+  position: absolute;
+  left:20px;
+  top:20%;
+  background-color: rgb(78,108,108) !important;
 }
 
 /*ログイン・アカウント作成ボタン*/
@@ -63,10 +79,11 @@
   position: absolute;
   right:20px;
   top:20%;
+  background-color: rgb(78,108,108) !important;
 }
 
-/*loginの文字について*/
-.login a{
+/*homeの文字について*/
+.menu a{
   color: #fff;
   text-decoration: none;
   font-size:13pt;
@@ -76,7 +93,7 @@
 }
 
 /*カーソルを合わせたとき*/
-.login a:hover{
+.menu a:hover{
   color: blue;
   cursor: pointer;
 }

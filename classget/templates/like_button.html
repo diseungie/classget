@@ -1,0 +1,9 @@
+{% if current_user.id and current_user.has_liked_subject(subject) %}
+    <a href="" class="like_button" id="unlike_{{ subject.id }}">
+        <img src="{{ url_for('static', filename='img/liked.png') }}">
+    </a>
+{% else %}
+    <a href="" class="like_button" id="like_{{ subject.id }}">
+        <img src="{{ url_for('static', filename='img/unliked.png') }}">
+    </a>
+{% endif %}

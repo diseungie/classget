@@ -6,27 +6,31 @@
 {% endblock %}
 
 {% block contents %}
-    <h1>{{ current_user.username }}さんは何キャラ？!</h1>
+    <div class="text">
+	<h2>{{ current_user.username }}さんはどんなキャラ?!</h2>
+	<p>ここでは10問の質問に答えてもらうことで、あなたのキャラ診断ができちゃいます！<br>文章を読んで、自分が当てはまると思うところのボタンを選んでみてください。</p>
+    </div>
     <div>
         <form method="POST" action="">
             <fieldset>
                 <!--      キャラ診断タイトル         -->
-                <legend>キャラ診断</legend>
                 {% for i in range(10) %}
                     <div class="testform">
                         <div class="question">
                             <span class="q_number">Q{{ i+1 }}</span>
                             <span class="q_text">{{ question[i] }}</span>
                         </div>
-                        <label>全くそう思わない</label>
-                        <input type="radio" id="a1" name="Q{{ i+1 }}" value=-30>
-                        <input type="radio" id="a2" name="Q{{ i+1 }}" value=-20>
-                        <input type="radio" id="a3" name="Q{{ i+1 }}" value=-10>
-                        <input type="radio" id="a4" name="Q{{ i+1 }}" value=0>
-                        <input type="radio" id="a5" name="Q{{ i+1 }}" value=3>
-                        <input type="radio" id="a6" name="Q{{ i+1 }}" value=7>
-                        <input type="radio" id="a7" name="Q{{ i+1 }}" value=15>
-                        <label>強くそう思う</label>
+                        <div class="buttons">
+                            <label>全くそう思わない</label>
+                            <input type="radio" id="a1" name="Q{{ i+1 }}" value=-30>
+                            <input type="radio" id="a2" name="Q{{ i+1 }}" value=-20>
+                            <input type="radio" id="a3" name="Q{{ i+1 }}" value=-10>
+                            <input type="radio" id="a4" name="Q{{ i+1 }}" value=0>
+                            <input type="radio" id="a5" name="Q{{ i+1 }}" value=3>
+                            <input type="radio" id="a6" name="Q{{ i+1 }}" value=7>
+                            <input type="radio" id="a7" name="Q{{ i+1 }}" value=15>
+                            <label>強くそう思う</label>
+                        </div>
                     </div>
                 {% endfor %}
                 <!--     提出ボタン       -->

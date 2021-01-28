@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, jsonify
 from werkzeug.exceptions import abort
 from classget import app, db, bcrypt
 from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm, SearchClassForm
@@ -283,9 +283,11 @@ def delete_review(review_id, subject_id):
     return redirect(url_for('classinfo', subject_id=subject_id))
 
 
-@app.route('/like/<int:subject_id>/<action>')
+@app.route('/like', methods=['POST'])
 @login_required
-def like_action(subject_id, action):
+def like():
+    subject_id = request.form['subject_id']
+    action = request.form['action']
     subject = Subject.query.filter_by(id=subject_id).first_or_404()
     if action == 'like':
         current_user.like_subject(subject)
@@ -293,4 +295,5 @@ def like_action(subject_id, action):
     if action == 'unlike':
         current_user.unlike_subject(subject)
         db.session.commit()
-    return redirect(request.referrer, code=307)
+
+    return render_template('like_button.html', subject=subject)

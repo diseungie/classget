@@ -10,6 +10,8 @@
         クラゲ百科事典
       {% endif %}
     </title>
+    <!--    font    -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css">
     {% block stylesheet %}
     {% endblock %}
@@ -26,6 +28,11 @@
       </div><!--ここまでヘッダー-->
 
       <div class="menu"><!--ここから緑のメニュー-->　　
+        <div class="home">
+          <a href="{{ url_for('mainpage') }}">ホーム</a>
+          <!-- about usのページは未作成のためリンクなし-->
+          <a>About Us</a>
+        </div>
         <div class="login">
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('typetest') }}">キャラ診断</a>

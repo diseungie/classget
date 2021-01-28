@@ -1,3 +1,86 @@
-ul#Q1 li{
-  display: inline-block;
-  }
+/* 上の方の文章の設定 */
+.text{
+  max-width: 100%;
+  width: 65%;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+}
+
+/* 見出しと説明文の間を少し開ける */
+.text h2{
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+}
+
+/* 説明文の行間の調整 */
+.text p{
+  line-height: 2em;
+}
+
+/* 白くなってるところ全体の設定 */
+fieldset{
+  width: 52%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  background-color: white;
+  border: 0px;
+}
+
+/* 白いところの文章の左側に余白を追加 */
+.testform{
+  margin-left: 40px;
+}
+
+
+.question{
+  text-align: left;
+  margin-bottom: 20px;
+
+}
+
+.q_number { /*Q.01の周りの緑の部分*/
+  padding: 0rem 0.9rem;
+  margin-right: 10px;
+  border-radius: 100vh;
+  color: white;
+  background-color: #739188;
+}
+
+
+/* buttonsはラジオボタンの設定 */
+.buttons {
+  margin-top: 15px;
+  margin-left: 23%;
+  margin-bottom: 50px;
+  transform: scale(1.6);
+}
+
+label {
+  font-size: 0.1em;
+}
+
+.submit_button {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+/* buttonは診断結果ボタンの設定 */
+button {
+  border: 0px;
+  padding: 0.5rem 0.9em;
+  color: white;
+  background-color: orange;
+  font-size: 2em;
+  border-radius: 1vh;
+}
+
+/* 診断結果にマウスを合わせた時にオレンジになるようにする */
+.submit_button button:hover{
+  color:bisque;
+  cursor: pointer;
+}
