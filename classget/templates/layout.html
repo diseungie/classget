@@ -21,9 +21,11 @@
     <div class="layout">
       <div class="header"><!--ここからヘッダー-->
         <a>一橋生のための授業情報サイト</a>
-        <img src="{{ url_for('static', filename='img/main_logo.png') }}" class="mainlogo">
+        <a href="{{ url_for('mainpage') }}">
+          <img src="{{ url_for('static', filename='img/main_logo.png') }}" class="mainlogo">
+        </a>
         <div class="presented">
-          <p>presented by <img src="static/img/hasclogo.png"></p>
+          <p>presented by <img src="{{ url_for('static', filename='img/hasclogo.png') }}"></p>
         </div>
       </div><!--ここまでヘッダー-->
 
@@ -34,6 +36,9 @@
           <a>About Us</a>
         </div>
         <div class="login">
+          {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
+            <a href="{{ url_for('createclass') }}">授業追加</a>
+          {% endif %}
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('typetest') }}">キャラ診断</a>
             <a href="{{ url_for('mypage', my_term='春') }}">マイページ</a>

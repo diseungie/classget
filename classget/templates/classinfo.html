@@ -8,62 +8,82 @@
 
 {% block contents %}
   <!-- ここから授業詳細 -->
-  <fieldset>
+  <fieldset class="outer">
     <div class="classinfo">
-      <h1 class="name">{{ subject.name }}</h1>
-      <!--  ↓お気に入りボタン（右上）    -->
-      <div class="like_buttons{{ subject.id }}">
-          {% if current_user.id and current_user.has_liked_subject(subject) %}
-              <a href="" class="like_button" id="unlike_{{ subject.id }}">
-                  <img src="{{ url_for('static', filename='img/liked.png') }}">
-              </a>
-          {% else %}
-              <a href="" class="like_button" id="like_{{ subject.id }}">
-                  <img src="{{ url_for('static', filename='img/unliked.png') }}">
-              </a>
-          {% endif %}
+      <div class="box">
+        <h1 class="name">{{ subject.name }}</h1>
+        <!--   学期と曜日・時限   -->
+          <span class="term-and-time"><h3>{{ subject.term}} {{ subject.time }}</h3></span>
+        <!--  ↓お気に入りボタン（右上）    -->
+        <div class="like_buttons{{ subject.id }}">
+            {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
+                <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
+                    <img class="like-button-img" src="{{ url_for('static', filename='img/liked.png') }}" width="35px">
+                </a>
+            {% elif current_user.is_authenticated %}
+                <a href="" class="user_like_button" id="like_{{ subject.id }}">
+                    <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="like_button">
+                    <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
+                </a>
+            {% endif %}
+        </div>
       </div>
 
-      <p class="sort">{{ subject.sort }}</p>
-      <p class="term_and_time">{{ subject.term}} {{ subject.time }}</p>
-      <p class="professor_and_language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
-
-      <div class="likes">お気に入り　{{ get_count(subject.likes) }}件</div>
-      <div class="categories">
+      <p class="sort">•{{ subject.sort }}   •{{ subject.draw }}</p>
+      <p class="professor-and-language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
+      <!--   ３段階の顔文字評価の集計   -->
+      <div class="class-rating">
+        <img class="face" src="{{ url_for('static', filename='img/rating_0.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
+        <img class="face" src="{{ url_for('static', filename='img/rating_1.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
+        <img class="face" src="{{ url_for('static', filename='img/rating_2.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
+        (お気に入り {{ get_count(subject.likes) }}件)
+      </div>
+      <div class="keywords">
         {% for keyword in subject_keyword %}
-          <span class="subject_keyword">{{ keyword }}</span>
+          <span class="keyword">{{ keyword }}</span>
         {% endfor %}
       </div>
     </div>
+    {% if current_user.id and current_user.iduser == 'admin' %}
+        <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button>授業情報修正</button></a>
+    {% endif %}
   </fieldset>
 
       <!-- ここからレビュー一覧 -->
-  <fieldset class="review-from-others">
+  <fieldset class="outer">
+    <div class="reviews">過去のレビュー</div>
     {% if reviews.items %}
       {% for review in reviews.items %}
-        <fieldset class="review">
+        <fieldset class="inner">
             <div class="author">
-              <img src="{{ url_for('static', filename='img/profile_pics/{}.png'.format(review.author.type)) }}" width= "55.3485px">
-              <span class="user-username">{{ review.author.username }}</span>
-              <span class="user-faculty">{{ review.author.faculty }}</span>
+              <!--       ユーザーアイコン       -->
+              <img class="user-icon" src="{{ url_for('static', filename='img/profile_pics/{}.png'.format(review.author.type)) }}" width= "55.3485px">
+              <!--       ユーザー名       -->
+              <div class="user-username">{{ review.author.username }}</div>
+              <!--       ユーザー学部       -->
+              <div class="user-faculty">{{ review.author.faculty }}</div>
             </div>
 
             <div class="review-body">
-              <span class="title">{{ review.title }}</span>
-              <img src="{{ url_for('static', filename='img/rating_{}.png'.format(review.rating)) }}">
-              <hr>
-              <div class="content">{{ review.content }}</div>
-              <div class="keyword">
-                {% for keyword in review.keyword.split(" ") %}
-                  <span>{{ keyword }}</span>
-                {% endfor %}
-              </div>
+              <span class="review-title">{{ review.title }}</span>
+              <img class="review_face" src="{{ url_for('static', filename='img/rating_{}.png'.format(review.rating)) }}">
               <div class="uplaoded_date">
                 {{ review.date_posted.strftime('%Y-%m-%d') }}
               </div>
+              <hr>
+              <!--       本文       -->
+              <div class="review-content">{{ review.content }}</div>
+              <div class="keywords">
+                {% for keyword in review.keyword.split(" ") %}
+                  <span class="keyword">{{ keyword }}</span>
+                {% endfor %}
+              </div>
               {% if review.author == current_user %}
-                <form action="{{ url_for('delete_review', review_id=review.id, subject_id=subject.id) }}">
-                  <button type="submit">このレビューを削除</button>
+                <form class="delete-button" action="{{ url_for('delete_review', review_id=review.id, subject_id=subject.id) }}">
+                  <button class="review-delete" type="submit">このレビューを削除</button>
                 </form>
               {% endif %}
             </div>
@@ -88,41 +108,40 @@
     <br>
 
   <!-- ここからレビュー作成 -->
-  <div class="newreview">
-    <h2>レビュー作成</h2>
+    <fieldset class="outer">
+      <div class="newreview">
+        <h2>レビュー作成</h2><hr>
+          <form method="POST" action="" class="newreview">
+            {{ form.hidden_tag() }}
+              <div class="title-review">
+                {{ form.title.label(class="label-title") }}
+                {{ form.title(class="blank-title", placeholder="  30字以内") }}
+              </div>
 
-    <fieldset>
-      <form method="POST" action="">
-        {{ form.hidden_tag() }}
-          <div class="title-review">
-            {{ form.title.label(class="label-title") }}
-            {{ form.title(class="blank-title") }}
-          </div>
+              <div class="rating-review">
+                {{ form.rating.label(class="label-rating") }}
+                {% for l, i in enumerate(form.rating) %}
+                  <img class="face" src="{{ url_for('static', filename='img/rating_{}.png'.format(l)) }}"> {{ i(class="button") }}
+                {% endfor %}
+              </div>
 
-          <div class="rating-review">
-            {{ form.rating.label(class="label-rating") }}
-            {% for l, i in enumerate(form.rating) %}
-              <img src="{{ url_for('static', filename='img/rating_{}.png'.format(l)) }}"> {{ i(class="button") }}
-            {% endfor %}
-          </div>
+              <div class="content-review">
+                {{ form.content.label(class="label-content") }}
+                {{ form.content(class="blank-content") }}
+              </div>
 
-          <div class="content-review">
-            {{ form.content.label(class="label-content") }}
-            {{ form.content(class="blank-content") }}
-          </div>
+              <div class="keyword-review">
+                {{ form.keyword.label(class="label-keyword") }}
+                {{ form.keyword(class="blank-keyword") }}
+              </div>
 
-          <div class="keyword-review">
-            {{ form.keyword.label(class="label-keyword") }}
-            {{ form.keyword(class="blank-keyword") }}
-          </div>
+              <div class="submit-review">
+                {{ form.submit }}
+              </div>
+          </form>
 
-          <div class="submit-review">
-            {{ form.submit }}
-          </div>
-      </form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/like_button.js') }}"></script>
+      </div>
     </fieldset>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/like_button.js') }}"></script>
-  </div>
 {% endblock %}

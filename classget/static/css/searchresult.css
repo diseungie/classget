@@ -1,0 +1,224 @@
+*{
+  margin:0;
+  }
+
+/*検索結果の文字と線*/
+h3{
+  color: rgb(78,108,108);
+  width:80%;
+  margin: 1rem 10%;
+  border-bottom: 2px solid rgb(78,108,108);
+}
+
+/*白のボックス全体*/
+ .searchresult{
+   background-color: #FFF;
+   width:80%;
+   margin-left:10%;
+   margin-right:10%;
+   margin-top:1rem;
+   display: inline-block;
+ }
+
+/*授業名・時限・教授のボックス*/
+.result_header{
+  background-color:#F3F3F5;
+  width:90%;
+  margin-left:5%;
+  margin-right:5%;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+/*授業名*/
+.class_name{
+  font-size: 16pt;
+  font-weight: bold;
+  float: left;
+  margin:0.5rem 1rem;
+}
+
+/*開講区分と時限*/
+.class_time{
+  float:left;
+  margin-top:0.9rem;
+}
+
+/*お気に入りボタン*/
+.like_button img{
+  width: 35px;
+  height: 35px;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  position: absolute;
+  right: 15%;
+  cursor: pointer;
+}
+
+.user_like_button img{
+  width: 35px;
+  height: 35px;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  position: absolute;
+  right: 15%;
+  cursor: pointer;
+}
+
+/*学部と抽選*/
+.class_sort{
+  margin-top:0.5rem;
+  margin-left:5%;
+  font-size:14px;
+}
+
+/*顔とお気に入り件数*/
+.rating{
+  float: left;
+  width:90%;
+  margin-left: 5%;
+}
+
+/*顔の画像の微調整*/
+.rating img{
+  margin-left:1rem;
+  margin-right:0.5rem;
+  margin-top:0.5rem;
+}
+
+/*お気に入り件数*/
+.liked-number{
+  float: right;
+  margin-top:0.7rem;
+  font-size:14px;
+}
+
+/*キーワード全体*/
+.class_keyword{
+  float:left;
+  margin-top:0.5rem;
+  margin-left: 5%;
+}
+
+/* キーワードの装飾*/
+.class_keyword span{
+  color: white;
+  background-color: rgb(194,174,151);
+  border-radius: 15px;
+  margin-right:0.8rem;
+  padding: 0.1rem 0.75rem;
+  word-break: keep-all; /*改行防止*/
+}
+
+/*詳細を見る*/
+.see-detail{
+  margin-top:0.5rem;
+  margin-bottom: 1rem;
+  width:90%;
+  margin-right:5%;
+  text-align: right;
+  float: right;
+  text-decoration: underline !important;
+  color: rgb(144,61,64);
+  cursor: pointer;
+}
+
+/*詳細を見るに合わせると透ける*/
+.see-detail:hover{
+ opacity: 0.5;
+}
+
+/*ページ番号*/
+.page_number{
+  text-align: center;
+  margin-top:1rem;
+}
+
+/* リンク効果削除 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*レスポンシブ対応まとめて*/
+@media screen and (max-width: 767px){
+  /*767pxはipadより小さい横幅*/
+　h3{
+  size:14px;
+  margin-bottom:0.5rem 10%;
+}
+　.result_header{
+    margin-top:0.25rem;
+}
+  .class_name{
+    font-size: 14px;
+    font-weight:bold;
+    width:80%;
+    margin-top:0.25rem;
+    margin-bottom:0;
+    margin-left:0.5rem;
+    margin-right:0;
+  }
+
+  .class_time{
+    font-size:12px;
+    width:80%;
+    margin-top:0.25rem;
+    margin-left:0.5rem;
+    margin-bottom:0.25rem;
+  }
+　
+  .like_button img{
+    width:20px;
+    height:20px;
+    margin:0.25rem 0.25rem;
+  }
+
+  .user_like_button img{
+    width:20px;
+    height:20px;
+    margin:0.25rem 0.25rem;
+  }
+
+  .class_sort{
+    font-size:10px;
+    margin-top:0;
+  }
+
+  .rating{
+    float:left;
+    font-size:12px;
+    margin-top:0;
+  }
+
+  .rating img{
+    width:16px;
+    margin-top:0.25rem;
+    margin-left:0.25rem;
+  }
+
+  .liked-number{
+    font-size:10px;
+    float:right;
+    margin-top:0.25rem;
+  }
+
+  .class_keyword{
+    font-size:10px;
+    margin-top:0.25rem;
+  }
+
+  .class_keyword span{
+    margin-top:0.5rem;
+  }
+
+  .see-detail{
+    font-size:12px;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+  }
+
+  a{
+    size:12px;
+  }
+}

@@ -7,55 +7,65 @@
 
 
 {% block contents %}
-    <div class="searchresult">
-        <h3>検索結果</h3>
-        {% for subject in result.items %}
-            <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
-                <div class="class">
-                    <div class="class-header">
-                        <div class="class_name">{{ subject.name }}</div>
-                        <div class="class_time">{{ subject.term }} {{ subject.time }}</div>
-                        <div class="like_buttons{{ subject.id }}">
-                            {% if current_user.id and current_user.has_liked_subject(subject) %}
-                                <a href="" class="like_button" id="unlike_{{ subject.id }}">
-                                    <img src="{{ url_for('static', filename='img/liked.png') }}">
-                                </a>
-                            {% else %}
-                                <a href="" class="like_button" id="like_{{ subject.id }}">
-                                    <img src="{{ url_for('static', filename='img/unliked.png') }}">
-                                </a>
-                            {% endif %}
+    <div class="whole_searchresult">
+        <h3>　検索結果：　{{ result_num }}件</h3>
+        <div class="searchresult">
+            {% for subject in result.items %}
+                <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
+                    <div class="class">
+                        <div class="result_header">
+                            <div class="class_name">{{ subject.name }}</div>
+                            <div class="class_time">{{ subject.term }} {{ subject.time }}</div>
+                            <div class="like_buttons{{ subject.id }}">
+                                {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
+                                    <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
+                                        <img src="{{ url_for('static', filename='img/liked.png') }}">
+                                    </a>
+                                {% elif current_user.is_authenticated %}
+                                    <a href="" class="user_like_button" id="like_{{ subject.id }}">
+                                        <img src="{{ url_for('static', filename='img/unliked.png') }}">
+                                    </a>
+                                {% else %}
+                                    <a href="{{ url_for('login') }}" class="like_button">
+                                        <img src="{{ url_for('static', filename='img/unliked.png') }}">
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
+                        <div class="class_sort">・{{ subject.sort }}　・{{ subject.draw }}</div>
+                        <div class="class_sort">・教授：{{ subject.teacher }}　・言語：{{ subject.language }}</div>
+                        <div class="rating">
+                            <img src="static/img/rating_0.png" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
+                            <img src="static/img/rating_1.png" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
+                            <img src="{{ url_for('static', filename='img/rating_2.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
+                            <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
+                        </div>
+                        <div class="class_keyword">
+                            {% for keyword in subject.keyword.split("　") %}
+                                <span class="keyword">{{ keyword }}</span>
+                            {% endfor %}
+                        </div>
+                        <a class="see-detail" href="{{ url_for('classinfo', subject_id=subject.id) }}">授業の詳細を見る></a>
+                        {% if current_user.id and current_user.iduser == 'admin' %}
+                            <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button>授業情報修正</button></a>
+                        {% endif %}
                     </div>
-                    <div class="class_sort">・{{ subject.sort }}　・{{ subject.draw }}</div>
-                    <div class="rating">
-                        <div class="rating-good"><img src="static/img/rating-good.png" width="32.5px">?</div>
-                        <div class="rating-maybe"><img src="static/img/rating-maybe.png" width="32.5px">?</div>
-                        <div class="rating-no"><img src="static/img/rating-no.png" width="32.5px">?</div>
-                        <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
-                    </div>
-                    <div class="class_keyword">
-                        {% for keyword in subject_keyword %}
-                            <span class="keyword">{{ keyword }}</span>
-                        {% endfor %}
-                    </div>
-                    <div>授業の詳細を見る</div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
-    <div class="page_number">
-        {% for page_num in result.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-            {% if page_num %}
-                {% if result.page == page_num %}
-                    <a class="current_page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="page_number">
+            {% for page_num in result.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if result.page == page_num %}
+                        <a class="current_page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
                 {% else %}
-                    <a class="page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                    ...
                 {% endif %}
-            {% else %}
-                ...
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

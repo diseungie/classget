@@ -67,11 +67,11 @@ class ReviewForm(FlaskForm):
                ('中間レポート', '中間レポート'), ('出席', '出席'), ('課題(毎回)', '課題(毎回)'), ('課題(たまに)', '課題(たまに)'),
                ('ライブ', 'ライブ'), ('オンデマンド', 'オンデマンド'), ('ライブ・オンデマ併用', 'ライブ・オンデマ併用'), ('対面', '対面'),
                ('顔出しアリ', '顔出しアリ'), ('顔出しナシ', '顔出しナシ')]
-    title = StringField('Title', validators=[DataRequired(), Length(max=30)])
-    rating = RadioField('Rating', choices=[(0, 'good'), (1, 'soso'), (2, 'bad')])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    keyword = MultiCheckboxField('keywords', choices=keyword_choices)
-    submit = SubmitField('submit')
+    title = StringField('タイトル*', validators=[DataRequired(), Length(max=30)])
+    rating = RadioField('評　価*', choices=[(0, 'good'), (1, 'soso'), (2, 'bad')])
+    content = TextAreaField('本　文*', validators=[DataRequired()])
+    keyword = MultiCheckboxField('キーワード', choices=keyword_choices)
+    submit = SubmitField('投 稿')
 
 
 class SearchClassForm(FlaskForm):
@@ -92,3 +92,15 @@ class SearchClassForm(FlaskForm):
     title = StringField('授業名')
     keyword = MultiCheckboxField('(避けたい)キーワード', choices=keyword_choices)
     submit = SubmitField('この条件で検索')
+
+
+class UpdateClassForm(FlaskForm):
+    sort = StringField('時間割区分', validators=[DataRequired(), Length(max=20)])
+    term = StringField('学期', validators=[DataRequired(), Length(max=20)])
+    time = StringField('曜日と時限', validators=[DataRequired(), Length(max=20)])
+    name = StringField('授業名', validators=[DataRequired(), Length(max=50)])
+    teacher = StringField('教授名', validators=[DataRequired(), Length(max=50)])
+    language = StringField('言語', validators=[DataRequired(), Length(max=10)])
+    draw = StringField('抽選', validators=[DataRequired(), Length(max=10)])
+    keyword = StringField('キーワード', validators=[DataRequired(), Length(max=200)])
+    submit = SubmitField('授業情報修正')

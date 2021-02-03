@@ -1,7 +1,7 @@
-from flask import render_template, url_for, redirect, request, jsonify
+from flask import render_template, url_for, redirect, request, session
 from werkzeug.exceptions import abort
 from classget import app, db, bcrypt
-from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm, SearchClassForm
+from classget.forms import RegistrationForm, LoginForm, UpdateAccountForm, ReviewForm, SearchClassForm, UpdateClassForm
 from classget.models import User, Subject, Review, Like, get_count
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_
@@ -11,87 +11,61 @@ import random
 @app.route("/", methods=["GET", "POST"])
 def mainpage():
     form = SearchClassForm()
-    # if form.validate_on_submit():
-    #     result = Subject.query
-    #     # 所属
-    #     if form.sort.data:
-    #         result = result.filter(Subject.sort.in_(form.sort.data))
-    #     # 開講区分
-    #     if form.term.data:
-    #         result = result.filter(Subject.term.in_(form.term.data))
-    #     # 曜日
-    #     if form.day.data:
-    #         day = [0, 0, 0, 0, 0]
-    #         for i in range(len(form.day.data)):
-    #             day[i] = form.day.data[i]
-    #         result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
-    #                                    Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
-    #                                    Subject.time.like(f'%{day[4]}%')))
-    #     # 時限
-    #     if form.time.data:
-    #         time = [0, 0, 0, 0, 0]
-    #         for i in range(len(form.time.data)):
-    #             time[i] = form.time.data[i]
-    #         result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
-    #                                    Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
-    #                                    Subject.time.like(f'%{time[4]}%')))
-    #     # 抽選
-    #     if form.draw.data:
-    #         result = result.filter(Subject.draw.in_(form.draw.data))
-    #     # 授業名
-    #     if form.title.data:
-    #         result = result.filter(Subject.name.like(f'%{form.title.data}%'))
-    #     # キーワード
-    #     if form.keyword.data:
-    #         for keyword in form.keyword.data:
-    #             result = result.filter(Subject.keyword.notlike(f'%{keyword}%'))
-    #     # 検索結果を１０個ずつ分けてページを作る
-    #     page = request.args.get('page', 1, type=int)
-    #     result = result.paginate(page=page, per_page=10)
     return render_template('mainpage.html', form=form)
 
 
 @app.route("/searchresult", methods=['GET', 'POST'])
 def searchresult():
     form = SearchClassForm()
+    result = Subject.query
     if form.validate_on_submit():
-        result = Subject.query
-        # 所属
-        if form.sort.data:
-            result = result.filter(Subject.sort.in_(form.sort.data))
-        # 開講区分
-        if form.term.data:
-            result = result.filter(Subject.term.in_(form.term.data))
-        # 曜日
-        if form.day.data:
-            day = [0, 0, 0, 0, 0]
-            for i in range(len(form.day.data)):
-                day[i] = form.day.data[i]
-            result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
-                                       Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
-                                       Subject.time.like(f'%{day[4]}%')))
-        # 時限
-        if form.time.data:
-            time = [0, 0, 0, 0, 0]
-            for i in range(len(form.time.data)):
-                time[i] = form.time.data[i]
-            result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
-                                       Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
-                                       Subject.time.like(f'%{time[4]}%')))
-        # 抽選
-        if form.draw.data:
-            result = result.filter(Subject.draw.in_(form.draw.data))
-        # 授業名
-        if form.title.data:
-            result = result.filter(Subject.name.like(f'%{form.title.data}%'))
-        # キーワード
-        if form.keyword.data:
-            for keyword in form.keyword.data:
-                result = result.filter(Subject.keyword.notlike(f'%{keyword}%'))
-        # 検索結果を１０個ずつ分けてページを作る
-        page = request.args.get('page', 1, type=int)
-        result = result.paginate(page=page, per_page=10)
-    return render_template('searchresult.html', title='検索結果', result=result, get_count=get_count)
+        session['form.sort.data'] = form.sort.data
+        session['form.term.data'] = form.term.data
+        session['form.day.data'] = form.day.data
+        session['form.time.data'] = form.time.data
+        session['form.draw.data'] = form.draw.data
+        session['form.title.data'] = form.title.data
+        session['form.keyword.data'] = form.keyword.data
+    # 所属
+    if session['form.sort.data']:
+        result = result.filter(Subject.sort.in_(session['form.sort.data']))
+    # 開講区分
+    if session['form.term.data']:
+        result = result.filter(Subject.term.in_(session['form.term.data']))
+    # 曜日
+    if session['form.day.data']:
+        day = [0, 0, 0, 0, 0]
+        for i in range(len(session['form.day.data'])):
+            day[i] = session['form.day.data'][i]
+        result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
+                                   Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
+                                   Subject.time.like(f'%{day[4]}%')))
+    # 時限
+    if session['form.time.data']:
+        time = [0, 0, 0, 0, 0]
+        for i in range(len(session['form.time.data'])):
+            time[i] = session['form.time.data'][i]
+        result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
+                                   Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
+                                   Subject.time.like(f'%{time[4]}%')))
+    # 抽選
+    if session['form.draw.data']:
+        result = result.filter(Subject.draw.in_(session['form.draw.data']))
+    # 授業名
+    if session['form.title.data']:
+        result = result.filter(Subject.name.like(f"%{session['form.title.data']}%"))
+    # キーワード
+    if session['form.keyword.data']:
+        for keyword in session['form.keyword.data']:
+            result = result.filter(Subject.keyword.notlike(f'%{keyword}%'))
+    # 検索結果を１０個ずつ分けてページを作る
+    page = request.args.get('page', 1, type=int)
+    result_num = get_count(result)
+    result = result.paginate(page=page, per_page=10)
+    if not result:
+        result = "検索結果がありません。"
+    return render_template('searchresult.html', title='検索結果', result=result, get_count=get_count, form=form,
+                           Review=Review, result_num=result_num)
 
 
 @app.route("/createaccount", methods=['GET', 'POST'])
@@ -270,7 +244,7 @@ def classinfo(subject_id):
         else:
             return redirect(url_for('login'))
     return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
-                           enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count)
+                           enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count, Review=Review)
 
 
 @app.route("/delete_review/<int:review_id>_<int:subject_id>", methods=["GET"])
@@ -297,3 +271,53 @@ def like():
         db.session.commit()
 
     return render_template('like_button.html', subject=subject)
+
+
+@app.route("/updateclass/<int:subject_id>", methods=["GET", "POST"])
+def updateclass(subject_id):
+    # UserIDが「admin」の場合だけ
+    if current_user.iduser == 'admin':
+        subject = Subject.query.get_or_404(subject_id)
+        form = UpdateClassForm()
+        # 修正フォームが提出されたら、DBに適用する
+        if form.validate_on_submit():
+            subject.sort=form.sort.data
+            subject.term=form.term.data
+            subject.time=form.time.data
+            subject.name=form.name.data
+            subject.teacher=form.teacher.data
+            subject.language=form.language.data
+            subject.draw=form.draw.data
+            subject.keyword=form.keyword.data
+            db.session.commit()
+            return redirect(url_for('classinfo', subject_id=subject_id))
+        # ページを開いたら既存の情報がすでに入っている
+        elif request.method == 'GET':
+            form.sort.data = subject.sort
+            form.term.data = subject.term
+            form.time.data = subject.time
+            form.name.data = subject.name
+            form.teacher.data = subject.teacher
+            form.language.data = subject.language
+            form.draw.data = subject.draw
+            form.keyword.data = subject.keyword
+            return render_template('update_class.html', subject=subject, form=form)
+    else:
+        return 'access denied'
+
+
+@app.route("/createclass", methods=["GET", "POST"])
+def createclass():
+    form = UpdateClassForm()
+    if current_user.iduser == 'admin':
+        if form.validate_on_submit():
+            new_subject = Subject(sort=form.sort.data, term=form.term.data, time=form.time.data, name=form.name.data,
+                                  teacher=form.teacher.data, language=form.language.data, draw=form.draw.data,
+                                  keyword=form.keyword.data)
+            db.session.add(new_subject)
+            db.session.commit()
+            return redirect(url_for('classinfo', subject_id=new_subject.id))
+    else:
+        return 'access denied'
+
+    return render_template('createclass.html', form=form)

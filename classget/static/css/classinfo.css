@@ -1,3 +1,212 @@
+/* 面倒なので全ての要素のmargin,paddingを0にしておく */
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* 顔のアイコンの大きさ調整 */
+.face{
+  height: 1.5rem;
+}
+
+/* fieldset全体への設定 */
+fieldset{
+  background-color: white;
+  border: transparent;
+}
+
+/* 外側にあるfieldsetへの設定 */
+fieldset.outer{
+  width: 78%;
+  padding: 1%;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+/* 内側にあるfieldsetへの設定 */
+fieldset.inner{background-color: rgb(235,247,247);
+  padding: 1rem;
+}
+
+/* 教科と学期と時限が入ったboxへの設定 */
+.box{
+  width: 100%;
+  background-color: #ededed;
+  display: inline-block;
+}
+
+/* 教科名 */
+h1.name{
+  margin: 0 1rem;
+  float: left;
+}
+
+/* 学期と時限 */
+h3{
+  float: left;
+  margin: 0.5rem 0;
+}
+
+/* お気に入りボタン */
+img.like-button-img{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
+  float: right;
+  width: 35px;
+}
+
+/* キーワードが入ったボックスの設定*/
+.categories{
+  margin: 0.5rem 0rem;
+}
+
+/* キーワード全般の設定 */
+.keywords{
+  font-size: 1rem;
+  margin: 0.5rem 0rem;
+}
+
+/* キーワードへの設定 */
+.keyword{
+  padding: 0rem 1rem;
+  margin: 0rem 0rem;
+  border-radius: 100vh;
+  color: white;
+  background-color: rgb(199,178,153);
+}
+
+/* この授業の詳細を見るボタン */
+.detail{
+  float: right;
+  text-decoration: underline;
+  color: rgb(144,61,64);
+}
+
+/* 過去のレビューの見出し */
+.reviews{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* レビューした人の情報が入るbox */
+.author{
+  float: left;
+  text-align: center;
+  width: 10%;
+}
+
+.user-username{
+  font-weight: 900;
+}
+
+
+/* レビューの内容 */
+.review-body{
+  float: right;
+  width: 85%;
+  padding: 1%;
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  border-radius: 1vh;
+}
+
+/* レビューのboxを吹き出しっぽくする */
+.review-body:before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: -30px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid white;
+}
+
+.review-title{
+  float: left;
+  font-size: 1.5rem;
+}
+
+.review_face{
+  width: 2rem;
+  margin-left: 1rem;
+}
+
+/* アップロード日時の文字は小さめに */
+.uploaded_date{
+  font-size: 14px;
+  color: gray;
+  float: right;
+  margin: 0rem 1rem;
+  }
+
+hr{
+  width: 100%;
+  height: 1px;
+  margin: rem 0rem;
+  background-color: black;
+}
+
+form.delete-button{
+  text-align: right;
+}
+
+.review-delete{
+  color: white;
+  background-color: rgb(255,100,92);
+  border:  rgb(223 44 36) 4px solid;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1vh;
+}
+
+
+/* ページの番号 */
+.page_nums{
+  text-align: center;
+}
+
+h2{
+  font-size: 2rem;
+}
+
+label{
+  font-weight: 900;
+}
+
+label.label-content{
+  float: left;
+}
+
+input, textarea{
+  border: transparent;
+  background-color: rgb(243,243,245);
+  border-radius: 1vh;
+  margin: 0rem 1rem;
+}
+
+textarea{
+  width: 90%;
+  height: 10rem
+}
+
+input#submit{
+  float: right;
+  color: white;
+  background-color: rgb(242,190,33);
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border:  rgb(223 170 9) 4px solid;
+  border-radius: 1vh;
+}
+
+li::marker{
+  color: transparent;
+}
+
+/* キーワード選択を横並びにする */
 .newreview .rating-review ul{
     margin: 0;
     padding: 0;

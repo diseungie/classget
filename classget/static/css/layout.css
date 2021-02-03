@@ -10,17 +10,19 @@ body{
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+
 /*水色部分全体*/
 .header{
   position: relative;
   height:180px;
   background-color: rgb(235,247,247);
-  }
+}
 
 
 
 /*一橋生のための履修情報サイト*/
 .header a{
+  margin: 0px 0px;
   position: absolute;
   top: 30px;
   left: 50%;
@@ -36,10 +38,10 @@ body{
 .mainlogo{
   position: absolute;
   width: 250px;
-  top:60px;
+  top:40px;
   left:0;
   right:0;
-  margin:auto;
+  margin: 0 auto;
   cursor: pointer;
 }
 
@@ -76,6 +78,7 @@ body{
 
 /*ログイン・アカウント作成ボタン*/
 .menu .login{
+  color: #fff;
   position: absolute;
   right:20px;
   top:20%;
@@ -90,6 +93,7 @@ body{
   float:left;
   padding-right:15px ;
   margin-left:15px;
+  background-color: rgb(78,108,108) !important;
 }
 
 /*カーソルを合わせたとき*/
@@ -97,3 +101,49 @@ body{
   color: blue;
   cursor: pointer;
 }
+
+@media screen and (max-width:767px){
+  .header{
+    height:120px;
+    }
+
+    /*一橋生のための履修情報サイト*/
+.header a{
+  margin: 0px 0px;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width:40%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  font-size: 5px;
+  text-align:center;
+}
+
+.mainlogo{
+  position: absolute;
+  width: 100%;
+  top:30px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  text-align: center;
+  cursor: pointer;
+}
+
+/*presented by HASC*/
+.presented{
+  position: absolute;
+  bottom:5px;
+  right: 10px;
+  font-size: 5px;
+}
+
+.presented img{
+  height:30px;
+  width:40px;
+  vertical-align: bottom;
+}
+

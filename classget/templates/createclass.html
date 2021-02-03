@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/updateclass.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+
+    <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <!--       sort         -->
+                <div class="sort">
+                    {{ form.sort.label }}
+                    {{ form.sort }}
+                </div>
+
+                <!--       term         -->
+                <div class="term">
+                    {{ form.term.label }}
+                    {{ form.term }}
+                </div>
+
+                <!--       time         -->
+                <div class="time">
+                    {{ form.time.label }}
+                    {{ form.time }}
+                    <span class="warning">*曜日は全角漢字、時限とコンマは半角</span>
+                </div>
+
+                <!--       name         -->
+                <div class="name">
+                    {{ form.name.label }}
+                    {{ form.name }}
+                </div>
+
+                <!--       teacher         -->
+                <div class="teacher">
+                    {{ form.teacher.label }}
+                    {{ form.teacher }}
+                </div>
+
+                <!--       language         -->
+                <div class="language">
+                    {{ form.language.label }}
+                    {{ form.language }}
+                </div>
+
+                <!--       draw         -->
+                <div class="draw">
+                    {{ form.draw.label }}
+                    {{ form.draw }}
+                    <span class="warning">*抽選科目または抽選なし</span>
+                </div>
+
+                <!--       keyword         -->
+                <div class="keyword">
+                    {{ form.keyword.label }}
+                    {{ form.keyword }}
+                    <span class="warning">*キーワードの間は全角スペースバーで区分する</span>
+                </div>
+
+            </fieldset>
+
+            <!--     submit       -->
+            <div class="submit_button">
+                {{ form.submit(class="submit_button", value="授業を追加する") }}
+            </div>
+        </form>
+
+{% endblock %}

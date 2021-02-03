@@ -1,84 +1,267 @@
 *{
-  background-color: #EBF7F7;
-}
+    background-color: #EBF7F7;
+  }
 
-/* 入力欄の枠線 */
-fieldset{
-  margin: auto;
-  border: 4pt #4E6C6C solid;  /*枠線*/
-  border-radius: 0.67em;  /*角丸*/
-  padding: 50px; /*内側の余白*/
-  background-color: #BDCCCC;  /*背景色*/
-  width: 370px; /*横幅*/
-  height: 425px;  /*高さ*/
-  line-height: 40px;  /*行の高さ*/
-}
+/*画面全体の幅*/
+  .container{
+    width: 370px; /*横幅*/
+    height: 100%;  /*高さ*/
+    margin: 0 auto; /*中央揃え*/
+  }
 
-/* アカウント作成 */
-legend{
-  text-align: center;
-  background-color: transparent;
-  width: 100%;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+/*入力欄について*/
+  /* 枠線 */
+  fieldset{
+    background-color: #BDCCCC;/*背景色*/
+    width: 370px; /*横幅*/
+    height: 100%;  /*高さ*/
+    padding: 40px; /*内側の余白*/
+    margin: auto; /*中央揃え*/
+    text-align: left;
+    border: solid 4pt #4E6C6C;  /*枠線*/
+    border-radius: 20px;  /*角丸*/
+    justify-content: space-between; /*等間隔に配置*/
+  }
 
-/* ユーザー名入力欄の文字について */
-.userid{
-  position: relative;
-  width: 100;
-  background-color: transparent;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+  /*位置*/
+  form{
+    text-align: center;
+    padding-top: 60px;
+  }
 
-/* パスワード入力欄の文字について */
-.password{
-  background-color: transparent;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+  /*中央揃え*/
+  .userid,
+  .password,
+  .confirm_password,
+  .username,
+  .syozoku{
+    margin: 0 auto;
+  }
 
-/* パスワード確認入力欄の文字について */
-.confirm_passowrd{
-  background-color: transparent;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+  /*タイトル*/
+  legend{
+    background-color: rgba(27,36,36,0.1);
+    font-weight: normal;
+    color: #273636;
+    font-size: 14pt;
+    letter-spacing: 2px;
+    padding: 2px 10px;
+    border-radius: 2px;
+    text-align: center;
+  }
 
-/* ユーザー名入力欄 */
-.username{
-  background-color: transparent;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+  label{
+    float: left;
+    width: 260px;
+    margin-bottom: 15px;
+  }
 
-/* 学部と学年のラベル／入力欄 */
-.syozoku{
-  background-color: transparent;
-  font-family: Noto Sans CJK JPRegular;
-  font-size: 15pt;
-  color: #273636
-}
+  input{
+    float: left;
+    width: 260px;
+    margin-bottom: 15px;
+  }
 
-.form_blank{
+  /*入力欄*/
+  input{
+    box-sizing: border-box;
+    font-weight: normal;
+    font-size: 15pt;
+    letter-spacing: 1px;
+    outline: none;
+    width: 100%;
+    height: 35px;
+    padding:5px;
+    position: relative;
+    text-align: left;
+    border: none; /*枠線なし*/
+    border-bottom: 2px solid #808080; /*下線部*/
+    border-bottom-left-radius: 1.1px;
+    border-bottom-right-radius: 1.1px;
+    background-color: transparent;
+    z-index: 1000;
+  }
 
-}
+  /*枠線の変化*/
+  input:focus{
+    border: none;
+    border-bottom: 2px solid #518383;
+  }
+  input:hover{
+    border: none;
+    border-bottom: 2px solid #518383;
+  }
 
-.form_label{
+  /* 文字について */
+  .userid,.password,.confirm_password,.username{
+    font-weight: normal;
+    background-color: transparent;
+    color: #273636;
+    font-size: 14pt;
+    text-align:left;
+    width:85%;
+    height:10%;
+    position: relative;
+  }
 
+/*エラーメッセージについて*/
+  .error{
+    background-color: transparent;
+  }
 
-}
+  .error_message {
+    color: #cc0033;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0 0;
+  }
 
-.error_message{
+  .error_message span{
+    margin-bottom: 15px;
+  }
 
-}
+  .error label {
+    color: #cc0033;
+  }
 
-.submit_button{
+  .error input[type=text] {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+    outline: none;
+  }
 
-}
+  .error input[type=password] {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+    outline: none;
+  }
+
+/*選択欄について*/
+  .syozoku select{
+    font-weight: normal;
+    background-color: transparent;
+    color: #273636;
+    font-size: 14pt;
+    text-align:left;
+    float: inline-end;
+    position: relative;
+  }
+
+  .syozoku::-ms-expand{
+      display: none; /*IEの矢印を非表示*/
+  }
+
+  .syozoku:-moz-focusring{
+      color: transparent;
+      text-shadow: 0 0 0 #828c9a; /*FireFoxでフォーカス時に点線の表示回避*/
+  }
+
+  /*矢印*/
+  .syozoku select::after{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance:none;
+    content: '\25BC';
+    position: relative;
+    top: 0;
+    right: 0;
+    color: #808080;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+  }
+
+  /*選択時の枠線の変化*/
+  select:focus,
+  select:hover{
+      outline: none;
+      border: none;
+      border-bottom: 2px solid #518383;
+  }
+  .syozoku select:hover::after{
+    color: #518383;
+  }
+
+  /*選択欄*/
+  .syozoku select{
+    padding: 8px  12px;
+    color:  #273636;
+    background-color: transparent;
+    border:none;
+    outline: none;
+    border-bottom: 2px solid #808080;
+    cursor: pointer;
+    border-bottom-left-radius: 1.1px;
+    border-bottom-right-radius: 1.1px;
+    margin-right: 25px;
+  }
+
+  /*文字*/
+  .syozoku{
+    font-weight: normal;
+    color: #273636;
+    background-color: transparent;
+    font-size: 14pt;
+    text-align:left;
+    width:85%;
+    height:10%;
+    position: relative;
+  }
+
+/*確定ボタンについて*/
+  .submit_button{
+    font-weight: bold;
+    background: #D96236;
+    color: #FFF;
+    font-size: 21pt;
+    width: 260px;
+    height: 40px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 15px;
+    padding: 10px 40px 10px 40px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+  }
+
+  /*選択時の変化*/
+  .submit_button:focus,
+  .submit_button:hover{
+    background: #C36238;
+    border: none;
+    border-top: 2px solid #A34A29;
+    border-left: 2px solid#A34A29;
+  }
+
+/*新規アカウント作成*/
+  small{
+    float: left;
+    font-weight: lighter;
+    background-color: transparent;
+    color: #273636;
+    font-size: 10pt;
+    text-align:left;
+    width:70%;
+    height:10%;
+    position: relative;
+    padding: 10px;
+  }
+
+/*リンクについて*/
+  .have_account{
+    color: #97B5B5;
+  }
+  .have_account:hover{
+    color: #518383;
+  }
+  .have_account:visited{
+    color: #847787;
+  }

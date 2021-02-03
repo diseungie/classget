@@ -6,41 +6,40 @@
 {% endblock %}
 
 {% block contents %}
-    <div>
+    <div class="container">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset>
                 <!--      Loginタイトル         -->
                 <legend>Login</legend>
-
                 <!--       ID入力欄         -->
                 <div class="userid">
-                    {{ form.iduser.label(class="form_label") }}
-
                     {% if form.iduser.errors %}
-                        {{ form.iduser(class="form_blank") }}
-                        <div class="error_message">
-                            {% for error in form.iduser.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="error">
+                            {{ form.iduser(class="form_blank", placeholder="ユーザーID") }}
+                            <div class="error_message">
+                                {% for error in form.iduser.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% else %}
-                        {{ form.iduser(class="form_blank") }}
+                        {{ form.iduser(class="form_blank", placeholder="ユーザーID") }}
                     {% endif %}
                 </div>
 
                 <!--     　　　パスワード入力欄           -->
                 <div class="password">
-                    {{ form.password.label(class="form_label") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form_blank") }}
-                        <div class="error_message">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
+                        <div class="error">
+                            {{ form.password(class="form_blank", placeholder="パスワード") }}
+                            <div class="error_message">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                     {% else %}
-                        {{ form.password(class="form_blank") }}
+                        {{ form.password(class="form_blank", placeholder="パスワード") }}
                     {% endif %}
                 </div>
 
@@ -63,12 +62,12 @@
                 {{ form.submit(class="login_button") }}
             </div>
         </form>
-    </div>
 
-    <!--　　アカウント作成に　　-->
-    <div>
-        <small>
-            Need An Account? <a href="{{ url_for('createaccount') }}">Sign Up Now</a>
-        </small>
+        <!--　　アカウント作成に　　-->
+        <div>
+            <small>
+                Need An Account? <a href="{{ url_for('createaccount') }}" class="need_account">Sign Up Now</a>
+            </small>
+        </div>
     </div>
 {% endblock %}

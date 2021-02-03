@@ -1,0 +1,201 @@
+*{
+    background-color: #EBF7F7;
+  }
+
+/*画面全体の幅*/
+  .container{
+    width: 370px; /*横幅*/
+    height: 100%;  /*高さ*/
+    margin: 0 auto; /*中央揃え*/
+  }
+
+/*入力欄について*/
+  /* 枠線 */
+  fieldset{
+    background-color: #BDCCCC;/*背景色*/
+    width: 370px; /*横幅*/
+    height: 100%;  /*高さ*/
+    padding: 40px; /*内側の余白*/
+    margin: auto;/*中央揃え*/
+    text-align: center;
+    border: solid 4pt #4E6C6C;  /*枠線*/
+    border-radius: 20px;  /*角丸*/
+    justify-content: space-between;/*等間隔に配置*/
+    }
+
+  /*位置*/
+  form{
+    text-align: center;
+    padding-top: 60px;
+  }
+
+  .userid,
+  .password{
+    margin: 0 auto;
+  }
+
+  /*タイトル*/
+  legend{
+    background-color: rgba(27,36,36,0.1);
+    color: #273636;
+    font-size: 14pt;
+    letter-spacing: 2px;/*文字間隔*/
+    padding: 2px 10px;
+    border-radius: 2px;
+    text-align: left;
+  }
+
+  label{
+    float: left;
+    width: 260px;
+    margin-bottom: 25px;
+  }
+
+  input{
+    float: left;
+    width: 260px;
+    margin-bottom: 25px;
+  }
+
+  /*入力欄*/
+  .form_blank{
+    box-sizing: border-box;
+    font-size: 15pt;
+    letter-spacing: .7px;
+    outline: none;
+    width: 100%;
+    height: 35 px;
+    padding:5px;
+    position: relative;
+    text-align: left;
+    border: none; /*枠線なし*/
+    border-bottom: 2px solid #808080; /*下線部*/
+    border-bottom-left-radius: 1.1px;
+    border-bottom-right-radius: 1.1px;
+    background-color: transparent;
+  }
+
+  /*入力時の枠線の変化*/
+  input:focus{
+    border: none;
+    border-bottom: 2px solid #518383;
+  }
+
+  input:hover{
+    border: none;
+    border-bottom: 2px solid #518383;
+  }
+
+  .form_blank:focus{
+    border: none;
+    border-bottom: 2px solid #518383;
+  }
+
+
+  /* ユーザー名入力欄の文字について */
+  .userid{
+    background-color: transparent;
+    color: #273636;
+    font-size: 14pt;
+    text-align:left;
+    width:85%;
+    height:10%;
+    position: relative;
+  }
+
+  /* パスワード入力欄の文字について */
+  .password{
+    color: #273636;
+    background-color: transparent;
+    font-size: 14pt;
+    text-align:left;
+    width:85%;
+    height:10%;
+    position: relative;
+  }
+
+  .remember_me{
+    color: #273636;
+    background-color: transparent !important;
+    font-size: 10pt;
+    text-align: left !important;
+    width:70%;
+    height:10%;
+    position: relative;
+  }
+
+/*エラーメッセージについて*/
+  .error_message {
+    color: #cc0033;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0 0;
+  }
+
+  .error label {
+    color: #cc0033;
+  }
+
+  .error input[type=text] {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+    outline: none;
+  }
+
+  .error input[type=password] {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+    outline: none;
+  }
+
+/*ログインボタンについて*/
+  .login_button input{
+    background: #D96236;
+    color: #FFF;
+    font-size: 21pt;
+    width: 260px;
+    height: 40px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 15px;
+    padding: 10px 40px 10px 40px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    border: none;
+  }
+
+  /*選択時のボタンの変化*/
+  .login_button:focus,
+  .login_button:hover{
+      background: #C36238;
+      border: none;
+      border-top: 2px solid #A34A29;
+      border-left: 2px solid#A34A29;
+  }
+
+/*新規アカウント作成*/
+ small{
+  float: left;
+  background-color: transparent;
+  color: #273636;
+  font-size: 10pt;
+  font-weight: lighter;
+  text-align:left;
+  position: relative;
+  padding: 10px;
+}
+
+/*リンクについて*/
+  .need_account{
+    color: #97B5B5;
+  }
+  .need_account:hover{
+    color: #518383;
+  }
+  .need_account:visited{
+    color: #847787;
+  }
