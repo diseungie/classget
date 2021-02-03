@@ -95,12 +95,12 @@ class SearchClassForm(FlaskForm):
 
 
 class UpdateClassForm(FlaskForm):
-    sort = StringField('時間割区分', validators=[DataRequired(), Length(max=20)])
-    term = StringField('学期', validators=[DataRequired(), Length(max=20)])
-    time = StringField('曜日と時限', validators=[DataRequired(), Length(max=20)])
-    name = StringField('授業名', validators=[DataRequired(), Length(max=50)])
-    teacher = StringField('教授名', validators=[DataRequired(), Length(max=50)])
-    language = StringField('言語', validators=[DataRequired(), Length(max=10)])
-    draw = StringField('抽選', validators=[DataRequired(), Length(max=10)])
-    keyword = StringField('キーワード', validators=[DataRequired(), Length(max=200)])
+    sort = StringField('・時間割区分', validators=[DataRequired(), Length(max=20)])
+    term = StringField('・学期', validators=[DataRequired(), Length(max=20)])
+    time = StringField('・曜日と時限', validators=[DataRequired(), Length(max=20)])
+    name = StringField('・授業名', validators=[DataRequired(), Length(max=50)])
+    teacher = StringField('・教授名', validators=[DataRequired(), Length(max=50)])
+    language = StringField('・言語', validators=[DataRequired(), Length(max=10)])
+    draw = StringField('・抽選', validators=[DataRequired(), Length(max=10)])
+    keyword = StringField('・キーワード', validators=[DataRequired(), Length(max=200)])
     submit = SubmitField('授業情報修正')

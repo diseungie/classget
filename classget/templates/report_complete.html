@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/updateclass.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+
+    <h1>報告が送信されました。ありがとうございます。</h1>
+
+{% endblock %}

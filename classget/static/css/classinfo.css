@@ -219,3 +219,17 @@ ul li {
   display:inline-block;
   width:12em;
 }
+
+
+
+
+
+.report_button{
+  float: right;
+  color: white;
+  background-color: rgb(255,140,130);
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border:  rgb(255,165,155) 2px solid;
+  border-radius: 1vh;
+}

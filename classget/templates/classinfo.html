@@ -7,80 +7,96 @@
 
 
 {% block contents %}
-  <!-- ここから授業詳細 -->
+<!-- ここから授業詳細 -->
   <fieldset class="outer">
     <div class="classinfo">
-      <div class="box">
-        <h1 class="name">{{ subject.name }}</h1>
-        <!--   学期と曜日・時限   -->
-          <span class="term-and-time"><h3>{{ subject.term}} {{ subject.time }}</h3></span>
-        <!--  ↓お気に入りボタン（右上）    -->
-        <div class="like_buttons{{ subject.id }}">
-            {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
-                <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
-                    <img class="like-button-img" src="{{ url_for('static', filename='img/liked.png') }}" width="35px">
-                </a>
-            {% elif current_user.is_authenticated %}
-                <a href="" class="user_like_button" id="like_{{ subject.id }}">
-                    <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
-                </a>
-            {% else %}
-                <a href="{{ url_for('login') }}" class="like_button">
-                    <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
-                </a>
-            {% endif %}
+        <div class="box">
+<!--      授業名      -->
+            <h1 class="name">{{ subject.name }}</h1>
+<!--   学期と曜日・時限   -->
+            <span class="term-and-time"><h3>{{ subject.term}} {{ subject.time }}</h3></span>
+<!--  お気に入りボタン    -->
+            <div class="like_buttons{{ subject.id }}">
+<!--       お気に入り済みの状態         -->
+                {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
+                    <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
+                        <img class="like-button-img" src="{{ url_for('static', filename='img/liked.png') }}" width="35px">
+                    </a>
+<!--       お気に入りしてない状態        -->
+                {% elif current_user.is_authenticated %}
+                    <a href="" class="user_like_button" id="like_{{ subject.id }}">
+                        <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
+                    </a>
+<!--       ログインしてない状態（押したらログインページに送る）      -->
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="like_button">
+                        <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}" width="35px">
+                    </a>
+                {% endif %}
+            </div>
         </div>
-      </div>
-
-      <p class="sort">•{{ subject.sort }}   •{{ subject.draw }}</p>
-      <p class="professor-and-language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
-      <!--   ３段階の顔文字評価の集計   -->
-      <div class="class-rating">
+<!--　　授業情報　　-->
+        <p class="sort">•{{ subject.sort }}   •{{ subject.draw }}</p>
+        <p class="professor-and-language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
+<!--   ３段階の顔文字評価の集計   -->
+        <div class="class-rating">
         <img class="face" src="{{ url_for('static', filename='img/rating_0.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
         <img class="face" src="{{ url_for('static', filename='img/rating_1.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
         <img class="face" src="{{ url_for('static', filename='img/rating_2.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
         (お気に入り {{ get_count(subject.likes) }}件)
-      </div>
-      <div class="keywords">
+        </div>
+<!--    キーワード      -->
+        <div class="keywords">
         {% for keyword in subject_keyword %}
           <span class="keyword">{{ keyword }}</span>
         {% endfor %}
-      </div>
+        </div>
+<!--    授業情報修正申請ボタン    -->
+        <div class="report">
+            <a href="{{ url_for('report', subject_id=subject.id) }}"><button class="report_button">この授業の最新情報報告</button></a>
+        </div>
     </div>
-    {% if current_user.id and current_user.iduser == 'admin' %}
+<!--  授業情報修正ボタン（adminアカウントにだけ見える）  -->
+    {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
         <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button>授業情報修正</button></a>
     {% endif %}
   </fieldset>
 
-      <!-- ここからレビュー一覧 -->
+<!-- ここからレビュー一覧 -->
   <fieldset class="outer">
     <div class="reviews">過去のレビュー</div>
     {% if reviews.items %}
       {% for review in reviews.items %}
         <fieldset class="inner">
+<!--　　　　レビュー作成者　　　　　-->
             <div class="author">
-              <!--       ユーザーアイコン       -->
+<!--      作成者アイコン       -->
               <img class="user-icon" src="{{ url_for('static', filename='img/profile_pics/{}.png'.format(review.author.type)) }}" width= "55.3485px">
-              <!--       ユーザー名       -->
+<!--      作成者のユーザー名       -->
               <div class="user-username">{{ review.author.username }}</div>
-              <!--       ユーザー学部       -->
+<!--      作成者の学部       -->
               <div class="user-faculty">{{ review.author.faculty }}</div>
             </div>
-
+<!--　　　　レビュー内容　　　　　　-->
             <div class="review-body">
+<!--      タイトル         -->
               <span class="review-title">{{ review.title }}</span>
+<!--       評価     -->
               <img class="review_face" src="{{ url_for('static', filename='img/rating_{}.png'.format(review.rating)) }}">
+<!--       投稿日付         -->
               <div class="uplaoded_date">
                 {{ review.date_posted.strftime('%Y-%m-%d') }}
               </div>
               <hr>
-              <!--       本文       -->
+<!--       本文       -->
               <div class="review-content">{{ review.content }}</div>
+<!--       キーワード         -->
               <div class="keywords">
                 {% for keyword in review.keyword.split(" ") %}
                   <span class="keyword">{{ keyword }}</span>
                 {% endfor %}
               </div>
+<!--       レビュー削除ボタン（ログインしてるユーザー　＝＝　投稿者の場合）         -->
               {% if review.author == current_user %}
                 <form class="delete-button" action="{{ url_for('delete_review', review_id=review.id, subject_id=subject.id) }}">
                   <button class="review-delete" type="submit">このレビューを削除</button>
@@ -89,9 +105,11 @@
             </div>
         </fieldset>
       {% endfor %}
+<!--   レビューがないとき   -->
     {% else %}
       <div>作成されたレビューがありません。</div>
     {% endif %}
+<!--   ページの表示   -->
     {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
             {% if reviews.page == page_num %}

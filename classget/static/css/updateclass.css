@@ -2,3 +2,29 @@
     color: #ff0000;
     font-size: 12px;
 }
+
+.keywords{
+    color: rgb(128,128,128);
+}
+
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+input.submit_button{
+    text-align: center;
+    color: white;
+    background-color: rgb(242,190,33);
+    font-size: 1rem;
+    padding: 0.3rem 0.7rem;
+    border:  rgb(223 170 9) 4px solid;
+    border-radius: 1vh;
+    margin-top: 1rem;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+}

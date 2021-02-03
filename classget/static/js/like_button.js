@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
-
-    $(document).on('click', ".user_like_button", function(event) {
+    $(document).on('click', '.user_like_button', function(event) {
 
         event.preventDefault();
 

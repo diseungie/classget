@@ -6,6 +6,11 @@ from classget.models import User, Subject, Review, Like, get_count
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_
 import random
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email import encoders
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -192,11 +197,11 @@ def typeresult():
     type_eco = get_count(User.query.filter_by(type=current_user.type, faculty='経済学部'))
     type_law = get_count(User.query.filter_by(type=current_user.type, faculty='法学部'))
     type_soc = get_count(User.query.filter_by(type=current_user.type, faculty='社会学部'))
-    type_proportion = (type_number/user_number)*100
-    com_proportion = (type_com/type_number)*100
-    eco_proportion = (type_eco / type_number) * 100
-    law_proportion = (type_law / type_number) * 100
-    soc_proportion = (type_soc / type_number) * 100
+    type_proportion = "{:.1f}".format((type_number/user_number)*100)
+    com_proportion = "{:.1f}".format((type_com/type_number)*100)
+    eco_proportion = "{:.1f}".format((type_eco / type_number) * 100)
+    law_proportion = "{:.1f}".format((type_law / type_number) * 100)
+    soc_proportion = "{:.1f}".format((type_soc / type_number) * 100)
     return render_template('typeresult.html', recommended_subjects=recommended_subjects, type_pp=type_proportion,
                            com_pp=com_proportion, eco_pp=eco_proportion, law_pp=law_proportion, soc_pp=soc_proportion)
 
@@ -276,19 +281,19 @@ def like():
 @app.route("/updateclass/<int:subject_id>", methods=["GET", "POST"])
 def updateclass(subject_id):
     # UserIDが「admin」の場合だけ
-    if current_user.iduser == 'admin':
+    if current_user.is_authenticated and current_user.iduser == 'admin':
         subject = Subject.query.get_or_404(subject_id)
         form = UpdateClassForm()
         # 修正フォームが提出されたら、DBに適用する
         if form.validate_on_submit():
-            subject.sort=form.sort.data
-            subject.term=form.term.data
-            subject.time=form.time.data
-            subject.name=form.name.data
-            subject.teacher=form.teacher.data
-            subject.language=form.language.data
-            subject.draw=form.draw.data
-            subject.keyword=form.keyword.data
+            subject.sort = form.sort.data
+            subject.term = form.term.data
+            subject.time = form.time.data
+            subject.name = form.name.data
+            subject.teacher = form.teacher.data
+            subject.language = form.language.data
+            subject.draw = form.draw.data
+            subject.keyword = form.keyword.data
             db.session.commit()
             return redirect(url_for('classinfo', subject_id=subject_id))
         # ページを開いたら既存の情報がすでに入っている
@@ -309,7 +314,7 @@ def updateclass(subject_id):
 @app.route("/createclass", methods=["GET", "POST"])
 def createclass():
     form = UpdateClassForm()
-    if current_user.iduser == 'admin':
+    if current_user.is_authenticated and current_user.iduser == 'admin':
         if form.validate_on_submit():
             new_subject = Subject(sort=form.sort.data, term=form.term.data, time=form.time.data, name=form.name.data,
                                   teacher=form.teacher.data, language=form.language.data, draw=form.draw.data,
@@ -321,3 +326,52 @@ def createclass():
         return 'access denied'
 
     return render_template('createclass.html', form=form)
+
+
+@app.route("/report/<int:subject_id>", methods=["GET", "POST"])
+def report(subject_id):
+    subject = Subject.query.get_or_404(subject_id)
+    form = UpdateClassForm()
+    if form.validate_on_submit():
+        # 送信者情報
+        sender = "machikado.cookingclass@gmail.com"
+        sender_password = "hxvgufhczdlwzuao"
+        # メールサーバーにログイン
+        s = smtplib.SMTP_SSL('smtp.gmail.com')
+        s.login(sender, sender_password)
+        # 宛名
+        receiver = "hit.classget@gmail.com"
+        # メール送信情報
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = "ユーザーからの授業情報修正の報告"
+        msg['From'] = sender
+        msg['To'] = receiver
+        # メール本文
+        content = f'''
+        ・開講区分：{form.sort.data}
+        ・学期：{form.term.data}
+        ・曜日時限：{form.time.data}
+        ・授業名：{form.name.data}
+        ・教授名：{form.teacher.data}
+        ・言語：{form.language.data}
+        ・抽選：{form.draw.data}
+        ・キーワード：{form.keyword.data}
+        '''
+        part2 = MIMEText(content, 'plain')
+        msg.attach(part2)
+        # メール送信、サーバーを閉じる
+        s.sendmail(sender, receiver, msg.as_string())
+        s.quit()
+        return render_template('report_complete.html')
+
+    # ページを開いたら既存の情報がすでに入っている
+    elif request.method == 'GET':
+        form.sort.data = subject.sort
+        form.term.data = subject.term
+        form.time.data = subject.time
+        form.name.data = subject.name
+        form.teacher.data = subject.teacher
+        form.language.data = subject.language
+        form.draw.data = subject.draw
+        form.keyword.data = subject.keyword
+    return render_template('report.html', subject=subject, form=form)

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/updateclass.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+
+    <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <h2>授業の最新情報を報告</h2>
+            <fieldset>
+                <!--       sort         -->
+                <div class="sort">
+                    {{ form.sort.label }}
+                    {{ form.sort }}
+                </div>
+
+                <!--       term         -->
+                <div class="term">
+                    {{ form.term.label }}
+                    {{ form.term }}
+                </div>
+
+                <!--       time         -->
+                <div class="time">
+                    {{ form.time.label }}
+                    {{ form.time }}
+                    <span class="warning">*曜日は漢字、時限は数字</span>
+                </div>
+
+                <!--       name         -->
+                <div class="name">
+                    {{ form.name.label }}
+                    {{ form.name }}
+                    <span class="warning">*略称不可</span>
+                </div>
+
+                <!--       teacher         -->
+                <div class="teacher">
+                    {{ form.teacher.label }}
+                    {{ form.teacher }}
+                </div>
+
+                <!--       language         -->
+                <div class="language">
+                    {{ form.language.label }}
+                    {{ form.language }}
+                </div>
+
+                <!--       draw         -->
+                <div class="draw">
+                    {{ form.draw.label }}
+                    {{ form.draw }}
+                    <span class="warning">*抽選科目または抽選なし</span>
+                </div>
+
+                <!--       keyword         -->
+                <div class="keyword">
+                    {{ form.keyword.label }}
+                    {{ form.keyword }}
+                    <span class="warning">*該当するキーワードを全て書いてください</span>
+                    <div class="keywords">*キーワード：期末試験　期末レポート　中間試験　中間レポート　出席　課題(毎回)　課題(たまに)　ライブ　オンデマンド　ライブ・オンデマ併用　対面　顔出しアリ　顔出しナシ</div>
+                </div>
+
+            </fieldset>
+
+            <!--     submit       -->
+            <div class="submit_button">
+                {{ form.submit(class="submit_button", value="この情報で報告!") }}
+            </div>
+        </form>
+
+{% endblock %}
