@@ -12,9 +12,11 @@
     <div class="classinfo">
         <div class="box">
 <!--      授業名      -->
-            <h1 class="name">{{ subject.name }}</h1>
-<!--   学期と曜日・時限   -->
-            <span class="term-and-time"><h3>{{ subject.term}} {{ subject.time }}</h3></span>
+            <div class="main-info">
+                <h1 class="name">{{ subject.name }}</h1>
+    <!--   学期と曜日・時限   -->
+                <div class="term-and-time"><h3>{{ subject.term}} {{ subject.time }}</h3></div>
+            </div>
 <!--  お気に入りボタン    -->
             <div class="like_buttons{{ subject.id }}">
 <!--       お気に入り済みの状態         -->
@@ -36,14 +38,14 @@
             </div>
         </div>
 <!--　　授業情報　　-->
-        <p class="sort">•{{ subject.sort }}   •{{ subject.draw }}</p>
-        <p class="professor-and-language">{{ subject.teacher }} 教授 / 言語：{{ subject.language }}</p>
+        <p class="sort">•{{ subject.sort }} <span class="draw">•{{ subject.draw }}</span></p>
+        <p class="professor-and-language">•教員名：{{ subject.teacher }} 教授  <span class="draw">•言語：{{ subject.language }}</span></p>
 <!--   ３段階の顔文字評価の集計   -->
         <div class="class-rating">
         <img class="face" src="{{ url_for('static', filename='img/rating_0.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
         <img class="face" src="{{ url_for('static', filename='img/rating_1.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
         <img class="face" src="{{ url_for('static', filename='img/rating_2.png') }}"> {{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
-        (お気に入り {{ get_count(subject.likes) }}件)
+            <span class="liked_number">(お気に入り {{ get_count(subject.likes) }}件)</span>
         </div>
 <!--    キーワード      -->
         <div class="keywords">
@@ -58,7 +60,7 @@
     </div>
 <!--  授業情報修正ボタン（adminアカウントにだけ見える）  -->
     {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
-        <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button>授業情報修正</button></a>
+        <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button class="update_class_button">授業情報修正</button></a>
     {% endif %}
   </fieldset>
 
@@ -71,7 +73,7 @@
 <!--　　　　レビュー作成者　　　　　-->
             <div class="author">
 <!--      作成者アイコン       -->
-              <img class="user-icon" src="{{ url_for('static', filename='img/profile_pics/{}.png'.format(review.author.type)) }}" width= "55.3485px">
+              <img class="user-icon" src="{{ url_for('static', filename='img/profile_pics/{}.png'.format(review.author.type)) }}">
 <!--      作成者のユーザー名       -->
               <div class="user-username">{{ review.author.username }}</div>
 <!--      作成者の学部       -->
@@ -84,14 +86,14 @@
 <!--       評価     -->
               <img class="review_face" src="{{ url_for('static', filename='img/rating_{}.png'.format(review.rating)) }}">
 <!--       投稿日付         -->
-              <div class="uplaoded_date">
+              <div class="uploaded_date">
                 {{ review.date_posted.strftime('%Y-%m-%d') }}
               </div>
               <hr>
 <!--       本文       -->
               <div class="review-content">{{ review.content }}</div>
 <!--       キーワード         -->
-              <div class="keywords">
+              <div class="review-keywords">
                 {% for keyword in review.keyword.split(" ") %}
                   <span class="keyword">{{ keyword }}</span>
                 {% endfor %}
@@ -110,30 +112,30 @@
       <div>作成されたレビューがありません。</div>
     {% endif %}
 <!--   ページの表示   -->
-    {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-        {% if page_num %}
-            {% if reviews.page == page_num %}
-                <a class="current_page_num" href="{{ url_for('classinfo', subject_id=subject.id, page=page_num) }}">{{ page_num }}</a>
+    <div class="page_nums">
+        {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if reviews.page == page_num %}
+                    <a class="current_page_num" href="{{ url_for('classinfo', subject_id=subject.id, page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="page_num" href="{{ url_for('classinfo', subject_id=subject.id, page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
             {% else %}
-                <a class="page_num" href="{{ url_for('classinfo', subject_id=subject.id, page=page_num) }}">{{ page_num }}</a>
+                ...
             {% endif %}
-        {% else %}
-            ...
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    </div>
   </fieldset>
-
-    <br>
 
   <!-- ここからレビュー作成 -->
     <fieldset class="outer">
       <div class="newreview">
-        <h2>レビュー作成</h2><hr>
+        <div class="create-review"><h2>レビュー作成</h2></div><hr>
           <form method="POST" action="" class="newreview">
             {{ form.hidden_tag() }}
               <div class="title-review">
                 {{ form.title.label(class="label-title") }}
-                {{ form.title(class="blank-title", placeholder="  30字以内") }}
+                {{ form.title(class="blank-title", placeholder="15字以内") }}
               </div>
 
               <div class="rating-review">
@@ -150,7 +152,9 @@
 
               <div class="keyword-review">
                 {{ form.keyword.label(class="label-keyword") }}
-                {{ form.keyword(class="blank-keyword") }}
+                <div class="select-keyword">
+                    {{ form.keyword(class="blank-keyword") }}
+                </div>
               </div>
 
               <div class="submit-review">

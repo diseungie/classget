@@ -8,9 +8,7 @@ from sqlalchemy import or_
 import random
 import smtplib
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
-from email import encoders
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -363,7 +361,6 @@ def report(subject_id):
         s.sendmail(sender, receiver, msg.as_string())
         s.quit()
         return render_template('report_complete.html')
-
     # ページを開いたら既存の情報がすでに入っている
     elif request.method == 'GET':
         form.sort.data = subject.sort
@@ -375,3 +372,17 @@ def report(subject_id):
         form.draw.data = subject.draw
         form.keyword.data = subject.keyword
     return render_template('report.html', subject=subject, form=form)
+
+
+@app.route('/ham_menu', methods=['POST'])
+def ham_menu():
+    action = request.form['action']
+    if action == 'show_menu':
+        if current_user.is_authenticated:
+            return render_template('show_ham_menu.html')
+        else:
+            return render_template('nouser_show_ham_menu.html')
+    elif action == 'close_menu':
+        return render_template('close_ham_menu.html')
+    else:
+        pass

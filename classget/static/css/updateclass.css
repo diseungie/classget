@@ -3,8 +3,16 @@
     font-size: 12px;
 }
 
+fieldset input{
+  width:30%;
+}
+
 .keywords{
     color: rgb(128,128,128);
+}
+
+.keyword input{
+    width: 50%;
 }
 
 h1{
@@ -16,15 +24,24 @@ h2{
 }
 
 input.submit_button{
-    text-align: center;
+    align: center;
     color: white;
     background-color: rgb(242,190,33);
     font-size: 1rem;
-    padding: 0.3rem 0.7rem;
+    padding: 0.4rem 1rem;
     border:  rgb(223 170 9) 4px solid;
     border-radius: 1vh;
     margin-top: 1rem;
-    width: 20%;
-    margin-left: 40%;
-    margin-right: 40%;
+}
+
+.submit_button{
+    text-align: center;
+}
+
+fieldset{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    border: rgb(78,108,108) 2px solid;
 }

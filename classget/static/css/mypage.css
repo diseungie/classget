@@ -2,23 +2,23 @@
   width:30px;
   }
 
-table th{
+.timetable table th{
   height: 30px;
   background-color: #a5c9c1;
 }
 
-table td{
+.timetable table td{
   background-color: #e5fff2;
   font-size: 10.5pt;
   text-align: center;
 }
 
-table .jigen{
+.timetable table .jigen{
   background-color: #a5c9c1;
   padding: 30px 10px;
 }
 
-table .space{
+.timetable table .space{
   background-color: #54917f;
   width: 30px;
 }

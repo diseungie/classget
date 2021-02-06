@@ -102,7 +102,7 @@ class Subject(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30), nullable=False)
+    title = db.Column(db.String(15), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     content = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.String(200))

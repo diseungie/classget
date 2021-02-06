@@ -1,0 +1,20 @@
+<div class="hamburger-menu" id="close_menu">
+  <a class="ham-letter" href="">close</a>
+  <a href=""><img id="close-img" class="menu_img" src="{{ url_for('static', filename='img/close_menu.png') }}"></a>
+</div>
+<table class="ham">
+    <tbody>
+        <tr>
+            <td><a href="{{ url_for('mainpage') }}">ホーム</a></td>
+            <td><a>About Us</a></td>
+        </tr>
+        <tr>
+            <td><a href="{{ url_for('typetest') }}">キャラ診断</a></td>
+            <td><a href="{{ url_for('mypage', my_term='春') }}">マイページ</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a href="{{ url_for('logout') }}">ログアウト</a></td>
+        </tr>
+    </tbody>
+</table>

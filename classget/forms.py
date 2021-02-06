@@ -27,12 +27,12 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            raise ValidationError('That username is taken, Please choose a different one')
+            raise ValidationError('既に誰かが使用中のユーザー名です')
 
     def validate_iduser(self, iduser):
         user = User.query.filter_by(iduser=iduser.data).first()
         if user:
-            raise ValidationError('That ID is taken, Please choose a different one')
+            raise ValidationError('既に誰かが使用中のIDです')
 
 
 class LoginForm(FlaskForm):
@@ -59,7 +59,7 @@ class UpdateAccountForm(FlaskForm):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
-                raise ValidationError('That username is taken, Please choose a different one')
+                raise ValidationError('既に誰かが使用中のユーザー名です')
 
 
 class ReviewForm(FlaskForm):
@@ -67,7 +67,7 @@ class ReviewForm(FlaskForm):
                ('中間レポート', '中間レポート'), ('出席', '出席'), ('課題(毎回)', '課題(毎回)'), ('課題(たまに)', '課題(たまに)'),
                ('ライブ', 'ライブ'), ('オンデマンド', 'オンデマンド'), ('ライブ・オンデマ併用', 'ライブ・オンデマ併用'), ('対面', '対面'),
                ('顔出しアリ', '顔出しアリ'), ('顔出しナシ', '顔出しナシ')]
-    title = StringField('タイトル*', validators=[DataRequired(), Length(max=30)])
+    title = StringField('タイトル*', validators=[DataRequired(), Length(max=15)])
     rating = RadioField('評　価*', choices=[(0, 'good'), (1, 'soso'), (2, 'bad')])
     content = TextAreaField('本　文*', validators=[DataRequired()])
     keyword = MultiCheckboxField('キーワード', choices=keyword_choices)

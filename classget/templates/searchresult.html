@@ -14,8 +14,10 @@
                 <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
                     <div class="class">
                         <div class="result_header">
-                            <div class="class_name">{{ subject.name }}</div>
-                            <div class="class_time">{{ subject.term }} {{ subject.time }}</div>
+                            <div class="container">
+                                <div class="class_name">{{ subject.name }}</div>
+                                <div class="class_time">{{ subject.term }} {{ subject.time }}</div>
+                            </div>
                             <div class="like_buttons{{ subject.id }}">
                                 {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
                                     <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
@@ -35,8 +37,8 @@
                         <div class="class_sort">・{{ subject.sort }}　・{{ subject.draw }}</div>
                         <div class="class_sort">・教授：{{ subject.teacher }}　・言語：{{ subject.language }}</div>
                         <div class="rating">
-                            <img src="static/img/rating_0.png" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
-                            <img src="static/img/rating_1.png" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
+                            <img src="{{ url_for('static', filename='img/rating_0.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
+                            <img src="{{ url_for('static', filename='img/rating_1.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
                             <img src="{{ url_for('static', filename='img/rating_2.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
                             <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
                         </div>
@@ -45,10 +47,10 @@
                                 <span class="keyword">{{ keyword }}</span>
                             {% endfor %}
                         </div>
-                        <a class="see-detail" href="{{ url_for('classinfo', subject_id=subject.id) }}">授業の詳細を見る></a>
-                        {% if current_user.id and current_user.iduser == 'admin' %}
-                            <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button>授業情報修正</button></a>
+                        {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
+                            <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button class="update_class_button">授業情報修正</button></a>
                         {% endif %}
+                        <a class="see-detail" href="{{ url_for('classinfo', subject_id=subject.id) }}">授業の詳細を見る></a>
                     </div>
                 </a>
             {% endfor %}

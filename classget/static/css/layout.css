@@ -14,7 +14,7 @@ body{
 /*水色部分全体*/
 .header{
   position: relative;
-  height:180px;
+  height:150px;
   background-color: rgb(235,247,247);
 }
 
@@ -24,38 +24,39 @@ body{
 .header a{
   margin: 0px 0px;
   position: absolute;
-  top: 30px;
+  top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
-  width: 30%;
-  height: 30px;
-  font-size: 10pt;
+  font-size:12px;
+  text-align:center;
+}
+
+/*よくわかんないけど-50%とか使うと中央寄りになるらしい。詳しくはleftから-msまでの4行をコピペしてググってください色々出てきます*/
+.logo_div{
   text-align:center;
 }
 
 .mainlogo{
-  position: absolute;
-  width: 250px;
-  top:40px;
-  left:0;
-  right:0;
-  margin: 0 auto;
+  width: 230px;
+  margin: 1.7rem auto;
   cursor: pointer;
 }
+
+/*mainlogoの方はmargin:0を使って中央寄せしています。これも詳しくはコピペしてググってください*/
 
 /*presented by HASC*/
 .presented{
   position: absolute;
   bottom:5px;
   right: 20px;
-  font-size: 10pt;
+  font-size: 8px;
 }
 
 .presented img{
-  height:40px;
-  width:60px;
+  height:30px;
+  width:45px;
   vertical-align: bottom;
 }
 
@@ -72,7 +73,7 @@ body{
 .menu .home{
   position: absolute;
   left:20px;
-  top:20%;
+  top:20%; /*なぜかremで定義できないから%使った*/
   background-color: rgb(78,108,108) !important;
 }
 
@@ -86,13 +87,12 @@ body{
 }
 
 /*homeの文字について*/
-.menu a{
+.menu .home a, .menu .login a{
   color: #fff;
   text-decoration: none;
-  font-size:13pt;
+  font-size:16px;
   float:left;
-  padding-right:15px ;
-  margin-left:15px;
+  margin:0 1rem;
   background-color: rgb(78,108,108) !important;
 }
 
@@ -102,48 +102,143 @@ body{
   cursor: pointer;
 }
 
-@media screen and (max-width:767px){
+
+/*ここからレスポンシブ対応*/
+@media screen and (min-width: 425px) and (max-width: 767px){
   .header{
-    height:120px;
-    }
+    height:8rem !important;
+  }
 
-    /*一橋生のための履修情報サイト*/
-.header a{
-  margin: 0px 0px;
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  width:40%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  font-size: 5px;
-  text-align:center;
+  /*一橋生のための履修情報サイト*/
+  .header a{
+    top:0.8rem;
+    color: rgb(100,100,100);
+  }
+
+  .mainlogo{
+    width: 200px !important;
+    margin: 1.5rem auto !important;
+  }
 }
 
-.mainlogo{
-  position: absolute;
-  width: 100%;
-  top:30px;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
+/*スマホの横幅はだいたい424以下らしい。ipad縦持ちが768px。４２４−７６７で定義したのはパソコンで細くしたときに綺麗になるように。この辺は感覚で微調整しました*/
+/*中途半端な横幅のときあまり綺麗じゃないけど、使うこと少ないし許してください*/
+
+@media screen and (max-width: 767px){
+  /*ヘッダーをスマートにする*/
+  .header{
+    height:6rem;
+  }
+
+  /*一橋生のための履修情報サイト*/
+  .header a{
+    font-size:9px;
+    top:0.8rem;
+    color: rgb(100,100,100);
+  }
+
+  .mainlogo{
+    width: 150px;
+    margin: 1.3rem auto;
+  }
+
+  /*presented by HASC*/
+  .presented{
+    bottom:5px;
+    right: 10px;
+    font-size:5px;
+  }
+
+  .presented img{
+    height:25px;
+    width:35px; /*なぜか縦も横も幅指定しないと歪む*/
+  }
+
+  /*ここから先は緑のメニューの調整*/
+  /*とりあえずスマートにする*/
+  .menu{
+    height:2rem;
+  }
+
+  .menu .home a, .menu .login a{
+    font-size:11px;
+  }
+}
+
+
+@media screen and (max-width: 390px){
+  .presented{
+    display:none;
+  }
+}
+
+
+/* メニューバーが重なるとこからはハンバーガーメニューにする */
+.hamburger-menu a.ham-letter{
+  color: white;
+  text-decoration:none;
+  background-color: rgb(78,108,108) !important;
+  position:absolute;
+  right: 11.5%;
+  top: 20%;
+  font-size:12px;
+}
+
+.ham-menu img{
+  width:27px;
+  height:21px;
+  position:absolute;
+  right: 3%;
+  top: 19%;
+}
+
+#close-img{
+  width:24px;
+  height:19px;
+  position:absolute;
+  right: 3%;
+  top: 19%;
+}
+
+table{
+  width:100%;
+  color: white;
+  background-color: rgb(78,108,108);
   text-align: center;
-  cursor: pointer;
-}
-
-/*presented by HASC*/
-.presented{
+  border-collapse: collapse;
+  border-style: hidden;
+  border-top: 1px solid white;
+  margin-top: 5px;
+  z-index: 3000;
   position: absolute;
-  bottom:5px;
-  right: 10px;
-  font-size: 5px;
 }
 
-.presented img{
-  height:30px;
-  width:40px;
-  vertical-align: bottom;
+.ham td, .ham th {
+  border: 1px solid white;
 }
 
+.ham td{
+  padding: 0.5rem 0.5rem;
+  width: 49%;
+  background-color: rgb(78,108,108) !important;
+}
+
+.ham td a{
+  text-decoration: none;
+  font-size:16px;
+  color: white;
+  background-color: rgb(78,108,108) !important;
+}
+
+@media screen and (min-width: 600px){
+  .ham-menu{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .menu .home, .menu .login{
+    display: none;
+  }
+}
+/*ここまでハンバーガーメニュー*/
