@@ -10,48 +10,53 @@
     <!-- この中に内容入れる -->
     <div class="toppage">
         <!--ここからコピーとロゴ-->
-        <h1>キャッチコピー、入れよう。</h1>
-        <img src="static/img/jellyfish.jpg">
+        <img src="{{ url_for('static', filename='/img/maruikurage.png') }}">
+        <h2>あなたは何キャラ？</h2>
+        <a>キャラ診断をすると、同じキャラの一橋生の<br>オススメ授業を見ることができます。<br>まずはアカウント作成へ！</a>
+        <div class="create_here">>>アカウント作成はコチラから</div>
     </div>
 
     <div class="search-area">
-        <p>条件で検索する</p>
+        <h3>  条件から探す</h3>
         <form method="POST" action="{{ url_for('searchresult') }}">
-          {{ form.hidden_tag() }}
-          <fieldset>
-              <div class="searchform">
-                  {{ form.sort.label(class="form_label") }}
-                  {{ form.sort(class="form_checkbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.term.label(class="form_label") }}
-                  {{ form.term(class="form_checkbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.day.label(class="form_label") }}
-                  {{ form.day(class="form_checkbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.time.label(class="form_label") }}
-                  {{ form.time(class="form_checkbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.draw.label(class="form_label") }}
-                  {{ form.draw(class="form_checkbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.title.label(class="form_label") }}
-                  {{ form.title(class="form_textbox") }}
-              </div>
-              <div class="searchform">
-                  {{ form.keyword.label(class="form_label") }}
-                  {{ form.keyword(class="form_checkbox") }}
-              </div>
-              <!--     Searchボタン       -->
-              <div class="search_button">
-                  {{ form.submit(class="search_button") }}
-              </div>
-          </fieldset>
+            {{ form.hidden_tag() }}
+            <div class="check">
+                <div class="syozoku">
+                    <p>{{ form.sort.label(class="form_label") }}</p>
+                    {{ form.sort(class="form_checkbox") }}
+                </div>
+                <div class="season">
+                    <p>{{ form.term.label(class="form_label") }}</p>
+                    {{ form.term(class="form_checkbox") }}
+                </div>
+                <div class="day">
+                    <p>{{ form.day.label(class="form_label") }}</p>
+                    {{ form.day(class="form_checkbox") }}
+                </div>
+                <div class="when">
+                    <p>{{ form.time.label(class="form_label") }}</p>
+                    {{ form.time(class="form_checkbox") }}
+                </div>
+                <div class="draw">
+                    <p>{{ form.draw.label(class="form_label") }}</p>
+                    {{ form.draw(class="form_checkbox") }}
+
+                    <div class="searchform" id="makeImg">
+                      {{ form.title(class="searchText", id="inText", placeholder="授業名") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="searchdetail">
+                <div class="keyword">
+                    <p>検索結果に含まないキーワード</p>
+                    {{ form.keyword(class="form_checkbox") }}
+                </div>
+            </div>
+            <!--     Searchボタン       -->
+            <div class="search_button">
+                {{ form.submit(class="searchbutton") }}
+            </div>
         </form>
     </div>
   <!-- ここまで授業検索画面 -->

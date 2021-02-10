@@ -1,24 +1,291 @@
-.userinfo img{
-  width:30px;
-  }
 
-.timetable table th{
-  height: 30px;
-  background-color: #a5c9c1;
+/* ユーザー情報について */
+.userinfo{
+  background-color: #FFFFFF;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  height:8rem;
+  display: inline-block;
+  border-radius: 1vh;
 }
 
-.timetable table td{
-  background-color: #e5fff2;
-  font-size: 10.5pt;
+/* プロフィールイメージ */
+.userinfo img{
+ margin-top: 1.5rem;
+ margin-bottom: 1.5rem;
+ position: absolute;
+ left:19%;
+ height:5rem;
+}
+
+/* ユーザー名 */
+.username{
+  font-weight: bold;
+  font-size: 18px;
+  width:60%;
+  position: absolute;
+  top:15.5rem;
+  left:32%;
+}
+
+    /* タイプ */
+.type,
+.faculty,
+.year{
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.type{
+  position: absolute;
+  top:17.5rem;
+  left: 32%;
+}
+
+.faculty{
+  left: 32%;
+  position: absolute;
+  top:19rem;
+}
+
+.year{
+  left: 39%;
+  position: absolute;
+  top:19rem;
+}
+
+
+    /* アカウント情報修正 */
+ .update{
+  color: white;
+  background-color: rgb(242,190,33);
+  border-radius: 8px;
+  padding: 0.3rem 0.4rem;
+  font-size:12px;
+  width:8rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right:15%;
+  top:19rem;
+}
+
+.update:hover{
+  opacity: 0.5;
+}
+
+.update a{
+  color: #FFF;
+  text-decoration: none;
+}
+
+.select-season button{
+  color: white;
+  background-color: rgb(117,162,162);
+  border-radius: 4px;
+  border: 0;
+  padding: 0.4rem 0.4rem;
+  font-size:12px;
+  width:5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.select-season #current_term button{
+  background-color: transparent;
+  color: rgb(78,120,120);
+  box-shadow: 0 0 0 0.2rem rgb(117,162,162) inset;
+}
+
+.春{
+  position: absolute;
+  left:10%;
+}
+
+.夏{
+  position: absolute;
+  left:22%;
+}
+
+.秋{
+  position: absolute;
+  left:34%;
+}
+
+.冬{
+  position: absolute;
+  left:46%;
+}
+
+div .timetable{
+  margin: 6% 5%;
+}
+
+table .timetable{
+  width:80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+/*曜日のます*/
+table.timetable th{
+  height: 1rem;
+  font-size: 12px;
+  background-color: rgb(156,216,216);
+}
+
+/*授業名のます*/
+table.timetable td{
+  background-color: rgb(215,239,239);
+  font-size: 12px;
+  width:20%;
   text-align: center;
 }
 
-.timetable table .jigen{
-  background-color: #a5c9c1;
-  padding: 30px 10px;
+/*授業名のますを通過すると薄くなる*/
+table.timetable td:hover{
+  opacity: 0.6;
 }
 
-.timetable table .space{
-  background-color: #54917f;
-  width: 30px;
+table.timetable .jigen{
+  opacity: 1 !important;
+}
+
+/*左の時限のます*/
+table.timetable .jigen{
+  background-color: rgb(117,162,162);
+  width:1rem;
+  padding:2rem 0.7rem;
+}
+
+/*左上のます*/
+table.timetable .space{
+  background-color: rgb(78,108,108);
+  height:1.5rem;
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px){
+    .username{
+      top:12rem!important;
+    }
+
+    .type{
+      top:13.5rem!important;
+    }
+
+    .faculty{
+      top:14.5rem!important;
+    }
+
+    .year{
+      top:14.5rem!important;
+      left:47.5%!important;
+    }
+
+    .update{
+      top:14.4rem!important;
+    }
+
+    .春{
+      left:2.5rem !important;
+    }
+
+    .夏{
+      left:7rem !important;
+    }
+
+    .秋{
+      left:11.5rem !important;
+    }
+
+    .冬{
+      left:16rem !important;
+    }
+
+    table.timetable{
+      margin-top: 8% !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+ .userinfo{
+   width: 90%;
+   margin-left: 5%;
+   margin-right: 5%;
+   margin-top: 1rem;
+   height:6rem;
+ }
+
+ .userinfo img{
+   left:18%;
+   height:4rem;
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+ }
+
+ .username{
+   font-size: 14px;
+   top:10rem;
+   left:38%;
+ }
+
+    .type{
+      font-size: 10px;
+      top:11.5rem;
+      left:38%;
+    }
+
+     .faculty{
+       font-size: 10px;
+       top:12.5rem;
+       left:38%;
+     }
+
+    .year{
+      font-size: 10px;
+      top:12.5rem;
+      left:50%;
+    }
+
+    .update{
+     font-size: 8px;
+     top:12.4rem;
+     right:10%;
+     padding:0.1rem 0.1rem;
+     width:6rem;
+     border-radius: 5px;
+    }
+
+    .select-season button{
+      font-size:10px;
+      width:4rem;
+    }
+
+    .春{
+      left:1.3rem;
+    }
+
+    .夏{
+      left:6rem;
+    }
+
+    .秋{
+      left:10.8rem;
+    }
+
+    .冬{
+      left:15.6rem;
+    }
+
+    table.timetable{
+      width:90%;
+      margin: 5% 5%;
+      margin-top: 10%
+    }
+
 }

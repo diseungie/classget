@@ -218,7 +218,8 @@ def mypage(my_term):
                 if t == i:
                     result.append([l.subject.id, l.subject.name])
         return result
-    return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject, timetable=timetable)
+    return render_template('mypage.html', title='mypage', image_file=image_file, liked=liked_subject,
+                           timetable=timetable, my_term=my_term)
 
 
 @app.route("/classinfo/<int:subject_id>", methods=["GET", "POST"])

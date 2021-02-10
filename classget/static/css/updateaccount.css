@@ -2,17 +2,17 @@
     background-color: #EBF7F7;
   }
 
-/*入力欄について*/
-  /* 枠線 */
+/* 入力欄について */
+  /*枠線 */
   fieldset{
     background-color: #BDCCCC;/*背景色*/
     width: 40%; /*横幅*/
     padding: 2rem; /*内側の余白*/
-    margin: auto; /*中央揃え*/
+    margin: auto;
     text-align: left;
-    border: solid 4px #4E6C6C;  /*枠線*/
+    border: solid 4pt #4E6C6C;  /*枠線*/
     border-radius: 20px;  /*角丸*/
-    justify-content: space-between; /*等間隔に配置*/
+    justify-content: space-between;/*等間隔に*/
   }
 
   /*位置*/
@@ -20,12 +20,11 @@
     text-align: center;
     padding-top: 3rem;
   }
-
   /*中央揃え*/
-  .userid,
-  .password,
-  .confirm_password,
   .username,
+  .current_password,
+  .new_password,
+  .confirm_password,
   .syozoku{
     margin: 0 auto;
   }
@@ -35,7 +34,7 @@
     background-color: rgba(27,36,36,0.1);
     font-weight: normal;
     color: #273636;
-    font-size: 16px;
+    font-size: 14pt;
     letter-spacing: 2px;
     padding: 2px 10px;
     border-radius: 2px;
@@ -43,15 +42,18 @@
   }
 
   label{
-    float: left;
-    width: 40%;
-    margin-bottom: 1rem;
+      float: left;
+      width: 260px;
+      margin-bottom: 15px;
   }
 
   input{
-    float: left;
-    margin-bottom: 1rem;
-  }
+      float: left;
+      width: 40%;
+      margin-bottom: 1rem;
+      z-index:1000;
+    }
+
 
   /*入力欄*/
   input{
@@ -70,10 +72,9 @@
     border-bottom-left-radius: 1.1px;
     border-bottom-right-radius: 1.1px;
     background-color: transparent;
-    z-index: 1000;
   }
 
-  /*枠線の変化*/
+  /*入力時の枠線の変化*/
   input:focus{
     border: none;
     border-bottom: 2px solid rgb(217,98,54);
@@ -83,10 +84,14 @@
     border-bottom: 2px solid rgb(217,98,54);
   }
 
-  /* 文字について */
-  .userid,.password,.confirm_password,.username{
+  /* 文字 */
+  .username,
+  .current_password,
+  .new_password,
+  .confirm_password,
+  .syozoku{
     font-weight: normal;
-    background-color: transparent;
+    background-color: #BDCCCC;
     color: #273636;
     font-size: 16px;
     text-align:left;
@@ -97,26 +102,21 @@
 
 /*エラーメッセージについて*/
   .error{
-    background-color:#BDCCCC;
-  }
-
-  .error input{
-    margin-bottom: 0;
+    background-color: #BDCCCC;
+    margin-bottom: 0.5rem;
   }
 
   .error_message {
     color: #cc0033;
+    background-color: #BDCCCC;
     display: inline-block;
     font-size: 12px;
     line-height: 15px;
     margin: 5px 0 0;
-    margin-bottom: 1rem;
-    float: left;
-    background-color:#BDCCCC;
+    padding-left: 0.5rem;
   }
 
   .error_message span{
-    margin-bottom: 15px;
     background-color: #BDCCCC;
   }
 
@@ -128,12 +128,14 @@
     background-color: #fce4e4;
     border: 1px solid #cc0033;
     outline: none;
+    margin-bottom:0;
   }
 
   .error input[type=password] {
     background-color: #fce4e4;
     border: 1px solid #cc0033;
     outline: none;
+    margin-bottom:0;
   }
 
 /*選択欄について*/
@@ -175,12 +177,12 @@
     transition: .25s all ease;
   }
 
-  /*選択時の枠線の変化*/
+/*選択時の枠線の変化*/
   select:focus,
   select:hover{
-      outline: none;
-      border: none;
-      border-bottom: 2px solid rgb(217,98,54);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #518383;
   }
   .syozoku select:hover::after{
     color: #518383;
@@ -200,7 +202,7 @@
     margin-right: 1rem;
   }
 
-  /*文字*/
+  /* 文字 */
   .syozoku{
     font-weight: normal;
     color: #273636;
@@ -212,58 +214,30 @@
     position: relative;
   }
 
-/*確定ボタンについて*/
+/*確定ボタン*/
   .submit_button{
     background: rgb(217,98,54);
     color: #FFF;
     font-size: 20px;
-    width: 30%;
+    width: 40%;
     height: 2.5rem;
     text-align: center;
     vertical-align: middle;
+    line-height: 15px;
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    margin-left: 35%;
-    margin-right: 35%;
-    margin-top:2rem;
-    margin-bottom: 1rem;
+    margin-left:30%;
+    margin-right: 30%;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
     border: none;
     cursor: pointer;
   }
 
-  /*選択時の変化*/
+  /*選択時のボタンの変化*/
   .submit_button:focus,
   .submit_button:hover{
     opacity: 0.5;
-  }
-
-/*新規アカウント作成*/
-  small{
-    font-weight: lighter;
-    background-color: transparent;
-    color: #97B5B5!important;
-    font-size: 14px;
-    text-align:center;
-    width:30%;
-    letter-spacing: -0.03rem;
-  }
-
-  .already{
-    text-align:center;
-    margin-bottom: 3rem;
-  }
-
-/*リンクについて*/
- .have_account a{
-   color:#97B5B5;
- }
-
-  .have_account:hover{
-    color: #518383;
-  }
-
-  .have_account:visited{
-    color: #847787;
   }
 
   @media screen and (max-width:767px){
@@ -276,13 +250,8 @@
     }
 
     .submit_button{
-      width:50%;
-      margin:1.5rem 25%;
-      margin-bottom: 0.5rem;
-    }
-
-    small{
-      font-size: 11px;
+      width:60%;
+      margin:1.5rem 20%;
     }
 
   }

@@ -15,77 +15,78 @@
 
                 <!--      ユーザー名入力欄      -->
                 <div class="username">
-                    {{ form.username.label(class="form_label") }}
                     {% if form.username.errors %}
-                        {{ form.username(class="form_blank") }}
-                        <div class="error_message">
-                            {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="error">
+                            {{ form.username(class="form_blank", placeholder="ユーザー名") }}
+                            <div class="error_message">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% else %}
-                        {{ form.username(class="form_blank") }}
+                        {{ form.username(class="form_blank", placeholder="ユーザー名") }}
                     {% endif %}
                 </div>
 
                 <!--      現在パスワード入力欄      -->
                 <div class="current_password">
-                    {{ form.current_password.label(class="form_label") }}
                     {% if form.current_password.errors %}
-                        {{ form.current_password(class="form_blank") }}
-                        <!--        エラーメッセージ（IDは10文字以内にしてくださいとか）        -->
-                        <div class="error_message">
-                            {% for error in form.current_password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="error">
+                            {{ form.current_password(class="form_blank", placeholder="現在パスワード") }}
+                            <!--        エラーメッセージ（IDは10文字以内にしてくださいとか）        -->
+                            <div class="error_message">
+                                {% for error in form.current_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% else %}
-                        {{ form.current_password(class="form_blank") }}
+                        {{ form.current_password(class="form_blank", placeholder="現在パスワード") }}
                     {% endif %}
                     {% if password_error == 1 %}
                         <div class="error_message">
-                            wrong password, please check it again
+                            パスワードが間違っています
                         </div>
                     {% endif %}
                 </div>
 
                 <!--       新しいパスワード入力欄         -->
                 <div class="new_password">
-                    {{ form.new_password.label(class="form_label") }}
                     {% if form.new_password.errors %}
-                        {{ form.new_password(class="form_blank") }}
-                        <!--        エラーメッセージ（IDは10文字以内にしてくださいとか）        -->
-                        <div class="error_message">
-                            {% for error in form.new_password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="error">
+                            {{ form.new_password(class="form_blank", placeholder="新しいパスワード(任意)") }}
+                            <!--        エラーメッセージ（IDは10文字以内にしてくださいとか）        -->
+                            <div class="error_message">
+                                {% for error in form.new_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% else %}
-                        {{ form.new_password(class="form_blank") }}
+                        {{ form.new_password(class="form_blank", placeholder="新しいパスワード(任意)") }}
                     {% endif %}
                 </div>
 
                 <!--      パスワード確認入力欄      -->
                 <div class="confirm_password">
-                    {{ form.confirm_password.label(class="form_label") }}
                     {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form_blank") }}
-                        <div class="error_message">
-                            {% for error in form.confirm_password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="error">
+                            {{ form.confirm_password(class="form_blank", placeholder="新しいパスワード確認(任意)") }}
+                            <div class="error_message">
+                                {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% else %}
-                        {{ form.confirm_password(class="form_blank") }}
+                        {{ form.confirm_password(class="form_blank", placeholder="新しいパスワード確認(任意)") }}
                     {% endif %}
                 </div>
 
                 <!--     学部と学年のラベル／入力欄       -->
                 <div class="syozoku">
-                    {{ form.faculty.label(class="form_label") }}
                     {{ form.faculty(class="form_blank") }}
-
-                    {{ form.year.label(class="form_label") }}
                     {{ form.year(class="form_blank") }}
                 </div>
             </fieldset>

@@ -73,7 +73,7 @@ body{
 .menu .home{
   position: absolute;
   left:20px;
-  top:20%; /*なぜかremで定義できないから%使った*/
+  top:21%; /*なぜかremで定義できないから%使った*/
   background-color: rgb(78,108,108) !important;
 }
 
@@ -82,7 +82,7 @@ body{
   color: #fff;
   position: absolute;
   right:20px;
-  top:20%;
+  top:21%;
   background-color: rgb(78,108,108) !important;
 }
 
@@ -190,6 +190,7 @@ body{
   position:absolute;
   right: 3%;
   top: 19%;
+  background-color:transparent !important;
 }
 
 #close-img{
@@ -198,9 +199,10 @@ body{
   position:absolute;
   right: 3%;
   top: 19%;
+  background-color:transparent !important;
 }
 
-table{
+table.ham{
   width:100%;
   color: white;
   background-color: rgb(78,108,108);
@@ -209,7 +211,7 @@ table{
   border-style: hidden;
   border-top: 1px solid white;
   margin-top: 5px;
-  z-index: 3000;
+  z-index: 1000;
   position: absolute;
 }
 

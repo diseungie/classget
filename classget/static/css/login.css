@@ -2,23 +2,16 @@
     background-color: #EBF7F7;
   }
 
-/*画面全体の幅*/
-  .container{
-    width: 370px; /*横幅*/
-    height: 100%;  /*高さ*/
-    margin: 0 auto; /*中央揃え*/
-  }
 
 /*入力欄について*/
   /* 枠線 */
   fieldset{
     background-color: #BDCCCC;/*背景色*/
-    width: 370px; /*横幅*/
-    height: 100%;  /*高さ*/
-    padding: 40px; /*内側の余白*/
+    width: 40%; /*横幅*/
+    padding: 2rem; /*内側の余白*/
     margin: auto;/*中央揃え*/
     text-align: center;
-    border: solid 4pt #4E6C6C;  /*枠線*/
+    border: solid 4px #4E6C6C;  /*枠線*/
     border-radius: 20px;  /*角丸*/
     justify-content: space-between;/*等間隔に配置*/
     }
@@ -26,7 +19,7 @@
   /*位置*/
   form{
     text-align: center;
-    padding-top: 60px;
+    margin-top: 3rem;
   }
 
   .userid,
@@ -38,34 +31,45 @@
   legend{
     background-color: rgba(27,36,36,0.1);
     color: #273636;
-    font-size: 14pt;
+    font-size: 16px;
     letter-spacing: 2px;/*文字間隔*/
     padding: 2px 10px;
     border-radius: 2px;
-    text-align: left;
+    text-align: center;
   }
 
   label{
     float: left;
-    width: 260px;
-    margin-bottom: 25px;
+    width: 40%;
+    margin-bottom: 1rem;
   }
 
   input{
     float: left;
-    width: 260px;
-    margin-bottom: 25px;
+    margin-bottom: 1rem;
+  }
+  .error{
+    background-color: #BDCCCC;
+    margin-bottom: 1rem;
+  }
+
+  .error input{
+    margin-bottom: 0.1rem;
+  }
+
+  .form-check-input{
+    margin-left:10%;
   }
 
   /*入力欄*/
   .form_blank{
     box-sizing: border-box;
-    font-size: 15pt;
-    letter-spacing: .7px;
+    font-size: 16px;
+    letter-spacing: 0.2rem;
     outline: none;
     width: 100%;
-    height: 35 px;
-    padding:5px;
+    height: 2rem;
+    padding:0.5rem;
     position: relative;
     text-align: left;
     border: none; /*枠線なし*/
@@ -78,7 +82,7 @@
   /*入力時の枠線の変化*/
   input:focus{
     border: none;
-    border-bottom: 2px solid #518383;
+    border-bottom: 2px solid rgb(217,98,54);
   }
 
   input:hover{
@@ -88,7 +92,7 @@
 
   .form_blank:focus{
     border: none;
-    border-bottom: 2px solid #518383;
+    border-bottom: 2px solid rgb(217,98,54);
   }
 
 
@@ -96,7 +100,7 @@
   .userid{
     background-color: transparent;
     color: #273636;
-    font-size: 14pt;
+    font-size: 16px;
     text-align:left;
     width:85%;
     height:10%;
@@ -106,8 +110,8 @@
   /* パスワード入力欄の文字について */
   .password{
     color: #273636;
-    background-color: transparent;
-    font-size: 14pt;
+    background-color: transparent!important;
+    font-size: 16px;
     text-align:left;
     width:85%;
     height:10%;
@@ -116,12 +120,18 @@
 
   .remember_me{
     color: #273636;
-    background-color: transparent !important;
-    font-size: 10pt;
+    background-color:transparent!important;
+    font-size: 14px;
     text-align: left !important;
     width:70%;
-    height:10%;
+    height:1rem;
     position: relative;
+    cursor: pointer;
+    white-space:nowrap;
+  }
+
+  .form-check-label{
+    background-color: #BDCCCC;
   }
 
 /*エラーメッセージについて*/
@@ -130,7 +140,13 @@
     display: inline-block;
     font-size: 12px;
     line-height: 15px;
-    margin: 5px 0 0;
+    margin: 5px 0;
+    margin-bottom: 10px;
+    background-color: #BDCCCC !important;
+  }
+
+  .error_message span{
+    background-color: #BDCCCC;
   }
 
   .error label {
@@ -151,42 +167,42 @@
 
 /*ログインボタンについて*/
   .login_button input{
-    background: #D96236;
+    background: rgb(217,98,54);
     color: #FFF;
-    font-size: 21pt;
-    width: 260px;
-    height: 40px;
+    font-size: 20px;
+    width: 20%;
+    height: 2.5rem;
     position: relative;
     text-align: center;
-    vertical-align: middle;
-    line-height: 15px;
-    padding: 10px 40px 10px 40px;
+    padding: 0.5rem 2rem;
     border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    margin-left: 60px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 40%;
+    margin-right: 40%;
     border: none;
+    cursor: pointer;
   }
 
   /*選択時のボタンの変化*/
   .login_button:focus,
   .login_button:hover{
-      background: #C36238;
+      opacity: 0.5;
       border: none;
-      border-top: 2px solid #A34A29;
-      border-left: 2px solid#A34A29;
   }
 
 /*新規アカウント作成*/
  small{
-  float: left;
   background-color: transparent;
   color: #273636;
-  font-size: 10pt;
+  font-size: 14px;
   font-weight: lighter;
-  text-align:left;
+  text-align:center;
   position: relative;
-  padding: 10px;
+}
+
+.need-account-block{
+  text-align:center;
 }
 
 /*リンクについて*/
@@ -195,7 +211,27 @@
   }
   .need_account:hover{
     color: #518383;
+    cursor: pointer;
   }
   .need_account:visited{
     color: #847787;
+  }
+
+  @media screen and (max-width:767px){
+    fieldset{
+      width:70%; /*よくわからないけどいい感じになったからmarginは定義しない、たぶん上のautoが効いてる*/
+    }
+
+    .form-check-label{
+      width:80%;
+    }
+
+    .login_button input{
+      width:40%;
+      margin:1.5rem 30%;
+    }
+
+    small{
+      font-size: 11px;
+    }
   }

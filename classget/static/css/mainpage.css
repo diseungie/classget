@@ -1,15 +1,267 @@
-.searchform ul{
+/*白背景キャッチコピーのところ*/
+.toppage{
+  height:14rem;
+  width:100%;
+  background-color: #fff;
+  display: inline-block;
+}
+
+/*照らされるクラゲ*/
+.toppage img{
+  height:14rem;
+  margin-left: 20%;
+}
+
+/*あなたは何キャラ*/
+.toppage h2{
+ border-bottom: 2px solid rgb(217,98,54);  /*下線つけた*/
+ width:50%;
+ color:rgb(39,54,54);
+ padding-bottom: 0.2rem;
+ padding-right: 0.5rem;
+ margin-bottom: 1rem;
+ letter-spacing: 0.2rem;
+ text-align: right;
+ position: absolute;
+ top:11.5rem;
+ right:9%;
+}
+
+/*説明のとこ*/
+.toppage a{
+ font-size:13px;
+ text-align: right;
+ position: absolute;
+ color:rgb(39,54,54);
+ top:16.5rem;
+ right:10%;
+}
+
+/*アカウント作成ボタン*/
+.create_here{
+  color: white;
+  background-color: rgb(217,98,54);
+  border-radius: 8px;
+  padding: 1rem 0.8rem;
+  font-size:14px;
+  width:13rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right:10%;
+  top:21rem;
+}
+
+/*toppageのところの辺りなんかうまくいかないから絶対値で固定してしまった*/
+
+.create_here:hover{
+  opacity: 0.5;
+}
+
+/*白い検索欄全体*/
+.search-area{
+  width:80%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-top:2rem;
+  margin-bottom:2rem;
+  background-color: #FFF;
+}
+
+/*条件で探す*/
+.search-area h3{
+  width:90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  letter-spacing: 0.2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.25rem;
+  padding-left:1rem;
+  color:rgb(78,108,108);
+  border-bottom: 2px solid rgb(78,108,108);
+}
+
+.search-area p{
+ font-weight: bold;
+ letter-spacing: 0.3rem;
+ margin-bottom:0.7rem;
+ height:1rem;
+ padding-left: 1rem;
+ padding-bottom:0.5rem;
+ vertical-align: top;
+ border-left: solid 9px rgb(78,108,108);
+}
+
+label.form_label{
+  cursor: default;
+  margin-left: 0;
+}
+
+/*項目みたいなところ*/
+.syozoku,.day,.when,.season,.draw,.keyword{
+  color:rgb(39,54,54);
+  width:90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top:1.5rem;
+  margin-bottom:0.5rem;
+}
+
+ul.form_checkbox{
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
-.searchform ul li {
-  border: 1px transparent solid;
-  display:inline-block;
-  padding-right: 0.5rem;
+ul.form_checkbox li{
+  display: inline-block;
 }
 
-div.searchform{
-  padding-bottom:1rem;
+ul.form_checkbox li input{
+  margin-left: 1rem;
+}
+
+.searchdetail{
+  margin-top:3rem;
+}
+
+/*検索ボックス全体*/
+.searchform{
+  width          : 350px;              /* BOXの幅               */
+  height         : 25px;               /* BOXの高さ             */
+  letter-spacing : 0.1em;              /* 文字間隔              */
+  font-weight    : bold;               /* 太字                  */
+  line-height    : 0;                  /* 標準の行高さ          */
+}
+
+
+ /*テキスト入力欄*/
+.searchform .searchText {
+  display        : block;              /* ブロック化            */
+  float          : left;               /* 横並び                */
+  box-sizing     : border-box;         /* 枠線,余白を含んだ長さ */
+  height         : 25px;               /* 入力の高さ            */
+  width          : 250px;              /* 入力の幅              */
+  margin         : 0;                  /* 外余白                */
+  margin-top:1.5rem;
+  margin-left:1rem;
+  padding        : 0 10px;             /* 内余白                */
+  border         : 1.5px solid gray;  /* 枠線　幅,実践,色      */
+  border-radius  : 5px 5px 5px 5px;      /* 左上下の角丸          */
+  color          : #333;               /* 文字色                */
+  outline        : 0;                  /* 入力の薄い枠を非表示  */
+  font-size      : 14px;               /* フォントサイズ        */
+}
+
+/*検索ボックスに関してはググったやつをコピペして貼り付けて微調整しました*/
+
+/*チェックボックスの調整*/
+label{
+  word-break: keep-all; /*改行防止？*/
+  color:rgb(39,54,54);
+  cursor: pointer;
+}
+
+.search_button{
+ text-align: center;
+}
+
+.searchbutton{
+  color: white;
+  background-color: rgb(242, 190, 33);
+  border:0;
+  border-radius: 7px;
+  padding:0.4rem 0.6rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size:14px;
+  cursor: pointer; /*ここまで見た目*/
+  width:8rem;
+}
+
+.searchbutton:hover{
+  opacity: 0.5;
+}
+
+/*ここからレスポンシブ*/
+@media screen and (min-width: 425px) and (max-width: 767px){
+    .toppage h2{
+      top:11rem !important;
+    }
+
+    .toppage a{
+      top:14rem !important;
+    }
+
+    .create_here{
+      top:18rem !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .toppage{
+      height:12rem;
+    }
+    /*照らされるクラゲ*/
+    .toppage img{
+      height:12rem;
+      margin-left: 5%;
+    }
+
+    /*あなたは何キャラ*/
+    .toppage h2{
+     width:50%;
+     padding-bottom: 0.2rem;
+     padding-right: 0.5rem;
+     margin-bottom: 1rem;
+     letter-spacing: 0.1rem;
+     font-size:16px;
+     top:9rem;
+     right:5%;
+    }
+
+    /*説明のとこ*/
+    .toppage a{
+     font-size:10px;
+     top:12.5rem;
+     right:5%;
+    }
+
+    /*アカウント作成ボタン*/
+    .create_here{
+      padding: 0.5rem 0.2rem;
+      font-size:8px;
+      width:11rem;
+      right:5%;
+      top:16rem;
+    }
+
+    /*白いところ*/
+    .search-area{
+      width:90%;
+      margin-right: 5%;
+      margin-left: 5%;
+    }
+
+    /*探す*/
+    .search-area p{
+      letter-spacing: 0.2rem;
+      font-size: 15px;
+    }
+
+    /*チェックボックスの整列*/
+    label{
+    }
+
+    input{
+      margin-top: 0.5rem;
+      margin-right: 0.3rem;
+    }
+
+    input.searchbutton{
+      margin-right: 0;
+    }
+    /*よくわかんないけどflexにしたら1行1要素で綺麗になった*/
 }

@@ -6,68 +6,69 @@
 {% endblock %}
 
 {% block contents %}
-    <div class="container">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset>
-                <!--      Loginタイトル         -->
-                <legend>Login</legend>
-                <!--       ID入力欄         -->
-                <div class="userid">
-                    {% if form.iduser.errors %}
-                        <div class="error">
-                            {{ form.iduser(class="form_blank", placeholder="ユーザーID") }}
-                            <div class="error_message">
-                                {% for error in form.iduser.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    {% else %}
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <!--      Loginタイトル         -->
+            <legend>Login</legend>
+            <!--       ID入力欄         -->
+            <div class="userid">
+                {% if form.iduser.errors %}
+                    <div class="error">
                         {{ form.iduser(class="form_blank", placeholder="ユーザーID") }}
-                    {% endif %}
-                </div>
-
-                <!--     　　　パスワード入力欄           -->
-                <div class="password">
-                    {% if form.password.errors %}
-                        <div class="error">
-                            {{ form.password(class="form_blank", placeholder="パスワード") }}
-                            <div class="error_message">
-                                {% for error in form.password.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                    {% else %}
-                        {{ form.password(class="form_blank", placeholder="パスワード") }}
-                    {% endif %}
-                </div>
-
-                {% if login_error == 1 %}
-                    <!--      ログインに失敗した時にエラーメッセージ          -->
-                    <div class="error_message">
-                        login failed, please check your id and password
+                        <div class="error_message">
+                            {% for error in form.iduser.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                     </div>
+                {% else %}
+                    {{ form.iduser(class="form_blank", placeholder="ユーザーID") }}
                 {% endif %}
-
-                <!--      Remember　Me　チェックボックス          -->
-                <div class="remember_me">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label") }}
-                </div>
-            </fieldset>
-
-            <!--     Loginボタン       -->
-            <div class="login_button">
-                {{ form.submit(class="login_button") }}
             </div>
-        </form>
 
-        <!--　　アカウント作成に　　-->
-        <div>
-            <small>
-                Need An Account? <a href="{{ url_for('createaccount') }}" class="need_account">Sign Up Now</a>
-            </small>
+            <!--     　　　パスワード入力欄           -->
+            <div class="password">
+                {% if form.password.errors %}
+                    <div class="error">
+                        {{ form.password(class="form_blank", placeholder="パスワード") }}
+                        <div class="error_message">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    {{ form.password(class="form_blank", placeholder="パスワード") }}
+                {% endif %}
+            </div>
+
+            {% if login_error == 1 %}
+                <!--      ログインに失敗した時にエラーメッセージ          -->
+                <div class="error_message">
+                    IDとPWをもう一度ご確認ください。
+                </div>
+            {% endif %}
+
+            <!--      Remember　Me　チェックボックス          -->
+            <div class="remember_me">
+                {{ form.remember(class="form-check-input") }}
+                {{ form.remember.label(class="form-check-label") }}
+            </div>
+        </fieldset>
+
+        <!--     Loginボタン       -->
+        <div class="login_button">
+            {{ form.submit(class="login_button") }}
         </div>
+    </form>
+
+    <!--　　アカウント作成に　　-->
+    <div class="need-account-block">
+        <small>
+            まだアカウントを持ってないですか？ <a href="{{ url_for('createaccount') }}" class="need_account">アカウント作成へ</a>
+        </small>
     </div>
+
 {% endblock %}

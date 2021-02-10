@@ -22,7 +22,7 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
     faculty = SelectField('Faculty', choices=faculty_choices)
     year = SelectField('Year', choices=[(1, 1), (2, 2), (3, 3), (4, 4)])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('アカウント作成')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -40,7 +40,7 @@ class LoginForm(FlaskForm):
                          validators=[DataRequired(), Length(min=2, max=50)])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    submit = SubmitField('ログイン')
 
 
 class UpdateAccountForm(FlaskForm):
@@ -53,7 +53,7 @@ class UpdateAccountForm(FlaskForm):
                                      validators=[EqualTo('new_password')])
     faculty = SelectField('Faculty', choices=faculty_choices)
     year = SelectField('Year', choices=[(1, 1), (2, 2), (3, 3), (4, 4)])
-    submit = SubmitField('Update')
+    submit = SubmitField('アカウント情報修正')
 
     def validate_username(self, username):
         if username.data != current_user.username:
