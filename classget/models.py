@@ -74,6 +74,8 @@ class User(db.Model, UserMixin):
             recommended = Subject.query.order_by(Subject.like_by_kame.desc()).limit(3).all()
         elif self.type == 'タコ':
             recommended = Subject.query.order_by(Subject.like_by_taco.desc()).limit(3).all()
+        else:
+            recommended = []
         return recommended
 
 
@@ -98,6 +100,22 @@ class Subject(db.Model):
     def __repr__(self):
         return f"Subject('{self.id}', '{self.sort}', '{self.term}', '{self.time}', '{self.name}', '{self.teacher}', " \
                f"'{self.language}', '{self.draw}', '{self.keyword}')"
+
+    def recommended_by_review(self):
+        good_reviews = Review.query.filter_by(subject_id=self.id, rating=0).all()
+        user_ids = []
+        for review in good_reviews:
+            user_ids.append(review.user_id)
+        reviews = Review.query.filter(Review.user_id.in_(user_ids), Review.subject_id != self.id).filter_by(rating=0)\
+            .order_by(Review.date_posted.desc()).limit(3).all()
+        rec_subjects = [0, 0, 0]
+        for i, review in enumerate(reviews):
+            rec_subject = Subject.query.filter_by(id=review.subject_id).first()
+            rec_subjects[i] = rec_subject
+        return rec_subjects
+
+    def rating_count(self, rating):
+        return get_count(Review.query.filter_by(subject_id=self.id, rating=rating))
 
 
 class Review(db.Model):

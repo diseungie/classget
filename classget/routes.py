@@ -158,7 +158,7 @@ def logout():
 @login_required
 def typetest():
     question = ['初対面の人と友達になるのが得意だ。', '人助けをしたり、されたりすることが多い。', '課題の期限は守るほうだし、遅刻もしない。',
-                '普段ストレスや不安をなかなか感じないブッダみたいな性格を持っている。', '芸術や美術は結構好きだ。',
+                '普段ストレスや不安をなかなか感じない性格を持っている。', '芸術や美術は結構好きだ。',
                 'しばしば新しい冒険についてのアイデアが思い浮かぶ。', '他の人にどう思われるかなんて気にしない超マイウェイ。',
                 '人との約束のためなら無理もする。', 'みんなで何かを成し遂げることが好きだ。', '面白い話で場を盛り上げることができる。']
     # すでにキャラ診断した人は結果ページに送る
@@ -189,6 +189,16 @@ def typetest():
 @login_required
 def typeresult():
     recommended_subjects = current_user.recommend_by_likes()
+    catchphrase = {'海藻': '楽しいこと大好き！いつもノリノリな陽キャ',
+                   'ペンギン': '冷たい氷も溶けちゃう優しさ！協力的なサポーター',
+                   'イルカ': '頼まれたら裏切らない！信頼のメガバンク',
+                   'カメ': '100人乗っても大丈夫！屋久杉のような安定感',
+                   'タコ': '好奇心が止まらない！圧倒的な柔軟性'}
+    description = {'海藻': ['おしゃべりで周りを楽しませることができる', '誰かと一緒にいることが好き', '自己主張がしっかりできる', '行動的なみんなのリーダータイプ'],
+                   'ペンギン': ['やさしく、思いやりがある', '面倒見がいい', '共感力が高く、人の痛みが良く分かる', '人を疑わない'],
+                   'イルカ': ['計画的に集中して物事に取り組むことができる', '責任感が強い', '誠実で頼られやすい', '時間や期限をきちんと守る'],
+                   'カメ': ['大勢の人の前でもあまり緊張せずにいられる', '環境が変わってもなじみやすい', 'ものごとを根に持たない', 'あまり激しい感情にならない'],
+                   'タコ': ['クリエイティブだとよく言われる', '原宿が好きだったりする', '人とかぶらないものが好き', '異なる解釈が可能な映画や本などに興味がある']}
     type_number = get_count(User.query.filter_by(type=current_user.type))
     user_number = get_count(User.query)
     type_com = get_count(User.query.filter_by(type=current_user.type, faculty='商学部'))
@@ -201,7 +211,8 @@ def typeresult():
     law_proportion = "{:.1f}".format((type_law / type_number) * 100)
     soc_proportion = "{:.1f}".format((type_soc / type_number) * 100)
     return render_template('typeresult.html', recommended_subjects=recommended_subjects, type_pp=type_proportion,
-                           com_pp=com_proportion, eco_pp=eco_proportion, law_pp=law_proportion, soc_pp=soc_proportion)
+                           com_pp=com_proportion, eco_pp=eco_proportion, law_pp=law_proportion, soc_pp=soc_proportion,
+                           catchphrase=catchphrase, get_count=get_count, description=description)
 
 
 @app.route("/mypage/<my_term>")
@@ -230,8 +241,11 @@ def classinfo(subject_id):
     form = ReviewForm()
     subject_keyword = subject.keyword.split('　')
     # 授業IDでその授業のレビューを全部持ってくる
-    reviews = Review.query.filter_by(subject_id=subject_id).order_by(Review.date_posted.desc())\
-        .paginate(page=page, per_page=5)
+    reviews = Review.query.filter_by(subject_id=subject_id).order_by(Review.date_posted.desc())
+    reviews_num = get_count(reviews)
+    reviews = reviews.paginate(page=page, per_page=5)
+    # レビューに基づいたおすすめ授業（３つ）
+    recommended = subject.recommended_by_review()
     # レビューフォームを提出したら
     if form.validate_on_submit():
         # ログインしている場合
@@ -248,7 +262,8 @@ def classinfo(subject_id):
         else:
             return redirect(url_for('login'))
     return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
-                           enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count, Review=Review)
+                           enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count, Review=Review,
+                           recommended=recommended, reviews_num=reviews_num)
 
 
 @app.route("/delete_review/<int:review_id>_<int:subject_id>", methods=["GET"])

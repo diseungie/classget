@@ -13,7 +13,7 @@
         <img src="{{ url_for('static', filename='/img/maruikurage.png') }}">
         <h2>あなたは何キャラ？</h2>
         <a>キャラ診断をすると、同じキャラの一橋生の<br>オススメ授業を見ることができます。<br>まずはアカウント作成へ！</a>
-        <div class="create_here">>>アカウント作成はコチラから</div>
+        <a href="{{ url_for('createaccount') }}"><div class="create_here">>>アカウント作成はコチラから</div></a>
     </div>
 
     <div class="search-area">

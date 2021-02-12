@@ -5,7 +5,7 @@
 }
 
 /* 顔のアイコンの大きさ調整 */
-.face{
+.face-top{
   height: 2rem;
   margin-left: 0.5rem;
 }
@@ -126,6 +126,11 @@ span.draw{
 .reviews{
   font-size: 2rem;
   margin-bottom: 1rem;
+}
+
+div.reviews span.review-num{
+  font-size: 0.7em;
+  color: rgb(80,120,120);
 }
 
 /* レビューした人の情報が入るbox */
@@ -336,12 +341,17 @@ input.button{
 input#submit{
   float: right;
   color: white;
-  background-color: rgb(242,190,33);
+  background-color: rgb(255,204,51);
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   border:  rgb(223 170 9) 4px solid;
   border-radius: 1vh;
   cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input#submit:hover{
+  opacity: 0.5;
 }
 
 li::marker{
@@ -401,6 +411,159 @@ button.update_class_button{
 /* リンクにカーサー当てるときに */
 button.update_class_button:hover{
   opacity: 0.5;
+}
+
+/* suggestions */
+/* hr */
+hr.sug-hr{
+  background-color: rgb(78,108,108);
+  height: 0.25em;
+}
+
+div.suggestion{
+  position: relative;
+  color: rgb(78,108,108);
+  margin: 5% 10%;
+  font-size: 16px;
+}
+
+div.class-sug{
+  position: relative;
+  width: 30%;
+  background-color: white;
+  padding: 3%;
+  border-radius: 1vh;
+  box-sizing: border-box;
+}
+
+div.no-data{
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.cream-box{
+  background-color: rgb(247,251,251);
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2em;
+  padding: 1em;
+  box-sizing: content-box;
+  border-radius: 1vh;
+}
+
+p.suggestion{
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+p.class_name, p.term_day, div.flex-box, p.favorite, p.link-classinfo{
+  width: 100%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+}
+
+p.class_name{
+  font-size: 2em;
+  font-weight: bold;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+p.term_day{
+  font-size: 1.15em;
+  color: black;
+}
+
+a.link-classinfo{
+  text-align: right;
+  float: right;
+  text-decoration: underline !important;
+  color: rgb(144,61,64);
+  cursor: pointer;
+}
+
+img.like_button{
+  width: 12.5%;
+  margin-left: auto;
+}
+
+img.face{
+  height: 1.5em;
+  width: 1.5em;
+  margin: 0.5em;
+}
+
+img.face_heading{
+  height: 1.2em;
+  width: 1.2em;
+}
+
+@media screen and (max-width: 1200px){
+  div.suggestion{
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 910px){
+  div.suggestion{
+    font-size: 12px;
+  }
+
+  div.suggestion{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  div.suggestion{
+    font-size: 10px;
+  }
+
+  div.class-sug{
+    width: 94%;
+    margin-bottom: 1em;
+  }
+
+  div.cream-box{
+    flex-direction: column;
+  }
+
+  p.suggestion{
+    font-size: 1.75em;
+  }
+
+  img.like_button{
+  width: 7.5%;
+  margin-left: auto;
+  margin-bottom: 0.5em;
+  }
+}
+
+@media screen and (max-width: 600px){
+  div.suggestion{
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 450px){
+  p.suggestion{
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 376px){
+  p.suggestion{
+    font-size: 1.25em;
+  }
 }
 
 
@@ -527,7 +690,7 @@ button.update_class_button:hover{
   }
 
   .review-keywords .keyword {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .review-delete {

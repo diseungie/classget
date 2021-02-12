@@ -37,9 +37,9 @@
                         <div class="class_sort">・{{ subject.sort }}　・{{ subject.draw }}</div>
                         <div class="class_sort">・教授：{{ subject.teacher }}　・言語：{{ subject.language }}</div>
                         <div class="rating">
-                            <img src="{{ url_for('static', filename='img/rating_0.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=0)) }}
-                            <img src="{{ url_for('static', filename='img/rating_1.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=1)) }}
-                            <img src="{{ url_for('static', filename='img/rating_2.png') }}" width="32.5px">{{ get_count(Review.query.filter_by(subject_id=subject.id, rating=2)) }}
+                            <img src="{{ url_for('static', filename='img/rating_0.png') }}" width="32.5px">{{ subject.rating_count(0) }}
+                            <img src="{{ url_for('static', filename='img/rating_1.png') }}" width="32.5px">{{ subject.rating_count(1) }}
+                            <img src="{{ url_for('static', filename='img/rating_2.png') }}" width="32.5px">{{ subject.rating_count(2) }}
                             <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
                         </div>
                         <div class="class_keyword">

@@ -1,3 +1,4 @@
+
 /*白背景キャッチコピーのところ*/
 .toppage{
   height:14rem;
@@ -49,7 +50,7 @@
   cursor: pointer;
   position: absolute;
   right:10%;
-  top:21rem;
+  top:4.5rem;
 }
 
 /*toppageのところの辺りなんかうまくいかないから絶対値で固定してしまった*/
@@ -127,7 +128,7 @@ ul.form_checkbox li input{
 
 /*検索ボックス全体*/
 .searchform{
-  width          : 350px;              /* BOXの幅               */
+  width          : 300px;              /* BOXの幅               */
   height         : 25px;               /* BOXの高さ             */
   letter-spacing : 0.1em;              /* 文字間隔              */
   font-weight    : bold;               /* 太字                  */
@@ -168,7 +169,7 @@ label{
 
 .searchbutton{
   color: white;
-  background-color: rgb(242, 190, 33);
+  background-color: rgb(255, 204, 51);
   border:0;
   border-radius: 7px;
   padding:0.4rem 0.6rem;
@@ -195,7 +196,7 @@ label{
     }
 
     .create_here{
-      top:18rem !important;
+      top:4rem !important;
     }
 }
 
@@ -235,7 +236,7 @@ label{
       font-size:8px;
       width:11rem;
       right:5%;
-      top:16rem;
+      top:3.6rem;
     }
 
     /*白いところ*/

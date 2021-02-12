@@ -2,28 +2,94 @@
 
 {% block stylesheet %}
 <!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/typeresult.css') }}" type="text/css">
 {% endblock %}
 
 {% block contents %}
-    <h1>{{ current_user.username }}さんは、{{ current_user.type }}タイプ大学生です！</h1>
-    <div>
-        {{ current_user.type }}タイプは全体の{{ type_pp }}%です！
-    </div>
-    <div>
-        {{ current_user.type }}タイプには、<br>
-        商学部が{{ com_pp }}%、経済学部が{{ eco_pp }}%、法学部が{{ law_pp }}%、社会学部が{{ soc_pp }}%です！
-    </div>
-    <div>
-        {{ current_user.type }}タイプの学生たちは、こちらの授業をお気に入りしています
-    </div>
-    {% for subject in recommended_subjects %}
-        <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
-            <div class="recommended_class">
-                <p>{{ subject.name }}</p>
-                <p>{{ subject.sort }}</p>
-                <p>{{ subject.term }} {{ subject.time }}</p>
-            </div>
-        </a>
-    {% endfor %}
 
+<div class="top">
+    <p class="you">あなたは…</p>
+    <img class="bubble" src="{{ url_for('static', filename='/img/character/bubble.png') }}">
+</div>
+
+<div class="result">
+    <div class="box">
+        <p class="cphrase">{{ catchphrase['{}'.format(current_user.type)] }}</p>
+        <p class="type">{{ current_user.type }}タイプ</p>
+    </div>
+
+    <div class="pic-des">
+        <div class="animal">
+            <img class="animal" src="static/img/character/{{ current_user.type }}.png">
+        </div>
+        <div class="description">
+            <ul>
+                <li>{{ description['{}'.format(current_user.type)][0] }}</li>
+                <li>{{ description['{}'.format(current_user.type)][1] }}</li>
+                <li>{{ description['{}'.format(current_user.type)][2] }}</li>
+                <li>{{ description['{}'.format(current_user.type)][3] }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="decoration">
+        <img class="decoration" src="{{ url_for('static', filename='/img/character/sparkling.png') }}">
+    </div>
+</div>
+
+<img class="melting" src="{{ url_for('static', filename='/img/character/melting.png') }}">
+
+<div class="deep-green1">
+</div>
+
+<div class="deep-green2">
+    <p class="typeha">{{ current_user.type }}タイプは…</p>
+    <div class="sch-huk">
+        <img class="kanematsu" src="{{ url_for('static', filename='/img/character/kanematsu.png') }}">
+        <div class="percantage">
+            <p class="of">全体の</p>
+            <p class="percentage">{{ type_pp }}%</p>
+        </div>
+        <div class="hukidashi">
+            <p class="hukidashi-naka">
+                <p class="com">商学部{{ com_pp }}%</p>
+                <p class="eco">経済学部{{ eco_pp }}%</p>
+                <p class="law">法学部{{ law_pp }}%</p>
+                <p class="soc">社会学部{{ soc_pp }}%</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="suggestion">
+    <p class="suggestion">{{ current_user.type }}タイプの人がお気に入りした授業TOP3<hr></p>
+
+    <div class="cream-box">
+        {% for subject in recommended_subjects %}
+            <div class="class-sug">
+                <p class="class_name">{{ subject.name }}</p>
+                <p class="term_day">
+                    {{ subject.term }}　{{ subject.time }}
+                    {% if current_user.has_liked_subject(subject) %}
+                        <img class="user_like_button" src="{{ url_for('static', filename='/img/liked.png') }}">
+                    {% else %}
+                        <img class="user_like_button" src="{{ url_for('static', filename='/img/unliked.png') }}">
+                    {% endif %}
+                </p>
+                <hr class="sug-line">
+                <div class="flex-box">
+                    <img class="face" src="{{ url_for('static', filename='/img/rating_0.png') }}">
+                    <p class="rating-number">{{ subject.rating_count(0) }}</p>
+                    <img class="face" src="{{ url_for('static', filename='/img/rating_1.png') }}">
+                    <p class="rating-number">{{ subject.rating_count(1) }}</p>
+                    <img class="face" src="{{ url_for('static', filename='/img/rating_2.png') }}">
+                    <p class="rating-number">{{ subject.rating_count(2) }}</p>
+                </div>
+                <p class="favorite">お気に入り{{ get_count(subject.likes) }}件</p>
+                <a class="link-classinfo" href="{{ url_for('classinfo', subject_id=subject.id) }}"><p class="link-classinfo">授業詳細へ</p></a>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
 {% endblock %}

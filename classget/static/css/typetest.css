@@ -1,18 +1,18 @@
 /* 上の方の文章の設定 */
 .text{
-  max-width: 100%;
-  width: 65%;
-  margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
+  width: 80%;
+  margin-top: 2rem;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2rem;
 }
 
 /* 見出しと説明文の間を少し開ける */
 .text h2{
   font-size: 1.5em;
   margin-bottom: 1em;
-  border-bottom: 2px solid black;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid rgb(102,102,102);
 }
 
 /* 説明文の行間の調整 */
@@ -22,65 +22,122 @@
 
 /* 白くなってるところ全体の設定 */
 fieldset{
-  width: 52%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
   background-color: white;
-  border: 0px;
+  padding: 0;
+  border: 0;
 }
 
 /* 白いところの文章の左側に余白を追加 */
 .testform{
-  margin-left: 40px;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
 }
 
 
 .question{
   text-align: left;
-  margin-bottom: 20px;
-
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .q_number { /*Q.01の周りの緑の部分*/
   padding: 0rem 0.9rem;
-  margin-right: 10px;
+  margin-left: 10%;
+  margin-right: 1rem;
   border-radius: 100vh;
   color: white;
-  background-color: #739188;
+  background-color: rgb(78,108,108);
 }
 
+input{
+  cursor: pointer;
+  margin: 0px 5px;
+}
 
 /* buttonsはラジオボタンの設定 */
 .buttons {
-  margin-top: 15px;
-  margin-left: 23%;
-  margin-bottom: 50px;
+  margin-top: 1em;
+  margin-bottom: 3em;
+  margin-left: 25%;
+  width:50%;
   transform: scale(1.6);
 }
 
 label {
   font-size: 0.1em;
+  letter-spacing: -1px;
+  color: rgb(90,90,90)
 }
 
 .submit_button {
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* buttonは診断結果ボタンの設定 */
 button {
-  border: 0px;
-  padding: 0.5rem 0.9em;
+  border: 0;
+  padding: 0.3rem 0.9em;
   color: white;
-  background-color: orange;
-  font-size: 2em;
-  border-radius: 1vh;
+  background-color: rgb(242,199,33);
+  font-size: 20px;
+  border-radius: 8px;
 }
 
 /* 診断結果にマウスを合わせた時にオレンジになるようにする */
 .submit_button button:hover{
-  color:bisque;
+  opacity: 0.5;
   cursor: pointer;
+}
+
+@media screen and (max-width:767px){
+    fieldset{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+
+    .text{
+      width:90%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+
+    h2{
+      font-size:16px;
+    }
+
+    p{
+        font-size: 12px;
+      }
+
+    .testform{
+      margin-left: 2.5%;
+      margin-right: 2.5%;
+      margin-top: 2.5rem;
+    }
+
+    .q_number{
+      margin-left: 2.5%;
+      margin-right: 2.5%;
+      padding:0 0.6rem;
+      padding-bottom: 0.1rem;
+    }
+
+    .question{
+        font-size: 12px;
+      }
+
+    .buttons{
+      font-size: 0.6em;
+      margin-left: 2.5%;
+      width:95%;
+      transform: scale(1.0);
+    }
+
+
 }
