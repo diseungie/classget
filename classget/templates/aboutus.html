@@ -7,5 +7,157 @@
 
 
 {% block contents %}
-<h1>about us</h1>
-{% endblock contents %}
+
+<p class="aboutus">ABOUT US</p>
+
+<div class="HASC">
+
+    <div class="left-side">
+        <img src="{{ url_for('static', filename='/img/aboutus/hasclogo.jpg') }}" class="HASC-LOGO">
+    </div>
+
+    <div class="right-side">
+        <p class="heading">一橋大学広告研究会HASC</p>
+        <p class="text">
+            「やりたいこと、しよう。」<br>
+            『学生によるあらたな価値創造』『広告媒体を用い、人とモノを繋ぐ』を理念として、個人のアイデアを集結し、広告物等を製作し発信する一橋大学唯一の広告研究会。一橋生のための総合情報サイト「ヒトツマミ」や新勧情報サイト「バシュラン」なども運営中。</p>
+    </div>
+
+</div>
+
+<div class="project-leader">
+
+    <div class="left-side">
+        <img src="static/img/aboutus/sunsun.png" class="icon leader">
+        <p class="name leader">すんすん</p>
+        <p class="role">企画・製作統括</p>
+    </div>
+
+    <div class="right-side">
+        <p class="heading">クラゲ百科事典について</p>
+        <p class="text">
+            <span class="bold">「ある程度は勉強がしたくて大学に入ったが、興味ある授業が124単位もあったわけではない」</span><br>
+            <span class="content">履修登録期間にパソコンと分厚い履修ガイドブックを開き、ペンとノートを持って気になる授業をメモしていると、まるで本当の大学生になったようで楽しいですが、その気持ちが20秒以上続けられたことはありません。履修登録をアマゾンでものを選ぶことやユーチューブで次見る動画を選ぶように楽しく簡単には出来ないだろうか？GPAが4.0を超えるあの友達じゃなく自分と似ている性向の人から授業をおすすめしてもらえないだろうか？授業情報ウェブサイトの名前にクラゲが入ってはいけないだろうか？「クラゲ百科事典」は、こういう疑問から生まれました。</span>
+        </p>
+    </div>
+
+</div>
+
+<div class="PROJECT-TEAM">
+    <p class="title">PROJECT TEAM: <br><span class="team">なんかすごいもの作ろう</span></p>
+
+    <div class="project-team">
+
+        <p class="heading1">デベロッパー<hr></p>
+        <span class="dev-1">WEBデザイン</span>
+        <div class="frontend-team">
+
+            <div class="edamariko member">
+                <img src="static/img/aboutus/edamariko.jpg" class="icon">
+                <p class="name">えだまりこ</p>
+            </div>
+
+            <div class="obachan member">
+                <img src="static/img/aboutus/obachan.png" class="icon">
+                <p class="name">おばちゃん</p>
+            </div>
+
+            <div class="muramatsu member">
+                <img src="static/img/aboutus/muramatsu.jpg" class="icon">
+                <p class="name">むらまつ</p>
+            </div>
+
+            <div class="hukuki member">
+                <img src="static/img/aboutus/hukuki.jpg" class="icon">
+                <p class="name">ふくき</p>
+            </div>
+        </div>
+
+        <span class="dev-2">システム構築</span>
+        <div class="backend-team">
+
+            <div class="sunsun member">
+                <img src="static/img/aboutus/sunsun.png" class="icon">
+                <p class="name">すんすん</p>
+            </div>
+        </div>
+
+        <p class="heading3">広報・渉外<hr></p>
+        <div class="PR-team">
+
+            <div class="taco member">
+                <img src="static/img/aboutus/taco.jpg" class="icon">
+                <p class="name">taco</p>
+            </div>
+
+            <div class="m member">
+                <img src="static/img/aboutus/m..jpg" class="icon">
+                <p class="name">m.</p>
+            </div>
+
+            <div class="sunsun member">
+                <img src="static/img/aboutus/sunsun.png" class="icon">
+                <p class="name">すんすん</p>
+            </div>
+
+            <div class="MK member">
+                <img src="static/img/aboutus/M K.png" class="icon">
+                <p class="name">M K</p>
+            </div>
+        </div>
+
+        <p class="heading4">UIデザイン<hr></p>
+        <div class="UI-team">
+
+            <div class="hukuki member">
+                <img src="static/img/aboutus/hukuki.jpg" class="icon">
+                <p class="name">ふくき</p>
+            </div>
+
+            <div class="ayatani member">
+                <img src="static/img/aboutus/ayatani.jpg" class="icon">
+                <p class="name">あやたに</p>
+            </div>
+
+        </div>
+
+        <p class="heading5">データ整理<hr></p>
+        <div class="data-team">
+
+            <div class="ayatani member">
+                <img src="static/img/aboutus/ayatani.jpg" class="icon">
+                <p class="name">あやたに</p>
+            </div>
+
+            <div class="MK member">
+                <img src="static/img/aboutus/M K.png" class="icon">
+                <p class="name">M K</p>
+            </div>
+
+        </div>
+
+        <p class="heading6">スペシャルサンクス<hr></p>
+        <div class="special-thanks">
+
+            <div class="jimingae member">
+                <img src="static/img/aboutus/jimingae.jpg" class="icon">
+                <p class="name special">ジミンゲ</p>
+                <p class="role-s">(キャラクター<br>デザイン)</p>
+            </div>
+
+            <div class="jyouhoumatome member">
+                <img src="static/img/aboutus/jyouhoumatome.jpg" class="icon">
+                <p class="name special">一橋大学<br>履修情報<br>まとめ</p>
+                <p class="role-s">(広報協力)</p>
+            </div>
+
+            <div class="shirabasudaisuki member">
+                <img src="static/img/aboutus/shirabasudaisuki.jpg" class="icon">
+                <p class="name special">一橋大学<br>シラバス<br>大好きマン</p>
+                <p class="role-s">(広報協力)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
