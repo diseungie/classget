@@ -71,22 +71,22 @@
                 <p class="term_day">
                     {{ subject.term }}　{{ subject.time }}
                     {% if current_user.has_liked_subject(subject) %}
-                        <img class="user_like_button" src="{{ url_for('static', filename='/img/liked.png') }}">
+                        <img class="user_like_button" src="{{ url_for('static', filename='/img/system/liked.png') }}">
                     {% else %}
-                        <img class="user_like_button" src="{{ url_for('static', filename='/img/unliked.png') }}">
+                        <img class="user_like_button" src="{{ url_for('static', filename='/img/system/unliked.png') }}">
                     {% endif %}
                 </p>
                 <hr class="sug-line">
                 <div class="flex-box">
-                    <img class="face" src="{{ url_for('static', filename='/img/rating_0.png') }}">
+                    <img class="face" src="{{ url_for('static', filename='/img/system/rating_0.png') }}">
                     <p class="rating-number">{{ subject.rating_count(0) }}</p>
-                    <img class="face" src="{{ url_for('static', filename='/img/rating_1.png') }}">
+                    <img class="face" src="{{ url_for('static', filename='/img/system/rating_1.png') }}">
                     <p class="rating-number">{{ subject.rating_count(1) }}</p>
-                    <img class="face" src="{{ url_for('static', filename='/img/rating_2.png') }}">
+                    <img class="face" src="{{ url_for('static', filename='/img/system/rating_2.png') }}">
                     <p class="rating-number">{{ subject.rating_count(2) }}</p>
                 </div>
                 <p class="favorite">お気に入り{{ get_count(subject.likes) }}件</p>
-                <a class="link-classinfo" href="{{ url_for('classinfo', subject_id=subject.id) }}"><p class="link-classinfo">授業詳細へ</p></a>
+                <a class="link-classinfo" href="{{ url_for('reviews.classinfo', subject_id=subject.id) }}"><p class="link-classinfo">授業詳細へ</p></a>
             </div>
         {% endfor %}
 

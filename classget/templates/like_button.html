@@ -1,13 +1,13 @@
 {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
     <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
-        <img class="like-button-img" src="{{ url_for('static', filename='img/liked.png') }}">
+        <img class="like-button-img" src="{{ url_for('static', filename='img/system/liked.png') }}">
     </a>
 {% elif current_user.is_authenticated %}
     <a href="" class="user_like_button" id="like_{{ subject.id }}">
-        <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}">
+        <img class="like-button-img" src="{{ url_for('static', filename='img/system/unliked.png') }}">
     </a>
 {% else %}
-    <a href="{{ url_for('login') }}" class="like_button">
-        <img class="like-button-img" src="{{ url_for('static', filename='img/unliked.png') }}">
+    <a href="{{ url_for('users.login') }}" class="like_button">
+        <img class="like-button-img" src="{{ url_for('static', filename='img/system/unliked.png') }}">
     </a>
 {% endif %}

@@ -1,16 +1,20 @@
 <div class="hamburger-menu" id="close_menu">
   <a class="ham-letter" href="">close</a>
-  <a href=""><img id="close-img" class="menu_img" src="{{ url_for('static', filename='img/close_menu.png') }}"></a>
+  <a href=""><img id="close-img" class="menu_img" src="{{ url_for('static', filename='img/layout/close_menu.png') }}"></a>
 </div>
 <table class="ham">
     <tbody>
         <tr>
-            <td><a href="{{ url_for('mainpage') }}">ホーム</a></td>
-            <td><a>About Us</a></td>
+            <td><a href="{{ url_for('main.mainpage') }}">ホーム</a></td>
+            <td><a href="{{ url_for('main.aboutus') }}">About Us</a></td>
         </tr>
         <tr>
-            <td><a href="{{ url_for('login') }}">ログイン</a></td>
-            <td><a href="{{ url_for('createaccount') }}">アカウント作成</a></td>
+            <td><a href="{{ url_for('users.login') }}">ログイン</a></td>
+            <td><a href="{{ url_for('users.createaccount') }}">アカウント作成</a></td>
+        </tr>
+        <tr>
+            <td><a href="{{ url_for('main.mobile_install') }}">スマホにインストール</a></td>
+            <td></td>
         </tr>
     </tbody>
 </table>

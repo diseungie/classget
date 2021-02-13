@@ -10,15 +10,15 @@
     <!-- この中に内容入れる -->
     <div class="toppage">
         <!--ここからコピーとロゴ-->
-        <img src="{{ url_for('static', filename='/img/maruikurage.png') }}">
+        <img src="{{ url_for('static', filename='/img/mainpage/maruikurage.png') }}">
         <h2>あなたは何キャラ？</h2>
         <a>キャラ診断をすると、同じキャラの一橋生の<br>オススメ授業を見ることができます。<br>まずはアカウント作成へ！</a>
-        <a href="{{ url_for('createaccount') }}"><div class="create_here">>>アカウント作成はコチラから</div></a>
+        <a href="{{ url_for('users.createaccount') }}"><div class="create_here">>>アカウント作成はコチラから</div></a>
     </div>
 
     <div class="search-area">
         <h3>  条件から探す</h3>
-        <form method="POST" action="{{ url_for('searchresult') }}">
+        <form method="POST" action="{{ url_for('main.searchresult') }}">
             {{ form.hidden_tag() }}
             <div class="check">
                 <div class="syozoku">

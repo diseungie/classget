@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aboutus.css') }}" type="text/css">
+{% endblock %}
+
+
+{% block contents %}
+<h1>about us</h1>
+{% endblock contents %}

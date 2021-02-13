@@ -244,3 +244,100 @@ table.ham{
   }
 }
 /*ここまでハンバーガーメニュー*/
+
+/* footer */
+.footer01{
+  margin-top: 10rem;
+  position: relative;
+  background-color: rgb(78,108,108);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-btn {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  font-size: 120%;
+  background-color: rgb(78,108,108) !important;
+}
+
+.footer-btn:hover {
+  background: #67c5ff !important;
+  color: white;
+}
+
+.copyright{
+  position: relative;
+  background-color:rgb(235,247,247);
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}
+
+.footer02{
+  margin: 3em 10%;
+  width: 80%;
+}
+
+.footer-banner{
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.footer-banner li {
+	width: calc(100%/2);
+	padding:0 10px;/*画像の左右に20pxの余白を入れる*/
+	box-sizing:border-box;
+}
+
+.footer-banner li img {
+  max-width:100%; /*画像のはみだしを防ぐ*/
+	height: auto; /*画像の縦横比を維持する */
+	border:solid 2px #ccc; /*画像を2pxのグレーの枠線で囲む*/
+}
+
+@media screen and (max-width: 767px) {
+  .footer-banner{
+    display:block;
+  }
+
+  .footer01{
+    margin-top: 5em;
+  }
+
+  .footer02{
+    margin-top: 1em;
+  }
+
+  .footer-banner li {
+    width: calc(100%/1);
+    padding:5px 10px;/*画像の左右に10pxの余白を入れる*/
+    box-sizing:border-box;
+  }
+
+  .footer-banner li img {
+    max-width:100%; /*画像のはみだしを防ぐ*/
+    height: auto; /*画像の縦横比を維持する */
+    border:solid 2px #ccc; /*画像を2pxのグレーの枠線で囲む*/
+  }
+
+  .footer-btn {
+    display: inline-block;
+    padding: 0.4em 0.7em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+    font-size: 125%
+  }
+}

@@ -206,11 +206,12 @@ p.of{
 p.suggestion{
   font-size: 2em;
   font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 p.class_name, p.term_day, div.flex-box, p.favorite, p.link-classinfo{
   width: 100%;
-  height: 25%;
+  height: 20%;
   display: flex;
   align-items: center;
 }
@@ -230,9 +231,8 @@ p.term_day{
 }
 
 a.link-classinfo{
-  text-align: right;
   float: right;
-  text-decoration: underline !important;
+  margin-top: 0.5em;
   color: rgb(144,61,64);
   cursor: pointer;
 }

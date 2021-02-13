@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_install.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="title">
+        スマホにインストールする方法
+    </div><hr>
+    <div class="iphone">
+        <h2 class="phone1">iPhoneユーザー</h2>
+        <div class="des">
+            <ol>
+                <li class="line"><span class="important">Safari</span>でクラゲ百科事典を開く</li>
+                <li class="line">下の真ん中のボタン<img src="{{ url_for('static', filename='img/icon/safari_button.png') }}">をクリック</li>
+                <li class="line"><span class="important">ホームに追加</span>をタップ</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="android">
+        <h2 class="phone2">Androidユーザー</h2>
+        <div class="des">
+            <div class="sub-title1">Chrome</div>
+            <ol>
+                <li class="line"><span class="important">Chrome</span>でクラゲ百科事典を開く</li>
+                <li class="line">右下のボタン<span class="chrome_button">...</span>をタップ</li>
+                <li class="line"><span class="important">ホームに追加</span>をタップ</li>
+            </ol>
+        </div>
+        <div class="des">
+            <div class="sub-title2">Androidブラウザー</div>
+            <ol>
+                <li class="line"><span class="important">Androidブラウザー</span>でクラゲ百科事典を開く</li>
+                <li class="line">右上の<span class="important">ブックマークボタン</span>をタップ、ブックマークをする</li>
+                <li class="line">ブックマークボタンを長押し</li>
+                <li class="line"><span class="important">ショートカットを作成</span>をタップ</li>
+            </ol>
+        </div>
+    </div>
+</div>
+{% endblock contents %}

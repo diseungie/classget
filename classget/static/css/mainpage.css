@@ -67,6 +67,7 @@
   margin-top:2rem;
   margin-bottom:2rem;
   background-color: #FFF;
+  border-radius: 1vh;
 }
 
 /*条件で探す*/
@@ -170,15 +171,15 @@ label{
 .searchbutton{
   color: white;
   background-color: rgb(255, 204, 51);
-  border:0;
+  border: 3px rgb(230, 180, 30) solid;
   border-radius: 7px;
   padding:0.4rem 0.6rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  font-size:14px;
+  font-size:17px;
   cursor: pointer; /*ここまで見た目*/
-  width:8rem;
+  width:10rem;
 }
 
 .searchbutton:hover{

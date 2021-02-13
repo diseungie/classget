@@ -11,7 +11,7 @@
         <h3>　検索結果：　{{ result_num }}件</h3>
         <div class="searchresult">
             {% for subject in result.items %}
-                <a href="{{ url_for('classinfo', subject_id=subject.id) }}">
+                <a href="{{ url_for('reviews.classinfo', subject_id=subject.id) }}">
                     <div class="class">
                         <div class="result_header">
                             <div class="container">
@@ -21,15 +21,15 @@
                             <div class="like_buttons{{ subject.id }}">
                                 {% if current_user.is_authenticated and current_user.has_liked_subject(subject) %}
                                     <a href="" class="user_like_button" id="unlike_{{ subject.id }}">
-                                        <img src="{{ url_for('static', filename='img/liked.png') }}">
+                                        <img src="{{ url_for('static', filename='img/system/liked.png') }}">
                                     </a>
                                 {% elif current_user.is_authenticated %}
                                     <a href="" class="user_like_button" id="like_{{ subject.id }}">
-                                        <img src="{{ url_for('static', filename='img/unliked.png') }}">
+                                        <img src="{{ url_for('static', filename='img/system/unliked.png') }}">
                                     </a>
                                 {% else %}
-                                    <a href="{{ url_for('login') }}" class="like_button">
-                                        <img src="{{ url_for('static', filename='img/unliked.png') }}">
+                                    <a href="{{ url_for('users.login') }}" class="like_button">
+                                        <img src="{{ url_for('static', filename='img/system/unliked.png') }}">
                                     </a>
                                 {% endif %}
                             </div>
@@ -37,9 +37,9 @@
                         <div class="class_sort">・{{ subject.sort }}　・{{ subject.draw }}</div>
                         <div class="class_sort">・教授：{{ subject.teacher }}　・言語：{{ subject.language }}</div>
                         <div class="rating">
-                            <img src="{{ url_for('static', filename='img/rating_0.png') }}" width="32.5px">{{ subject.rating_count(0) }}
-                            <img src="{{ url_for('static', filename='img/rating_1.png') }}" width="32.5px">{{ subject.rating_count(1) }}
-                            <img src="{{ url_for('static', filename='img/rating_2.png') }}" width="32.5px">{{ subject.rating_count(2) }}
+                            <img src="{{ url_for('static', filename='img/system/rating_0.png') }}" width="32.5px">{{ subject.rating_count(0) }}
+                            <img src="{{ url_for('static', filename='img/system/rating_1.png') }}" width="32.5px">{{ subject.rating_count(1) }}
+                            <img src="{{ url_for('static', filename='img/system/rating_2.png') }}" width="32.5px">{{ subject.rating_count(2) }}
                             <div class="liked-number">(お気に入り{{ get_count(subject.likes) }}件)</div>
                         </div>
                         <div class="class_keyword">
@@ -48,9 +48,9 @@
                             {% endfor %}
                         </div>
                         {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
-                            <a href="{{ url_for('updateclass', subject_id=subject.id) }}"><button class="update_class_button">授業情報修正</button></a>
+                            <a href="{{ url_for('admin.updateclass', subject_id=subject.id) }}"><button class="update_class_button">授業情報修正</button></a>
                         {% endif %}
-                        <a class="see-detail" href="{{ url_for('classinfo', subject_id=subject.id) }}">授業の詳細を見る></a>
+                        <a class="see-detail" href="{{ url_for('reviews.classinfo', subject_id=subject.id) }}">授業の詳細を見る></a>
                     </div>
                 </a>
             {% endfor %}
@@ -59,9 +59,9 @@
             {% for page_num in result.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                 {% if page_num %}
                     {% if result.page == page_num %}
-                        <a class="current_page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                        <a class="current_page_num" href="{{ url_for('main.searchresult', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="page_num" href="{{ url_for('searchresult', page=page_num) }}">{{ page_num }}</a>
+                        <a class="page_num" href="{{ url_for('main.searchresult', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     ...
