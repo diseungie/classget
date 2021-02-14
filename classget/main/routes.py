@@ -13,7 +13,7 @@ main = Blueprint('main', __name__)
 @main.route("/", methods=["GET", "POST"])
 def mainpage():
     form = SearchClassForm()
-    return render_template('mainpage.html', form=form)
+    return render_template('main/mainpage.html', form=form)
 
 
 @main.route("/searchresult", methods=['GET', 'POST'])
@@ -66,13 +66,13 @@ def searchresult():
     result = result.paginate(page=page, per_page=10)
     if not result:
         result = "検索結果がありません。"
-    return render_template('searchresult.html', title='検索結果', result=result, get_count=get_count, form=form,
+    return render_template('main/searchresult.html', title='検索結果', result=result, get_count=get_count, form=form,
                            Review=Review, result_num=result_num)
 
 
 @main.route('/about_us')
 def aboutus():
-    return render_template('aboutus.html', title='About Us')
+    return render_template('main/aboutus.html', title='About Us')
 
 
 @main.route('/ham_menu', methods=['POST'])
@@ -80,11 +80,11 @@ def ham_menu():
     action = request.form['action']
     if action == 'show_menu':
         if current_user.is_authenticated:
-            return render_template('show_ham_menu.html')
+            return render_template('main/show_ham_menu.html')
         else:
-            return render_template('nouser_show_ham_menu.html')
+            return render_template('main/nouser_show_ham_menu.html')
     elif action == 'close_menu':
-        return render_template('close_ham_menu.html')
+        return render_template('main/close_ham_menu.html')
     else:
         pass
 
@@ -102,4 +102,4 @@ def sw_js():
 
 @main.route('/mobile_install')
 def mobile_install():
-    return render_template('mobile_install.html')
+    return render_template('main/mobile_install.html')

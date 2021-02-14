@@ -37,7 +37,7 @@ def updateclass(subject_id):
             form.language.data = subject.language
             form.draw.data = subject.draw
             form.keyword.data = subject.keyword
-            return render_template('update_class.html', subject=subject, form=form)
+            return render_template('admin/update_class.html', subject=subject, form=form)
     else:
         return 'access denied'
 
@@ -56,4 +56,4 @@ def createclass():
     else:
         return 'access denied'
 
-    return render_template('createclass.html', form=form)
+    return render_template('admin/createclass.html', form=form)

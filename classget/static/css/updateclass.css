@@ -24,7 +24,6 @@ h2{
 }
 
 input.submit_button{
-    align: center;
     color: white;
     background-color: rgb(242,190,33);
     font-size: 1rem;
@@ -32,6 +31,11 @@ input.submit_button{
     border:  rgb(223 170 9) 4px solid;
     border-radius: 1vh;
     margin-top: 1rem;
+    cursor: pointer;
+}
+
+input.submit_button:hover{
+    opacity: 0.5;
 }
 
 .submit_button{

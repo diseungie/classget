@@ -1,4 +1,5 @@
 import smtplib
+import yaml
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -13,6 +14,7 @@ from classget.models import Subject, Review, get_count
 from classget.reviews.forms import ReviewForm
 
 reviews = Blueprint('reviews', __name__)
+yml = yaml.load(open('classget/configure.yaml'), Loader=yaml.BaseLoader)
 
 
 @reviews.route("/classinfo/<int:subject_id>", methods=["GET", "POST"])
@@ -43,7 +45,7 @@ def classinfo(subject_id):
         # ログインしていない場合→ログイン画面へ
         else:
             return redirect(url_for('users.login'))
-    return render_template('classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
+    return render_template('reviews/classinfo.html', title=subject.name, subject=subject, form=form, reviews=reviews,
                            enumerate=enumerate, subject_keyword=subject_keyword, get_count=get_count, Review=Review,
                            recommended=recommended, reviews_num=reviews_num)
 
@@ -65,7 +67,7 @@ def report(subject_id):
     if form.validate_on_submit():
         # 送信者情報
         sender = "machikado.cookingclass@gmail.com"
-        sender_password = "hxvgufhczdlwzuao"
+        sender_password = yml['email_pw']
         # メールサーバーにログイン
         s = smtplib.SMTP_SSL('smtp.gmail.com')
         s.login(sender, sender_password)
@@ -92,7 +94,7 @@ def report(subject_id):
         # メール送信、サーバーを閉じる
         s.sendmail(sender, receiver, msg.as_string())
         s.quit()
-        return render_template('report_complete.html')
+        return render_template('reviews/report_complete.html')
     # ページを開いたら既存の情報がすでに入っている
     elif request.method == 'GET':
         form.sort.data = subject.sort
@@ -103,4 +105,4 @@ def report(subject_id):
         form.language.data = subject.language
         form.draw.data = subject.draw
         form.keyword.data = subject.keyword
-    return render_template('report.html', subject=subject, form=form, title='授業情報報告')
+    return render_template('reviews/report.html', subject=subject, form=form, title='授業情報報告')

@@ -15,7 +15,7 @@ def create_app():
     app = Flask(__name__)
 
     # config
-    yml = yaml.load(open('classget/configure.yaml'))
+    yml = yaml.load(open('classget/configure.yaml'), Loader=yaml.BaseLoader)
     app.config['SECRET_KEY'] = yml['secret_key']
     app.config['SQLALCHEMY_DATABASE_URI'] = yml['mysql_config']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -30,9 +30,11 @@ def create_app():
     from classget.main.routes import main
     from classget.reviews.routes import reviews
     from classget.users.routes import users
+    from classget.errors.handlers import errors
     app.register_blueprint(admin)
     app.register_blueprint(main)
     app.register_blueprint(reviews)
     app.register_blueprint(users)
+    app.register_blueprint(errors)
 
     return app

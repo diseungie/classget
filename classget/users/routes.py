@@ -30,7 +30,7 @@ def createaccount():
         login_user(user)
         # キャラ診断ページに送る
         return redirect(url_for('users.typetest'))
-    return render_template('createaccount.html', title='アカウント作成', form=form)
+    return render_template('users/createaccount.html', title='アカウント作成', form=form)
 
 
 @users.route("/login", methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def login():
         # パスワードが一致しない場合：パスワードエラー
         else:
             login_error = 1
-    return render_template('login.html', title='ログイン', form=form, login_error=login_error)
+    return render_template('users/login.html', title='ログイン', form=form, login_error=login_error)
 
 
 @users.route("/updateaccount", methods=['GET', 'POST'])
@@ -85,7 +85,7 @@ def updateaccount():
         form.faculty.data = current_user.faculty
         form.year.data = current_user.year
 
-    return render_template('updateaccount.html', title='アカウント情報修正', form=form, password_error=password_error)
+    return render_template('users/updateaccount.html', title='アカウント情報修正', form=form, password_error=password_error)
 
 
 @users.route("/logout")
@@ -108,7 +108,7 @@ def mypage(my_term):
                 if t == i:
                     result.append([l.subject.id, l.subject.name])
         return result
-    return render_template('mypage.html', title='マイページ', image_file=image_file, liked=liked_subject,
+    return render_template('users/mypage.html', title='マイページ', image_file=image_file, liked=liked_subject,
                            timetable=timetable, my_term=my_term)
 
 
@@ -140,7 +140,7 @@ def typetest():
         current_user.type = random.choice(list_max)
         db.session.commit()
         return redirect(url_for('users.typeresult'))
-    return render_template('typetest.html', question=question, title='キャラ診断')
+    return render_template('users/typetest.html', question=question, title='キャラ診断')
 
 
 @users.route("/typeresult", methods=['GET'])
@@ -168,7 +168,7 @@ def typeresult():
     eco_proportion = "{:.1f}".format((type_eco / type_number) * 100)
     law_proportion = "{:.1f}".format((type_law / type_number) * 100)
     soc_proportion = "{:.1f}".format((type_soc / type_number) * 100)
-    return render_template('typeresult.html', recommended_subjects=recommended_subjects, type_pp=type_proportion,
+    return render_template('users/typeresult.html', recommended_subjects=recommended_subjects, type_pp=type_proportion,
                            com_pp=com_proportion, eco_pp=eco_proportion, law_pp=law_proportion, soc_pp=soc_proportion,
                            catchphrase=catchphrase, get_count=get_count, description=description, title='診断結果')
 
@@ -186,4 +186,4 @@ def like():
         current_user.unlike_subject(subject)
         db.session.commit()
 
-    return render_template('like_button.html', subject=subject)
+    return render_template('users/like_button.html', subject=subject)

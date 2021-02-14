@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'main/layout.html' %}
 
 {% block stylesheet %}
     <!-- ここにCSSファイルをリンクする -->
@@ -9,6 +9,10 @@
 {% block contents %}
     <div class="whole_searchresult">
         <h3>　検索結果：　{{ result_num }}件</h3>
+        <p class="warning">
+            *授業情報は最新のシラバスや皆さんから集めた情報で更新していますが、
+            情報の漏れがある可能性があります。
+        </p>
         <div class="searchresult">
             {% for subject in result.items %}
                 <a href="{{ url_for('reviews.classinfo', subject_id=subject.id) }}">

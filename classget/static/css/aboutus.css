@@ -10,6 +10,10 @@
     display: flex;
 }
 
+a.web-link{
+  color: black;
+}
+
 .frontend-team, .backend-team, .PR-team, .UI-team, .data-team, .special-thanks{
   text-align: center;
   margin-top: 0.5em;
