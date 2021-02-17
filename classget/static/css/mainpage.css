@@ -180,10 +180,17 @@ label{
   font-size:17px;
   cursor: pointer; /*ここまで見た目*/
   width:10rem;
+  -webkit-appearance: none;
 }
 
 .searchbutton:hover{
   opacity: 0.5;
+}
+
+span.not_include{
+  text-decoration: underline;
+  text-decoration-color: rgb(78,108,108);
+  padding-bottom: 2px;
 }
 
 /*ここからレスポンシブ*/
@@ -234,7 +241,7 @@ label{
     /*アカウント作成ボタン*/
     .create_here{
       padding: 0.5rem 0.2rem;
-      font-size:8px;
+      font-size:10px;
       width:11rem;
       right:5%;
       top:3.6rem;

@@ -231,6 +231,7 @@
     margin-bottom: 1rem;
     border: none;
     cursor: pointer;
+    -webkit-appearance: none;
   }
 
   /*選択時の変化*/
@@ -281,6 +282,7 @@
       width:50%;
       margin:1.5rem 25%;
       margin-bottom: 0.5rem;
+      padding-top:0.3rem;
     }
 
     small{

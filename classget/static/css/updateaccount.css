@@ -232,6 +232,7 @@
     margin-bottom: 6rem;
     border: none;
     cursor: pointer;
+    -webkit-appearance: none;
   }
 
   /*選択時のボタンの変化*/

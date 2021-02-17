@@ -245,7 +245,7 @@ span.dev-1, span.dev-2{
 @media screen and (max-width: 768px){
     p.name{
         font-size: 0.6rem;
-        width: 180%;
+        width: 190%;
     }
 
     p.heading1, p.heading2, p.heading3, p.heading4, p.heading5, p.heading6{

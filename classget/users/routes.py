@@ -2,6 +2,7 @@ import random
 
 from flask import Blueprint, url_for, render_template, request
 from flask_login import current_user, login_user, login_required, logout_user
+from sqlalchemy import or_
 from werkzeug.utils import redirect
 
 from classget import bcrypt, db
@@ -99,7 +100,7 @@ def logout():
 def mypage(my_term):
     image_file = url_for('static', filename='img/profile_pics/' + current_user.type + '.png')
     liked_subject = Like.query.filter_by(user_id=current_user.id)\
-        .filter(Like.subject_term.like('%{}%'.format(my_term))).all()
+        .filter(or_(Like.subject_term.like('%{}%'.format(my_term)), Like.subject_term.like('%通年%'))).all()
 
     def timetable(i):
         result = []

@@ -8,7 +8,8 @@
 
 {% block contents %}
 <!-- ここから授業詳細 -->
-    <fieldset class="outer">
+    <div class="warning">*一部の授業は取れる学年に制限があります。詳細はCELSの公式シラバスで時間割コードを確認してください。</div>
+    <fieldset class="outer" id="top">
         <div class="classinfo">
             <div class="box">
 <!--      授業名      -->
@@ -54,8 +55,11 @@
                 {% endfor %}
             </div>
 <!--    授業情報修正申請ボタン    -->
-            <div class="report">
+	    <div class="report">
                 <a href="{{ url_for('reviews.report', subject_id=subject.id) }}"><button class="report_button">この授業の最新情報報告</button></a>
+            </div>    
+	    <div class="report">
+                <a href="{{ url_for('main.searchresult') }}"><button class="go_back_button">検索結果に戻る</button></a>
             </div>
         </div>
 <!--  授業情報修正ボタン（adminアカウントにだけ見える）  -->

@@ -32,6 +32,7 @@ input.submit_button{
     border-radius: 1vh;
     margin-top: 1rem;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 
 input.submit_button:hover{

@@ -253,8 +253,8 @@ table.timetable .space{
     }
 
     .update{
-     font-size: 8px;
-     top:12.4rem;
+     font-size: 10px;
+     top:12.6rem;
      right:10%;
      padding:0.1rem 0.1rem;
      width:6rem;
@@ -288,4 +288,7 @@ table.timetable .space{
       margin-top: 10%
     }
 
+    table.timetable td{
+      font-size: 9px;
+    }
 }

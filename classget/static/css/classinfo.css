@@ -4,6 +4,15 @@
   padding: 0;
 }
 
+.warning{
+  margin-left: 12%;
+  margin-right: 12%;
+  width: 76%;
+  margin-top: 5%;
+  color: rgb(218,0,0);
+  font-size: 12px;
+}
+
 /* 顔のアイコンの大きさ調整 */
 .face-top{
   height: 2rem;
@@ -31,6 +40,10 @@ fieldset.outer{
   margin-left: 10%;
   margin-right: 10%;
   border-radius: 1vh;
+}
+
+fieldset#top.outer{
+  margin-top: 1%;
 }
 
 /* 内側にあるfieldsetへの設定 */
@@ -378,6 +391,21 @@ li input{
   margin-left:0.8rem;
 }
 
+button.go_back_button{
+  float: right;
+  color: white;
+  background-color: rgb(98,128,128);
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  border: rgb(138,160,160) 2px solid;
+  border-radius: 1vh;
+  cursor: pointer;
+}
+
+button.go_back_button:hover{
+  opacity: 0.5;
+}
+
 /* ユーザーからの授業情報修正の申請ボタン */
 button.report_button{
   float: right;
@@ -528,6 +556,18 @@ img.face_heading{
     font-size: 10px;
   }
 
+  div.warning{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 4%;
+    width: 90%;
+    font-size: 10px;
+  }
+
+  fieldset#top.outer{
+    margin-top: 1%;
+  }
+
   div.class-sug{
     width: 94%;
     margin-bottom: 1em;
@@ -568,7 +608,13 @@ img.face_heading{
 
 
 /*レスポンシブ対応まとめて*/
-@media screen and (max-width: 767px){
+@media screen and (min-width: 500px) {
+  button.go_back_button{
+    margin-left: 74.5%;
+  }
+}
+
+@media screen and (max-width: 768px){
 
   h1.name{
     font-size: 1.1rem;
@@ -631,6 +677,15 @@ img.face_heading{
     padding: 0.1rem 0.8rem;
     margin: 0rem 0.1rem;
     white-space: nowrap;
+    line-height: 2rem;
+  }
+  
+  button.go_back_button{
+    float: left;
+    margin-top: 0rem;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+    margin-bottom: 0.4rem;
   }
 
   button.report_button {
@@ -691,6 +746,7 @@ img.face_heading{
 
   .review-keywords .keyword {
     font-size: 0.7rem;
+    line-height: 1rem;
   }
 
   .review-delete {
