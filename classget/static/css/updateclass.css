@@ -44,7 +44,8 @@ input.submit_button:hover{
 }
 
 fieldset{
-    width: 80%;
+    width: 76%;
+    padding: 2% 2%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: white;
