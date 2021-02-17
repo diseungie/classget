@@ -128,7 +128,7 @@ img.HASC-LOGO{
 img.icon.leader{
     width: 6em;
     height: 6em;
-    margin-top: 4em;
+    margin-top: 1em;
 }
 
 /* div */
@@ -180,8 +180,7 @@ span.dev-1, span.dev-2{
     }
 
     .aboutus, .HASC, .project-leader, .PROJECT-TEAM{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 2% 10%;
     font-size: 14px;
     }
 
