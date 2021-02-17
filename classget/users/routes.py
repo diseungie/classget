@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from werkzeug.utils import redirect
 
 from classget import bcrypt, db
-from classget.models import User, Like, get_count, Subject
+from classget.models import User, Like, get_count, Subject, Review
 from classget.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 
 users = Blueprint('users', __name__)
@@ -110,7 +110,7 @@ def mypage(my_term):
                     result.append([l.subject.id, l.subject.name])
         return result
     return render_template('users/mypage.html', title='マイページ', image_file=image_file, liked=liked_subject,
-                           timetable=timetable, my_term=my_term)
+                           timetable=timetable, my_term=my_term, User=User, Review=Review, get_count=get_count)
 
 
 @users.route("/typetest", methods=['GET', 'POST'])

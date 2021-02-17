@@ -199,4 +199,12 @@
             </tr>
         </table>
     </div>
+    {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
+        <div>
+	    ・ユーザー数：{{ get_count(User.query) }}
+        </div>
+	<div>
+            ・レビュー数：{{ get_count(Review.query) }}
+        </div>
+    {% endif %}
 {% endblock contents %}
