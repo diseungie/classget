@@ -274,3 +274,13 @@ span.not_include{
     }
     /*よくわかんないけどflexにしたら1行1要素で綺麗になった*/
 }
+
+@media screen and (max-width: 350px){
+  .create_here{
+    width: 10rem;
+  }
+
+  .searchform{
+    width: 250px;
+  }
+}

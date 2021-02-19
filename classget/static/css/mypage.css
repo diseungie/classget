@@ -169,6 +169,32 @@ table.timetable .space{
   height:1.5rem;
 }
 
+@media screen and (max-width: 350px){
+  .userinfo img{
+    left: 12%;
+  }
+
+  .username{
+    left: 35%;
+  }
+
+  .type{
+    left: 35%;
+  }
+
+  .faculty{
+    left: 35%;
+  }
+
+  .year{
+    left: 48%;
+  }
+
+  .select-season button{
+    width: 3rem;
+  }
+}
+
 @media screen and (min-width: 425px) and (max-width: 767px){
     .username{
       top:12rem!important;

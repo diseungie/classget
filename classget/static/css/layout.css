@@ -306,6 +306,12 @@ table.ham{
 	border:solid 2px #ccc; /*画像を2pxのグレーの枠線で囲む*/
 }
 
+@media screen and (max-width: 350px) {
+  .ham td a{
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .footer-banner{
     display:block;
@@ -340,5 +346,11 @@ table.ham{
     border-radius: 3px;
     transition: .4s;
     font-size: 125%
+  }
+}
+
+@media screen and (max-width: 350px){
+  .footer-btn{
+    font-size: 100%;
   }
 }

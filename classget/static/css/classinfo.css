@@ -776,3 +776,13 @@ img.face_heading{
     font-size:1.3rem;
   }
 }
+
+@media screen and (max-width: 350px){
+  button.report_button{
+    font-size: 0.8rem;
+  }
+
+  button.go_back_button{
+    font-size: 0.8rem;
+  } 
+}
