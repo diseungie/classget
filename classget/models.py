@@ -102,15 +102,15 @@ class Subject(db.Model):
                f"'{self.language}', '{self.draw}', '{self.keyword}')"
 
     def recommended_by_review(self):
-        good_reviews = Review.query.filter_by(subject_id=self.id, rating=0).all()
+        good_reviews = Review.query.filter_by(subject_id=self.id, rating=0).order_by(Review.date_posted.desc()).limit(3).all()
         user_ids = []
         for review in good_reviews:
             user_ids.append(review.user_id)
-        reviews = Review.query.filter(Review.user_id.in_(user_ids), Review.subject_id != self.id).filter_by(rating=0)\
-            .order_by(Review.date_posted.desc()).limit(3).all()
         rec_subjects = [0, 0, 0]
-        for i, review in enumerate(reviews):
-            rec_subject = Subject.query.filter_by(id=review.subject_id).first()
+        for i, user_id in enumerate(user_ids):
+            another_rec_review = Review.query.filter(Review.subject_id != self.id).filter_by(user_id=user_id, rating=0)\
+            .order_by(Review.date_posted.desc()).first()
+            rec_subject = Subject.query.filter_by(id=another_rec_review.subject_id).first()
             rec_subjects[i] = rec_subject
         return rec_subjects
 

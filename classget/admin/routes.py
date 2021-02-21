@@ -57,3 +57,7 @@ def createclass():
         return 'access denied'
 
     return render_template('admin/createclass.html', form=form)
+
+@admin.route("/report.html")
+def report_html():
+    return render_template('report.html')
