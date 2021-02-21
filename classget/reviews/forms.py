@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectMultipleField, widgets, StringField, RadioField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, ValidationError
 
 
 class MultiCheckboxField(SelectMultipleField):
@@ -18,3 +18,7 @@ class ReviewForm(FlaskForm):
     content = TextAreaField('本　文*', validators=[DataRequired()])
     keyword = MultiCheckboxField('キーワード', choices=keyword_choices)
     submit = SubmitField('投 稿')
+
+    def validate_title(self, title):
+        if len(title.data) > 15:
+            raise ValidationError('タイトルは15字以内で書いてください')

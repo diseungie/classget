@@ -140,8 +140,14 @@
           <form method="POST" action="" class="newreview">
             {{ form.hidden_tag() }}
               <div class="title-review">
-                {{ form.title.label(class="label-title") }}
-                {{ form.title(class="blank-title", placeholder="15字以内") }}
+		{% if form.title.errors %}
+                	{{ form.title.label(class="label-title") }}
+                	{{ form.title(class="blank-title", placeholder="15字以内") }}
+			<span class="error_message">タイトルは15字以内で書いてください</span>
+		{% else %}
+			{{ form.title.label(class="label-title") }}
+                        {{ form.title(class="blank-title", placeholder="15字以内") }}
+		{% endif %}
               </div>
 
               <div class="rating-review">
