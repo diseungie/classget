@@ -108,10 +108,10 @@ class Subject(db.Model):
             user_ids.append(review.user_id)
         rec_subjects = [0, 0, 0]
         for i, user_id in enumerate(user_ids):
-            another_rec_review = Review.query.filter(Review.subject_id != self.id).filter_by(user_id=user_id, rating=0)\
-            .order_by(Review.date_posted.desc()).first()
-            rec_subject = Subject.query.filter_by(id=another_rec_review.subject_id).first()
-            rec_subjects[i] = rec_subject
+            another_rec_review = Review.query.filter(Review.subject_id != self.id).filter_by(user_id=user_id, rating=0).order_by(Review.date_posted.desc()).first()
+            if another_rec_review:
+                rec_subject = Subject.query.filter_by(id=another_rec_review.subject_id).first()
+                rec_subjects[i] = rec_subject
         return rec_subjects
 
     def rating_count(self, rating):
