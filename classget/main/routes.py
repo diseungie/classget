@@ -36,20 +36,20 @@ def searchresult():
         result = result.filter(Subject.term.in_(session['form.term.data']))
     # 曜日
     if session['form.day.data']:
-        day = [0, 0, 0, 0, 0]
+        day = [0, 0, 0, 0, 0, 0]
         for i in range(len(session['form.day.data'])):
             day[i] = session['form.day.data'][i]
         result = result.filter(or_(Subject.time.like(f'%{day[0]}%'), Subject.time.like(f'%{day[1]}%'),
                                    Subject.time.like(f'%{day[2]}%'), Subject.time.like(f'%{day[3]}%'),
-                                   Subject.time.like(f'%{day[4]}%')))
+                                   Subject.time.like(f'%{day[4]}%'), Subject.time.like(f'%{day[5]}%')))
     # 時限
     if session['form.time.data']:
-        time = [0, 0, 0, 0, 0]
+        time = [0, 0, 0, 0, 0, 0]
         for i in range(len(session['form.time.data'])):
             time[i] = session['form.time.data'][i]
         result = result.filter(or_(Subject.time.like(f'%{time[0]}%'), Subject.time.like(f'%{time[1]}%'),
                                    Subject.time.like(f'%{time[2]}%'), Subject.time.like(f'%{time[3]}%'),
-                                   Subject.time.like(f'%{time[4]}%')))
+                                   Subject.time.like(f'%{time[4]}%'), Subject.time.like(f'%{time[5]}%')))
     # 抽選
     if session['form.draw.data']:
         result = result.filter(Subject.draw.in_(session['form.draw.data']))

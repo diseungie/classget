@@ -147,6 +147,10 @@ table.timetable td{
   text-align: center;
 }
 
+td.etc{
+  width: 100%;
+}
+
 /*授業名のますを通過すると薄くなる*/
 table.timetable td:hover{
   opacity: 0.6;

@@ -197,6 +197,73 @@
                     {% endfor %}
                 </td>
             </tr>
+
+            <tr>
+                <td class="jigen">6</td>
+                <td class="mo6">
+                    {% for i in timetable('月6') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="tu6">
+                    {% for i in timetable('火6') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="we6">
+                    {% for i in timetable('水6') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="th6">
+                    {% for i in timetable('木6') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="fr6">
+                    {% for i in timetable('金6') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="jigen">7</td>
+                <td class="mo7">
+                    {% for i in timetable('月7') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="tu7">
+                    {% for i in timetable('火7') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="we7">
+                    {% for i in timetable('水7') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="th7">
+                    {% for i in timetable('木7') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+                <td class="fr7">
+                    {% for i in timetable('金7') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="jigen">他</td>
+                <td class="etc" colspan="5">
+                    {% for i in timetable('他') %}
+                        <a href="{{ url_for('reviews.classinfo', subject_id=i[0]) }}"><p>{{ i[1] }}</p></a>
+                    {% endfor %}
+                </td>
+            </tr>
         </table>
     </div>
     {% if current_user.is_authenticated and current_user.iduser == 'admin' %}
