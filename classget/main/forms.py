@@ -18,7 +18,7 @@ class SearchClassForm(FlaskForm):
     keyword_choices = [('期末試験', '期末試験'), ('期末レポート', '期末レポート'), ('中間試験', '中間試験'),
                        ('中間レポート', '中間レポート'), ('出席', '出席'), ('課題(毎回)', '課題(毎回)'), ('課題(たまに)', '課題(たまに)'),
                        ('ライブ', 'ライブ'), ('オンデマンド', 'オンデマンド'), ('ライブ・オンデマ併用', 'ライブ・オンデマ併用'), ('対面', '対面'),
-                       ('顔出しアリ', '顔出しアリ'), ('顔出しナシ', '顔出しナシ')]
+                       ('顔出しアリ', '顔出しアリ'), ('顔出しナシ', '顔出しナシ'),('今年度非開講','今年度非開講')]
     sort = MultiCheckboxField('時間割所属', choices=syozoku_choices)
     term = MultiCheckboxField('開講区分', choices=term_choices)
     day = MultiCheckboxField('曜日', choices=day_choices)
