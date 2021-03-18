@@ -25,5 +25,6 @@ class SearchClassForm(FlaskForm):
     time = MultiCheckboxField('時限', choices=time_choices)
     draw = MultiCheckboxField('抽選', choices=draw_choices)
     title = StringField('授業名')
+    teacher = StringField('教授名')
     keyword = MultiCheckboxField('(避けたい)キーワード', choices=keyword_choices)
     submit = SubmitField('この条件で検索')
