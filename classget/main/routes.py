@@ -27,6 +27,7 @@ def searchresult():
         session['form.time.data'] = form.time.data
         session['form.draw.data'] = form.draw.data
         session['form.title.data'] = form.title.data
+        session['form.teacher.data'] = form.teacher.data
         session['form.keyword.data'] = form.keyword.data
     # 所属
     if session['form.sort.data']:
@@ -56,6 +57,9 @@ def searchresult():
     # 授業名
     if session['form.title.data']:
         result = result.filter(Subject.name.like(f"%{session['form.title.data']}%"))
+    # 教授名
+    if session['form.teacher.data']:
+        result = result.filter(Subject.teacher.like(f"%{session['form.teacher.data']}%"))
     # キーワード
     if session['form.keyword.data']:
         for keyword in session['form.keyword.data']:
