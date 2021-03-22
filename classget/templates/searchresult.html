@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/searchresult.css') }}" type="text/css">
+{% endblock %}
+
+
+{% block contents %}
+    <div class="searchresult">
+        <h3>検索結果</h3>
+        {% for s in subject %}
+            <div class="class">
+                <p class="class_title">{{ s.name }}</p>
+                <p class="class_sort">{{ s.sort }}</p>
+                <p class="class_time">{{ s.term }} {{ s.time }}</p>
+                <p class="class_likes">お気に入り　件</p>
+                <p class="keyword">キーワード</p>
+                <a href="{{ url_for('classinfo', subject_id=s.id) }}">授業の詳細を見る</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
