@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <!--      Loginタイトル         -->
+                <legend>Login</legend>
+
+                <!--       ID入力欄         -->
+                <div class="userid">
+                    {{ form.iduser.label(class="form_label") }}
+
+                    {% if form.iduser.errors %}
+                        {{ form.iduser(class="form_blank") }}
+                        <div class="error_message">
+                            {% for error in form.iduser.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.iduser(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                <!--     　　　パスワード入力欄           -->
+                <div class="password">
+                    {{ form.password.label(class="form_label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form_blank") }}
+                        <div class="error_message">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                {% if login_error == 1 %}
+                    <!--      ログインに失敗した時にエラーメッセージ          -->
+                    <div class="error_message">
+                        login failed, please check your id and password
+                    </div>
+                {% endif %}
+
+                <!--      Remember　Me　チェックボックス          -->
+                <div class="remember_me">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+
+            <!--     Loginボタン       -->
+            <div class="login_button">
+                {{ form.submit(class="login_button") }}
+            </div>
+
+            <!--     Forgot　Password?       -->
+            <small class="forgot_password">
+                <a href="#">Forgot Password?</a>
+            </small>
+        </form>
+    </div>
+
+    <!--　　アカウント作成に　　-->
+    <div>
+        <small>
+            Need An Account? <a href="{{ url_for('createaccount') }}">Sign Up Now</a>
+        </small>
+    </div>
+{% endblock %}

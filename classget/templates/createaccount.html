@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+<!-- ここにCSSファイルをリンクする -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/createaccount.css') }}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <!--      アカウント作成タイトル      -->
+                <legend>アカウント作成</legend>
+
+                <!--     ID入力欄       -->
+                <div class="userid">
+                    {{ form.iduser.label(class="form_label") }}
+
+                    {% if form.iduser.errors %}
+                        {{ form.iduser(class="form_blank") }}
+                        <!--       エラーメッセージ（IDは10文字以内にしてくださいとか）      -->
+                        <div class="error_message">
+                            {% for error in form.iduser.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.iduser(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                <!--      パスワード入力欄      -->
+                <div class="password">
+                    {{ form.password.label(class="form_label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form_blank") }}
+                        <!--        エラーメッセージ（IDは10文字以内にしてくださいとか）        -->
+                        <div class="error_message">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                <!--      パスワード確認入力欄      -->
+                <div class="confirm_password">
+                    {{ form.confirm_password.label(class="form_label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form_blank") }}
+                        <div class="error_message">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                <!--      ユーザー名入力欄      -->
+                <div class="username">
+                    {{ form.username.label(class="form_label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form_blank") }}
+                        <div class="error_message">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form_blank") }}
+                    {% endif %}
+                </div>
+
+                <!--     学部と学年のラベル／入力欄       -->
+                <div class="syozoku">
+                    {{ form.faculty.label(class="form_label") }}
+                    {{ form.faculty(class="form_blank") }}
+
+                    {{ form.year.label(class="form_label") }}
+                    {{ form.year(class="form_blank") }}
+                </div>
+            </fieldset>
+            <div>
+                {{ form.submit(class="submit_button") }}
+            </div>
+        </form>
+    </div>
+    <div>
+        <small>
+            Already Have An Account? <a href="{{ url_for('login') }}">Sign In</a>
+        </small>
+    </div>
+{% endblock %}
