@@ -135,6 +135,9 @@ def typeresult():
 @app.route("/mypage")
 @login_required
 def mypage():
+    for ranker_id in ['12','68','73']:
+        if ranker_id == current_user.id:
+            image_file = url_for('static', filename='img/profile_pics/' + ranker_id + '.png')
     image_file = url_for('static', filename='img/profile_pics/' + current_user.type + '.png')
     return render_template('mypage.html', title='mypage', image_file=image_file)
 
